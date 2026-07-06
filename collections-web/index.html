@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crego Collections — Supervisor Console (Prototype)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,550;0,9..144,650;1,9..144,450&family=IBM+Plex+Sans:wght@400;450;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#FAF8F4; --panel:#FFFFFF; --ink:#1B2432; --ink-2:#4A5568; --ink-3:#8A94A6;
+  --line:#E7E2D8; --line-soft:#F0ECE3;
+  --green:#0E7C5B; --green-soft:#E7F3EE;
+  --b0:#6B7686; --b0-bg:#EEF0F3;
+  --b1:#B98A1F; --b1-bg:#FBF3DC;
+  --b2:#C96F1E; --b2-bg:#FCEBDA;
+  --b3:#BC4B26; --b3-bg:#FAE3D9;
+  --b4:#8E2323; --b4-bg:#F7DDDD;
+  --legal:#5B3E8E; --legal-bg:#ECE5F6;
+  --sans:'IBM Plex Sans',sans-serif; --mono:'IBM Plex Mono',monospace; --serif:'Fraunces',serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--sans);background:var(--paper);color:var(--ink);font-size:13px;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.35;z-index:9999;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.02 0'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E")}
+.num{font-family:var(--mono);font-feature-settings:'tnum'}
+.app{display:grid;grid-template-columns:216px 1fr;min-height:100vh}
+
+/* ---------- sidebar ---------- */
+.side{background:var(--ink);color:#C9CFDA;padding:20px 0;position:sticky;top:0;height:100vh;display:flex;flex-direction:column}
+.logo{font-family:var(--serif);font-weight:650;font-size:19px;color:#fff;padding:0 20px 4px;letter-spacing:.2px}
+.logo em{font-style:italic;font-weight:450;color:#7FBFA6}
+.side .mod{font-size:10px;text-transform:uppercase;letter-spacing:.14em;color:#66718A;padding:18px 20px 8px}
+.nav a{display:flex;align-items:center;gap:10px;padding:8px 20px;color:#AEB7C6;text-decoration:none;font-size:13px;border-left:2px solid transparent;cursor:pointer}
+.nav a:hover{color:#fff;background:rgba(255,255,255,.04)}
+.nav a.on{color:#fff;background:rgba(255,255,255,.07);border-left-color:#7FBFA6}
+.nav a .dot{width:6px;height:6px;border-radius:50%;background:currentColor;opacity:.5}
+.side .foot{margin-top:auto;padding:16px 20px;border-top:1px solid rgba(255,255,255,.08);font-size:11px;color:#66718A}
+.side .foot b{display:block;color:#AEB7C6;font-weight:500}
+
+/* ---------- topbar ---------- */
+.main{display:flex;flex-direction:column;min-width:0}
+.top{display:flex;align-items:center;gap:12px;padding:12px 28px;border-bottom:1px solid var(--line);background:var(--panel);position:sticky;top:0;z-index:40}
+.crumb{font-size:12px;color:var(--ink-3)}
+.crumb b{color:var(--ink);font-weight:600}
+.top .spacer{flex:1}
+.scope{display:flex;gap:8px}
+.scope select{font-family:var(--sans);font-size:12px;padding:6px 26px 6px 10px;border:1px solid var(--line);border-radius:6px;background:var(--paper) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='5'%3E%3Cpath d='M0 0l4 5 4-5z' fill='%238A94A6'/%3E%3C/svg%3E") no-repeat right 9px center;appearance:none;color:var(--ink-2)}
+.avatar{width:28px;height:28px;border-radius:50%;background:var(--green);color:#fff;display:grid;place-items:center;font-size:11px;font-weight:600}
+
+/* ---------- shared ---------- */
+.page{padding:24px 28px 60px;display:none}
+.page.on{display:block}
+.h1{font-family:var(--serif);font-size:26px;font-weight:550;letter-spacing:-.01em}
+.h1 em{font-style:italic;font-weight:450;color:var(--green)}
+.sub{color:var(--ink-3);font-size:12.5px;margin-top:3px}
+.phead{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:20px}
+.btn{font-family:var(--sans);font-size:12.5px;font-weight:500;padding:8px 14px;border-radius:7px;border:1px solid var(--line);background:var(--panel);color:var(--ink);cursor:pointer;transition:all .15s}
+.btn:hover{border-color:var(--ink-3)}
+.btn.pri{background:var(--ink);border-color:var(--ink);color:#fff}
+.btn.pri:hover{background:#2A3547}
+.btn.grn{background:var(--green);border-color:var(--green);color:#fff}
+.btn.sm{padding:5px 10px;font-size:12px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px}
+.chip{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;padding:2px 8px;border-radius:20px;letter-spacing:.02em}
+.chip::before{content:"";width:5px;height:5px;border-radius:50%;background:currentColor}
+.chip.c0{color:var(--b0);background:var(--b0-bg)} .chip.c1{color:var(--b1);background:var(--b1-bg)}
+.chip.c2{color:var(--b2);background:var(--b2-bg)} .chip.c3{color:var(--b3);background:var(--b3-bg)}
+.chip.c4{color:var(--b4);background:var(--b4-bg)} .chip.legal{color:var(--legal);background:var(--legal-bg)}
+.chip.ok{color:var(--green);background:var(--green-soft)}
+.tag{font-size:10.5px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;padding:2px 7px;border-radius:4px}
+.tag.ptp{color:var(--green);background:var(--green-soft)}
+.tag.bkn{color:var(--b4);background:var(--b4-bg)}
+table{width:100%;border-collapse:collapse}
+th{font-size:10.5px;text-transform:uppercase;letter-spacing:.09em;color:var(--ink-3);font-weight:600;text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:10px 12px;border-bottom:1px solid var(--line-soft);vertical-align:middle}
+tr:last-child td{border-bottom:none}
+tbody tr{transition:background .1s}
+tbody tr:hover{background:#FBFAF6}
+.r{text-align:right}
+th.r{text-align:right}
+
+/* ---------- dashboard ---------- */
+.kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:16px}
+.kpi{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.kpi .lbl{font-size:11px;text-transform:uppercase;letter-spacing:.09em;color:var(--ink-3);font-weight:600}
+.kpi .val{font-family:var(--mono);font-size:23px;font-weight:600;margin-top:6px;letter-spacing:-.02em}
+.kpi .d{font-size:11.5px;margin-top:4px;color:var(--ink-3)}
+.kpi .d.up{color:var(--b4)} .kpi .d.dn{color:var(--green)}
+.buckets{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:16px}
+.bkt{border-radius:10px;padding:14px 16px;border:1px solid var(--line);background:var(--panel);position:relative;overflow:hidden;cursor:pointer;transition:transform .12s}
+.bkt:hover{transform:translateY(-2px)}
+.bkt::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px}
+.bkt.b0::before{background:var(--b0)} .bkt.b1::before{background:var(--b1)} .bkt.b2::before{background:var(--b2)} .bkt.b3::before{background:var(--b3)} .bkt.b4::before{background:var(--b4)}
+.bkt .nm{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-2)}
+.bkt .amt{font-family:var(--mono);font-size:19px;font-weight:600;margin-top:8px}
+.bkt .ct{font-size:11.5px;color:var(--ink-3);margin-top:2px}
+.bkt .roll{font-size:11px;margin-top:8px;padding-top:8px;border-top:1px dashed var(--line)}
+.bkt .roll b{font-family:var(--mono)}
+.grid2{display:grid;grid-template-columns:1.6fr 1fr;gap:12px;align-items:start}
+.card h3{font-family:var(--serif);font-size:15.5px;font-weight:550;padding:14px 16px 0}
+.card .cap{font-size:11.5px;color:var(--ink-3);padding:2px 16px 12px}
+.heat td:not(:first-child){font-family:var(--mono);font-size:12px;text-align:right}
+.cell{display:inline-block;min-width:58px;padding:3px 8px;border-radius:5px;text-align:right}
+.alert{display:flex;align-items:center;gap:10px;background:var(--b1-bg);border:1px solid #EAD9A8;border-radius:10px;padding:11px 14px;margin-bottom:16px;font-size:12.5px}
+.alert b{font-weight:600}
+.alert .btn{margin-left:auto}
+.agents td:first-child{font-weight:500}
+.bar{height:5px;border-radius:3px;background:var(--line-soft);overflow:hidden;width:90px}
+.bar i{display:block;height:100%;background:var(--green)}
+.bar.warn i{background:var(--b2)}
+
+/* ---------- case list ---------- */
+.filters{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.fpill{font-size:12px;font-weight:500;padding:6px 12px;border-radius:20px;border:1px solid var(--line);background:var(--panel);cursor:pointer;color:var(--ink-2)}
+.fpill.on{background:var(--ink);border-color:var(--ink);color:#fff}
+.filters .sep{width:1px;height:20px;background:var(--line);margin:0 4px}
+.search{font-family:var(--sans);font-size:12.5px;padding:7px 12px;border:1px solid var(--line);border-radius:7px;width:220px;background:var(--panel)}
+.bulkbar{display:none;align-items:center;gap:12px;background:var(--ink);color:#fff;border-radius:9px;padding:9px 14px;margin-bottom:10px;font-size:12.5px}
+.bulkbar.on{display:flex}
+.bulkbar .btn{border-color:rgba(255,255,255,.25);background:transparent;color:#fff}
+.bulkbar .btn.grn{background:var(--green);border-color:var(--green)}
+.pgr{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;color:var(--ink-3);font-size:12px}
+.pgr .pg{display:flex;gap:4px}
+.pgr button{border:1px solid var(--line);background:var(--panel);border-radius:5px;padding:4px 9px;font-size:12px;cursor:pointer;color:var(--ink-2)}
+.pgr button.cur{background:var(--ink);color:#fff;border-color:var(--ink)}
+input[type=checkbox]{accent-color:var(--ink);width:14px;height:14px;cursor:pointer}
+.caseid{font-family:var(--mono);font-size:12px;color:var(--green);font-weight:500;cursor:pointer}
+.caseid:hover{text-decoration:underline}
+.who b{display:block;font-weight:500}
+.who span{font-size:11.5px;color:var(--ink-3)}
+.dpd{font-family:var(--mono);font-weight:600}
+.overdue-sub{font-size:10.5px;color:var(--ink-3)}
+
+/* ---------- case detail ---------- */
+.back{font-size:12px;color:var(--ink-3);cursor:pointer;margin-bottom:10px;display:inline-block}
+.back:hover{color:var(--ink)}
+.dethead{display:flex;align-items:center;gap:16px;padding:18px 20px}
+.dethead .idblock h2{font-family:var(--serif);font-size:21px;font-weight:550}
+.dethead .idblock .num{font-size:12px;color:var(--ink-3)}
+.dethead .stats{display:flex;gap:28px;margin-left:auto}
+.dethead .st .l{font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-3);font-weight:600}
+.dethead .st .v{font-family:var(--mono);font-size:16px;font-weight:600;margin-top:3px}
+.detgrid{display:grid;grid-template-columns:1fr 300px;gap:12px;margin-top:12px;align-items:start}
+.tl{padding:6px 0 14px}
+.tli{display:grid;grid-template-columns:74px 26px 1fr;gap:0;padding:0 16px}
+.tli .when{font-family:var(--mono);font-size:11px;color:var(--ink-3);padding-top:14px;text-align:right;padding-right:10px}
+.tli .rail{position:relative}
+.tli .rail::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:2px;background:var(--line-soft)}
+.tli:first-child .rail::before{top:20px}
+.tli:last-child .rail::before{bottom:auto;height:20px}
+.tli .rail i{position:absolute;left:50%;top:16px;transform:translateX(-50%);width:9px;height:9px;border-radius:50%;background:var(--panel);border:2.5px solid var(--ink-3)}
+.tli.g .rail i{border-color:var(--green)} .tli.r .rail i{border-color:var(--b4)} .tli.o .rail i{border-color:var(--b2)} .tli.p .rail i{border-color:var(--legal)}
+.tli .body{padding:12px 0 12px 12px;border-bottom:1px dashed var(--line-soft)}
+.tli:last-child .body{border-bottom:none}
+.tli .t{font-weight:600;font-size:12.5px;display:flex;gap:8px;align-items:center}
+.tli .m{font-size:12px;color:var(--ink-2);margin-top:3px;line-height:1.5}
+.tli .meta{font-size:11px;color:var(--ink-3);margin-top:4px;font-family:var(--mono)}
+.rail-card .row{display:flex;justify-content:space-between;padding:8px 16px;font-size:12.5px;border-bottom:1px solid var(--line-soft)}
+.rail-card .row:last-child{border-bottom:none}
+.rail-card .row .k{color:var(--ink-3)}
+.rail-card .row .v{font-weight:500;text-align:right}
+.rail-card .pad{padding:12px 16px;display:flex;flex-direction:column;gap:8px}
+.comply{display:flex;gap:8px;align-items:flex-start;padding:10px 16px;font-size:12px;border-top:1px solid var(--line-soft)}
+.comply .ic{color:var(--green);font-weight:700}
+.comply.warn .ic{color:var(--b2)}
+
+/* ---------- allocation ---------- */
+.rules .prio{font-family:var(--mono);font-size:12px;color:var(--ink-3);width:36px}
+.rules .rname{font-weight:600}
+.rules .rmatch{font-size:12px;color:var(--ink-2);line-height:1.6}
+.kv{display:inline-block;background:var(--paper);border:1px solid var(--line);border-radius:4px;padding:1px 6px;font-family:var(--mono);font-size:11px;margin:1px 2px 1px 0}
+.toggle{width:32px;height:18px;border-radius:10px;background:var(--line);position:relative;cursor:pointer;display:inline-block}
+.toggle::after{content:"";position:absolute;width:14px;height:14px;border-radius:50%;background:#fff;top:2px;left:2px;transition:left .15s}
+.toggle.on{background:var(--green)}
+.toggle.on::after{left:16px}
+.runrow{display:flex;gap:12px;margin-bottom:12px}
+.runcard{flex:1;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.runcard .lbl{font-size:11px;text-transform:uppercase;letter-spacing:.09em;color:var(--ink-3);font-weight:600}
+.runcard .val{font-family:var(--mono);font-size:20px;font-weight:600;margin-top:5px}
+
+/* ---------- territories ---------- */
+.terr .pins{font-family:var(--mono);font-size:11px;color:var(--ink-2)}
+.conflict{color:var(--b4);font-size:11.5px;font-weight:500}
+
+/* ---------- modal ---------- */
+.overlay{display:none;position:fixed;inset:0;background:rgba(27,36,50,.45);z-index:100;align-items:center;justify-content:center}
+.overlay.on{display:flex}
+.modal{background:var(--panel);border-radius:12px;width:560px;max-height:84vh;overflow:auto;box-shadow:0 24px 60px rgba(27,36,50,.3)}
+.modal .mh{padding:16px 20px;border-bottom:1px solid var(--line)}
+.modal .mh h3{font-family:var(--serif);font-size:17px;font-weight:550}
+.modal .mh p{font-size:12px;color:var(--ink-3);margin-top:2px}
+.modal .mb{padding:16px 20px}
+.modal .mf{padding:14px 20px;border-top:1px solid var(--line);display:flex;justify-content:flex-end;gap:8px}
+.preview{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin-top:10px}
+.preview .pr{display:flex;justify-content:space-between;font-size:12.5px;padding:5px 0}
+.preview .pr b{font-family:var(--mono)}
+.preview .pr.warn{color:var(--b3)}
+.field{margin-bottom:12px}
+.field label{display:block;font-size:11.5px;font-weight:600;color:var(--ink-2);margin-bottom:5px}
+.field select,.field input{width:100%;font-family:var(--sans);font-size:13px;padding:8px 10px;border:1px solid var(--line);border-radius:7px;background:var(--panel)}
+</style>
+</head>
+<body>
+<div class="app">
+
+<!-- ================= SIDEBAR ================= -->
+<aside class="side">
+  <div class="logo">crego <em>omni</em></div>
+  <div class="mod">Collections</div>
+  <nav class="nav">
+    <a class="on" data-nav="dash" onclick="go('dash')"><span class="dot"></span>Dashboard</a>
+    <a data-nav="cases" onclick="go('cases')"><span class="dot"></span>Cases</a>
+    <a data-nav="alloc" onclick="go('alloc')"><span class="dot"></span>Allocation</a>
+    <a data-nav="terr" onclick="go('terr')"><span class="dot"></span>Territories</a>
+  </nav>
+  <div class="mod">Platform</div>
+  <nav class="nav">
+    <a><span class="dot"></span>Accounts</a>
+    <a><span class="dot"></span>Demands</a>
+    <a><span class="dot"></span>Reports</a>
+  </nav>
+  <div class="foot"><b>Priya Nair</b>Collection Head · Tiger Capital</div>
+</aside>
+
+<div class="main">
+  <!-- ================= TOPBAR ================= -->
+  <div class="top">
+    <span class="crumb" id="crumb">Collections / <b>Dashboard</b></span>
+    <span class="spacer"></span>
+    <div class="scope">
+      <select><option>All Products</option><option>SCF — Dealer Finance</option><option>Term Loan</option></select>
+      <select><option>All Regions</option><option>Maharashtra</option><option>Karnataka</option><option>NCR</option></select>
+      <select><option>As of: Today EOD</option><option>Yesterday</option></select>
+    </div>
+    <div class="avatar">PN</div>
+  </div>
+
+<!-- ================= DASHBOARD ================= -->
+<section class="page on" id="page-dash">
+  <div class="phead">
+    <div>
+      <div class="h1">The overdue <em>book</em></div>
+      <div class="sub">2,847 open cases · refreshed at EOD Jul 3, 11:42 PM · strategy v4 (default)</div>
+    </div>
+    <button class="btn">Export MIS</button>
+  </div>
+
+  <div class="alert">⚠ <span><b>37 cases unallocated</b> after last night's run — no matching rule for pincode set (Nagpur rural).</span><button class="btn sm" onclick="go('alloc')">Review in Allocation</button></div>
+
+  <div class="kpis">
+    <div class="kpi"><div class="lbl">Overdue Principal</div><div class="val">₹48.2 Cr</div><div class="d up">▲ 2.1% vs last week</div></div>
+    <div class="kpi"><div class="lbl">Open Cases</div><div class="val">2,847</div><div class="d">184 new this week</div></div>
+    <div class="kpi"><div class="lbl">Auto-allocated</div><div class="val">98.7%</div><div class="d dn">▲ target ≥ 90%</div></div>
+    <div class="kpi"><div class="lbl">PTP Due Today</div><div class="val">61</div><div class="d">₹1.9 Cr promised</div></div>
+    <div class="kpi"><div class="lbl">PTP Kept Rate</div><div class="val">64%</div><div class="d dn">▲ 5 pts vs June</div></div>
+  </div>
+
+  <div class="buckets">
+    <div class="bkt b0" onclick="go('cases')"><div class="nm">Current · X</div><div class="amt num">₹212.4 Cr</div><div class="ct">8,102 accounts</div><div class="roll">roll-fwd <b>4.2%</b></div></div>
+    <div class="bkt b1" onclick="go('cases')"><div class="nm">1–30 · SMA-0</div><div class="amt num">₹21.6 Cr</div><div class="ct">1,438 cases</div><div class="roll">cured <b>61%</b> · roll <b>22%</b></div></div>
+    <div class="bkt b2" onclick="go('cases')"><div class="nm">31–60 · SMA-1</div><div class="amt num">₹11.8 Cr</div><div class="ct">742 cases</div><div class="roll">cured <b>38%</b> · roll <b>31%</b></div></div>
+    <div class="bkt b3" onclick="go('cases')"><div class="nm">61–90 · SMA-2</div><div class="amt num">₹7.4 Cr</div><div class="ct">389 cases</div><div class="roll">cured <b>19%</b> · roll <b>44%</b></div></div>
+    <div class="bkt b4" onclick="go('cases')"><div class="nm">90+ · NPA</div><div class="amt num">₹7.4 Cr</div><div class="ct">278 cases · 41 legal</div><div class="roll">recovered <b>9%</b></div></div>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <h3>Region × bucket concentration</h3>
+      <div class="cap">Outstanding ₹ by region — darker means heavier. Click a cell to open the filtered case list.</div>
+      <table class="heat">
+        <thead><tr><th>Region</th><th class="r">1–30</th><th class="r">31–60</th><th class="r">61–90</th><th class="r">90+</th></tr></thead>
+        <tbody>
+          <tr><td>Maharashtra</td><td><span class="cell" style="background:#FBF3DC">₹8.1 Cr</span></td><td><span class="cell" style="background:#F8E4C4">₹4.9 Cr</span></td><td><span class="cell" style="background:#F5D4BC">₹3.1 Cr</span></td><td><span class="cell" style="background:#F0C2BB">₹3.8 Cr</span></td></tr>
+          <tr><td>Karnataka</td><td><span class="cell" style="background:#FBF3DC">₹5.9 Cr</span></td><td><span class="cell" style="background:#FAEDD2">₹3.2 Cr</span></td><td><span class="cell" style="background:#F8E0C8">₹2.2 Cr</span></td><td><span class="cell" style="background:#F5D3CE">₹1.7 Cr</span></td></tr>
+          <tr><td>NCR</td><td><span class="cell" style="background:#FCF6E6">₹4.2 Cr</span></td><td><span class="cell" style="background:#FBF0DA">₹2.4 Cr</span></td><td><span class="cell" style="background:#FAE8D4">₹1.4 Cr</span></td><td><span class="cell" style="background:#F8E0DC">₹1.2 Cr</span></td></tr>
+          <tr><td>Gujarat</td><td><span class="cell" style="background:#FDF8EC">₹3.4 Cr</span></td><td><span class="cell" style="background:#FCF3E4">₹1.3 Cr</span></td><td><span class="cell" style="background:#FBEEE2">₹0.7 Cr</span></td><td><span class="cell" style="background:#FAEAE8">₹0.7 Cr</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card">
+      <h3>Agent load & yield</h3>
+      <div class="cap">Top of 24 active agents · caseload vs cap</div>
+      <table class="agents">
+        <thead><tr><th>Agent</th><th>Load</th><th class="r">Collected (Jul)</th></tr></thead>
+        <tbody>
+          <tr><td>R. Deshmukh<br><span class="overdue-sub">Pune East</span></td><td><div class="bar warn"><i style="width:96%"></i></div><span class="overdue-sub num">144/150</span></td><td class="r num">₹18.4 L</td></tr>
+          <tr><td>S. Kulkarni<br><span class="overdue-sub">Pune West</span></td><td><div class="bar"><i style="width:74%"></i></div><span class="overdue-sub num">111/150</span></td><td class="r num">₹22.1 L</td></tr>
+          <tr><td>A. Reddy<br><span class="overdue-sub">Bengaluru N</span></td><td><div class="bar"><i style="width:61%"></i></div><span class="overdue-sub num">92/150</span></td><td class="r num">₹15.7 L</td></tr>
+          <tr><td>M. Gupta<br><span class="overdue-sub">NCR Central</span></td><td><div class="bar"><i style="width:52%"></i></div><span class="overdue-sub num">78/150</span></td><td class="r num">₹11.2 L</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CASE LIST ================= -->
+<section class="page" id="page-cases">
+  <div class="phead">
+    <div>
+      <div class="h1">Cases</div>
+      <div class="sub">2,847 open · sorted by risk (bucket desc, PTP due first)</div>
+    </div>
+    <div style="display:flex;gap:8px"><button class="btn">Saved views ▾</button><button class="btn">Export</button></div>
+  </div>
+
+  <div class="filters">
+    <span class="fpill on">All</span><span class="fpill">1–30</span><span class="fpill">31–60</span><span class="fpill">61–90</span><span class="fpill">90+</span><span class="fpill">Legal</span>
+    <span class="sep"></span>
+    <span class="fpill">PTP due today (61)</span>
+    <span class="fpill">Broken PTP (204)</span>
+    <span class="fpill">Unallocated (37)</span>
+    <span class="sep"></span>
+    <input class="search" placeholder="Search borrower, account, case ID…">
+  </div>
+
+  <div class="bulkbar" id="bulkbar">
+    <span><b id="selcount">2</b> cases selected · ₹14.6 L outstanding</span>
+    <span class="spacer" style="flex:1"></span>
+    <button class="btn sm" onclick="openModal()">Reassign</button>
+    <button class="btn sm">Send reminder</button>
+    <button class="btn sm">Export</button>
+  </div>
+
+  <div class="card">
+    <table>
+      <thead><tr>
+        <th style="width:28px"><input type="checkbox"></th>
+        <th>Case</th><th>Borrower</th><th>Bucket</th><th class="r">DPD</th><th class="r">Outstanding</th><th>PTP</th><th>Agent</th><th>Last activity</th>
+      </tr></thead>
+      <tbody>
+        <tr>
+          <td><input type="checkbox" onchange="bulk(this)"></td>
+          <td><span class="caseid" onclick="go('detail')">COL-2847</span></td>
+          <td class="who"><b>Sunrise Traders</b><span>ACC-11482 · SCF Dealer Finance</span></td>
+          <td><span class="chip c2">31–60</span></td>
+          <td class="r dpd">44</td>
+          <td class="r num">₹8.2 L</td>
+          <td><span class="tag ptp">DUE TODAY</span></td>
+          <td>R. Deshmukh</td>
+          <td>Call · contacted<br><span class="overdue-sub">Jul 2, 4:10 PM</span></td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" onchange="bulk(this)"></td>
+          <td><span class="caseid" onclick="go('detail')">COL-2731</span></td>
+          <td class="who"><b>Mehta Agro Supplies</b><span>ACC-10974 · Term Loan</span></td>
+          <td><span class="chip c4">90+</span></td>
+          <td class="r dpd">117</td>
+          <td class="r num">₹6.4 L</td>
+          <td><span class="tag bkn">BROKEN ×2</span></td>
+          <td>R. Deshmukh</td>
+          <td>Field visit · no answer<br><span class="overdue-sub">Jul 1, 11:20 AM</span></td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" onchange="bulk(this)"></td>
+          <td><span class="caseid" onclick="go('detail')">COL-2698</span></td>
+          <td class="who"><b>Kavya Enterprises</b><span>ACC-10811 · SCF Dealer Finance</span></td>
+          <td><span class="chip legal">Legal</span></td>
+          <td class="r dpd">142</td>
+          <td class="r num">₹11.1 L</td>
+          <td>—</td>
+          <td>Legal desk</td>
+          <td>LRN dispatched<br><span class="overdue-sub">Jun 28</span></td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" onchange="bulk(this)"></td>
+          <td><span class="caseid" onclick="go('detail')">COL-2954</span></td>
+          <td class="who"><b>Patil Auto Parts</b><span>ACC-11733 · SCF Dealer Finance</span></td>
+          <td><span class="chip c1">1–30</span></td>
+          <td class="r dpd">12</td>
+          <td class="r num">₹2.7 L</td>
+          <td>—</td>
+          <td>S. Kulkarni</td>
+          <td>SMS reminder sent<br><span class="overdue-sub">Jul 3, 9:00 AM</span></td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" onchange="bulk(this)"></td>
+          <td><span class="caseid" onclick="go('detail')">COL-2960</span></td>
+          <td class="who"><b>Nandini Textiles</b><span>ACC-11790 · Term Loan</span></td>
+          <td><span class="chip c1">1–30</span></td>
+          <td class="r dpd">7</td>
+          <td class="r num">₹1.4 L</td>
+          <td>—</td>
+          <td style="color:var(--b3);font-weight:500">Unallocated</td>
+          <td>Case opened<br><span class="overdue-sub">Jul 3, EOD</span></td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" onchange="bulk(this)"></td>
+          <td><span class="caseid" onclick="go('detail')">COL-2612</span></td>
+          <td class="who"><b>Om Sai Distributors</b><span>ACC-10502 · SCF Dealer Finance</span></td>
+          <td><span class="chip c3">61–90</span></td>
+          <td class="r dpd">73</td>
+          <td class="r num">₹4.9 L</td>
+          <td><span class="tag ptp">OPEN · JUL 8</span></td>
+          <td>A. Reddy</td>
+          <td>Call · contacted<br><span class="overdue-sub">Jun 30, 2:45 PM</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="pgr">
+      <span>Showing 1–25 of 2,847</span>
+      <div class="pg"><button>‹</button><button class="cur">1</button><button>2</button><button>3</button><button>…</button><button>114</button><button>›</button></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CASE DETAIL ================= -->
+<section class="page" id="page-detail">
+  <span class="back" onclick="go('cases')">← Back to cases</span>
+  <div class="card dethead">
+    <div class="idblock">
+      <h2>Sunrise Traders</h2>
+      <div class="num">COL-2847 · ACC-11482 · SCF Dealer Finance · Pune East (411014)</div>
+      <div style="margin-top:8px;display:flex;gap:6px"><span class="chip c2">31–60 · SMA-1</span><span class="tag ptp">PTP DUE TODAY</span></div>
+    </div>
+    <div class="stats">
+      <div class="st"><div class="l">DPD</div><div class="v">44</div></div>
+      <div class="st"><div class="l">Outstanding</div><div class="v">₹8.2 L</div></div>
+      <div class="st"><div class="l">Overdue demands</div><div class="v">3</div></div>
+      <div class="st"><div class="l">Collected (case)</div><div class="v" style="color:var(--green)">₹1.5 L</div></div>
+    </div>
+  </div>
+
+  <div class="detgrid">
+    <div class="card">
+      <h3>Timeline</h3>
+      <div class="cap">Everything that happened on this case — activity, PTPs, payments, transitions, comms.</div>
+      <div class="tl">
+        <div class="tli g"><div class="when">Jul 4<br>expected</div><div class="rail"><i></i></div><div class="body">
+          <div class="t">PTP due today <span class="tag ptp">OPEN</span></div>
+          <div class="m">₹2,00,000 promised via UPI by R. Deshmukh's call on Jun 27. Reminder auto-sent to borrower at 9:00 AM with payment link.</div>
+        </div></div>
+        <div class="tli"><div class="when">Jul 3<br>9:00 AM</div><div class="rail"><i></i></div><div class="body">
+          <div class="t">SMS reminder · cadence D+42</div>
+          <div class="m">"Payment overdue" template with payment link. Delivered.</div>
+          <div class="meta">strategy v4 · bucket 31–60 cadence · corr: rem-2847-0703</div>
+        </div></div>
+        <div class="tli g"><div class="when">Jun 27<br>4:10 PM</div><div class="rail"><i></i></div><div class="body">
+          <div class="t">Call · Contacted → PTP taken</div>
+          <div class="m">Borrower cited delayed receivables from anchor. Promised ₹2,00,000 by Jul 4, UPI. Narration: "will clear one demand now, rest next month."</div>
+          <div class="meta">by R. Deshmukh · ENQ-8841</div>
+        </div></div>
+        <div class="tli g"><div class="when">Jun 27<br>4:32 PM</div><div class="rail"><i></i></div><div class="body">
+          <div class="t">Payment collected · ₹1,50,000</div>
+          <div class="m">UPI via payment link, settled against Demand DM-3391.</div>
+          <div class="meta">PAY-77121 · linked to ENQ-8841</div>
+        </div></div>
+        <div class="tli o"><div class="when">Jun 16<br>EOD</div><div class="rail"><i></i></div><div class="body">
+          <div class="t">Bucket transition · 1–30 → 31–60</div>
+          <div class="m">DPD crossed 30. Case escalated per strategy v4; retained with same agent (sticky assignment).</div>
+        </div></div>
+        <div class="tli"><div class="when">Jun 3<br>EOD</div><div class="rail"><i></i></div><div class="body">
+          <div class="t">Agent disclosure sent · compliance</div>
+          <div class="m">Borrower notified of authorized recovery agent (R. Deshmukh) via SMS + email before first contact, per RBI requirement.</div>
+          <div class="meta">corr: disc-2847 · delivered 9:02 AM</div>
+        </div></div>
+        <div class="tli"><div class="when">Jun 2<br>EOD</div><div class="rail"><i></i></div><div class="body">
+          <div class="t">Case opened & allocated</div>
+          <div class="m">DPD 1 on DM-3391. Rule #3 "SCF · MH pincodes · early bucket" → R. Deshmukh (load 96/150 at assignment).</div>
+        </div></div>
+      </div>
+    </div>
+
+    <div>
+      <div class="card rail-card" style="margin-bottom:12px">
+        <h3>Borrower</h3>
+        <div style="height:8px"></div>
+        <div class="row"><span class="k">Contact</span><span class="v">Ramesh Jadhav</span></div>
+        <div class="row"><span class="k">Phone</span><span class="v num">+91 98••• ••412</span></div>
+        <div class="row"><span class="k">Address</span><span class="v">Kharadi, Pune 411014</span></div>
+        <div class="row"><span class="k">eNACH</span><span class="v" style="color:var(--b3)">Bounced ×2</span></div>
+        <div class="row"><span class="k">Anchor</span><span class="v">Tiger Capital SCF</span></div>
+      </div>
+      <div class="card rail-card" style="margin-bottom:12px">
+        <h3>Assignment</h3>
+        <div style="height:8px"></div>
+        <div class="row"><span class="k">Agent</span><span class="v">R. Deshmukh</span></div>
+        <div class="row"><span class="k">Territory</span><span class="v">Pune East</span></div>
+        <div class="row"><span class="k">Since</span><span class="v">Jun 2 (32 days)</span></div>
+        <div class="pad">
+          <button class="btn sm" onclick="openModal()">Reassign case</button>
+          <button class="btn sm">Log enquiry (on behalf)</button>
+          <button class="btn sm" style="color:var(--b4)">Close / normalize…</button>
+        </div>
+      </div>
+      <div class="card rail-card">
+        <h3>Compliance</h3>
+        <div style="height:8px"></div>
+        <div class="comply"><span class="ic">✓</span><span>Agent disclosure delivered before first contact (Jun 3)</span></div>
+        <div class="comply"><span class="ic">✓</span><span>All comms inside 08:00–19:00 window · 6 sent, 0 deferred</span></div>
+        <div class="comply warn"><span class="ic">•</span><span>Legal track eligibility at DPD 90 — 46 days away</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ALLOCATION ================= -->
+<section class="page" id="page-alloc">
+  <div class="phead">
+    <div>
+      <div class="h1">Allocation</div>
+      <div class="sub">Rules run top-down; first match wins. Nightly incremental run at EOD + on-demand full runs.</div>
+    </div>
+    <div style="display:flex;gap:8px"><button class="btn">+ New rule</button><button class="btn pri" onclick="openDryRun()">Run allocation…</button></div>
+  </div>
+
+  <div class="runrow">
+    <div class="runcard"><div class="lbl">Last run</div><div class="val">Jul 3, EOD</div><div class="overdue-sub" style="margin-top:4px">incremental · 184 cases in scope</div></div>
+    <div class="runcard"><div class="lbl">Allocated</div><div class="val" style="color:var(--green)">147</div><div class="overdue-sub" style="margin-top:4px">across 18 agents</div></div>
+    <div class="runcard"><div class="lbl">Unallocated</div><div class="val" style="color:var(--b3)">37</div><div class="overdue-sub" style="margin-top:4px">no matching rule — Nagpur rural pincodes</div></div>
+    <div class="runcard"><div class="lbl">Sticky (unchanged)</div><div class="val">2,663</div><div class="overdue-sub" style="margin-top:4px">retained with current agent</div></div>
+  </div>
+
+  <div class="card" style="margin-bottom:12px">
+    <h3>Rules</h3>
+    <div class="cap">Drag to reorder priority. A case matches on bucket × product × territory × amount band → assigned within pool by capacity-aware round-robin.</div>
+    <table class="rules">
+      <thead><tr><th>#</th><th>Rule</th><th>Match</th><th>Assign to</th><th>Capacity</th><th class="r">Active</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="prio">1</td>
+          <td class="rname">Legal track — NPA high value</td>
+          <td class="rmatch"><span class="kv">bucket ≥ 90+</span><span class="kv">outstanding ≥ ₹10 L</span><span class="kv">any territory</span></td>
+          <td>Legal desk (team)</td>
+          <td class="num">no cap</td>
+          <td class="r"><span class="toggle on"></span></td>
+        </tr>
+        <tr>
+          <td class="prio">2</td>
+          <td class="rname">Deep bucket — field seniors</td>
+          <td class="rmatch"><span class="kv">bucket 61–90, 90+</span><span class="kv">territory: Pune E/W, Blr N</span></td>
+          <td>Senior field pool (6 agents)</td>
+          <td class="num">80 / agent</td>
+          <td class="r"><span class="toggle on"></span></td>
+        </tr>
+        <tr>
+          <td class="prio">3</td>
+          <td class="rname">SCF · MH pincodes · early bucket</td>
+          <td class="rmatch"><span class="kv">bucket 1–30, 31–60</span><span class="kv">product: SCF</span><span class="kv">territory: MH-all</span></td>
+          <td>MH field pool (11 agents)</td>
+          <td class="num">150 / agent</td>
+          <td class="r"><span class="toggle on"></span></td>
+        </tr>
+        <tr>
+          <td class="prio">4</td>
+          <td class="rname">Early bucket — tele-calling</td>
+          <td class="rmatch"><span class="kv">bucket 1–30</span><span class="kv">any product</span><span class="kv">any territory</span></td>
+          <td>Tele pool (7 agents)</td>
+          <td class="num">300 / agent</td>
+          <td class="r"><span class="toggle on"></span></td>
+        </tr>
+        <tr style="opacity:.55">
+          <td class="prio">5</td>
+          <td class="rname">Monsoon surge — temp pool</td>
+          <td class="rmatch"><span class="kv">bucket 31–60</span><span class="kv">territory: NCR</span></td>
+          <td>NCR overflow pool (3 agents)</td>
+          <td class="num">100 / agent</td>
+          <td class="r"><span class="toggle"></span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>Run history</h3>
+    <div class="cap">Every run is audited — who ran it, scope, and the full case→agent decision log.</div>
+    <table>
+      <thead><tr><th>Run</th><th>Type</th><th>Scope</th><th class="r">Allocated</th><th class="r">Unallocated</th><th>By</th><th></th></tr></thead>
+      <tbody>
+        <tr><td class="num">#412 · Jul 3 EOD</td><td>Incremental</td><td>New + bucket transitions</td><td class="r num">147</td><td class="r num" style="color:var(--b3)">37</td><td>System</td><td class="r"><button class="btn sm">Decision log</button></td></tr>
+        <tr><td class="num">#411 · Jul 2 EOD</td><td>Incremental</td><td>New + bucket transitions</td><td class="r num">168</td><td class="r num">0</td><td>System</td><td class="r"><button class="btn sm">Decision log</button></td></tr>
+        <tr><td class="num">#410 · Jul 1, 2:14 PM</td><td>Full re-run</td><td>All open cases · after rule #2 edit</td><td class="r num">2,801</td><td class="r num">12</td><td>Priya Nair</td><td class="r"><button class="btn sm">Decision log</button></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ================= TERRITORIES ================= -->
+<section class="page" id="page-terr">
+  <div class="phead">
+    <div>
+      <div class="h1">Territories</div>
+      <div class="sub">Named, reusable pincode sets referenced by allocation rules. Admin-only.</div>
+    </div>
+    <button class="btn pri">+ New territory</button>
+  </div>
+
+  <div class="alert">⚠ <span><b>Pincode conflict:</b> 411045 appears in both <b>Pune East</b> and <b>Pune West</b> — rule matching will use whichever territory the higher-priority rule references.</span><button class="btn sm">Resolve</button></div>
+
+  <div class="card">
+    <table class="terr">
+      <thead><tr><th>Territory</th><th>Pincodes</th><th>Agents mapped</th><th class="r">Open cases</th><th class="r">Outstanding</th><th></th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="who"><b>Pune East</b><span>Maharashtra</span></td>
+          <td class="pins">411006, 411014, 411028, 411036, 411045 <span class="conflict">⚠</span> +9 more</td>
+          <td>R. Deshmukh, V. Pawar, +2</td>
+          <td class="r num">414</td><td class="r num">₹9.1 Cr</td>
+          <td class="r"><button class="btn sm">Edit</button></td>
+        </tr>
+        <tr>
+          <td class="who"><b>Pune West</b><span>Maharashtra</span></td>
+          <td class="pins">411001, 411004, 411021, 411038, 411045 <span class="conflict">⚠</span> +11 more</td>
+          <td>S. Kulkarni, +3</td>
+          <td class="r num">389</td><td class="r num">₹7.8 Cr</td>
+          <td class="r"><button class="btn sm">Edit</button></td>
+        </tr>
+        <tr>
+          <td class="who"><b>Bengaluru North</b><span>Karnataka</span></td>
+          <td class="pins">560001, 560024, 560043, 560064 +22 more</td>
+          <td>A. Reddy, K. Hegde, +3</td>
+          <td class="r num">356</td><td class="r num">₹6.4 Cr</td>
+          <td class="r"><button class="btn sm">Edit</button></td>
+        </tr>
+        <tr>
+          <td class="who"><b>NCR Central</b><span>Delhi NCR</span></td>
+          <td class="pins">110001, 110016, 110049, 201301 +18 more</td>
+          <td>M. Gupta, +4</td>
+          <td class="r num">298</td><td class="r num">₹5.2 Cr</td>
+          <td class="r"><button class="btn sm">Edit</button></td>
+        </tr>
+        <tr>
+          <td class="who"><b>Nagpur Rural</b><span style="color:var(--b3)">No agents mapped — source of 37 unallocated cases</span></td>
+          <td class="pins">440001, 440008, 441101 +6 more</td>
+          <td style="color:var(--b3)">None</td>
+          <td class="r num">37</td><td class="r num">₹0.6 Cr</td>
+          <td class="r"><button class="btn sm">Map agents</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+</div><!-- /main -->
+</div><!-- /app -->
+
+<!-- ================= REASSIGN MODAL ================= -->
+<div class="overlay" id="modal-reassign">
+  <div class="modal">
+    <div class="mh"><h3>Reassign cases</h3><p>2 cases · ₹14.6 L outstanding · currently with R. Deshmukh</p></div>
+    <div class="mb">
+      <div class="field"><label>Reassign to</label>
+        <select><option>Agent — S. Kulkarni (111/150)</option><option>Agent — A. Reddy (92/150)</option><option>Pool — MH field pool (capacity round-robin)</option></select>
+      </div>
+      <div class="field"><label>Reason</label>
+        <select><option>Load balancing</option><option>Agent offboarding</option><option>Territory change</option><option>Escalation</option></select>
+      </div>
+      <div class="preview">
+        <div class="pr"><span>S. Kulkarni load after reassign</span><b>113 / 150</b></div>
+        <div class="pr"><span>Open PTPs moving with cases</span><b>1 (due today)</b></div>
+        <div class="pr warn"><span>Borrower agent-disclosure re-notification</span><b>will be sent ×2</b></div>
+      </div>
+    </div>
+    <div class="mf"><button class="btn" onclick="closeModal()">Cancel</button><button class="btn pri" onclick="closeModal()">Reassign 2 cases</button></div>
+  </div>
+</div>
+
+<!-- ================= DRY RUN MODAL ================= -->
+<div class="overlay" id="modal-dryrun">
+  <div class="modal">
+    <div class="mh"><h3>Run allocation — dry run</h3><p>Full re-run · all 2,847 open cases · current ruleset</p></div>
+    <div class="mb">
+      <div class="preview" style="margin-top:0">
+        <div class="pr"><span>Cases evaluated</span><b>2,847</b></div>
+        <div class="pr"><span>Reassigned (agent changes)</span><b>92</b></div>
+        <div class="pr"><span>Unchanged (sticky)</span><b>2,718</b></div>
+        <div class="pr warn"><span>Unallocated — no rule match</span><b>37</b></div>
+        <div class="pr warn"><span>Agents over capacity after run</span><b>1 (R. Deshmukh 152/150)</b></div>
+      </div>
+      <p style="font-size:12px;color:var(--ink-3);margin-top:10px">Committing will move cases, notify affected agents, and trigger borrower agent-disclosure notifications where the agent changed. Full decision log will be stored on run #413.</p>
+    </div>
+    <div class="mf"><button class="btn" onclick="closeModal()">Cancel</button><button class="btn">Download preview CSV</button><button class="btn grn" onclick="closeModal()">Commit allocation</button></div>
+  </div>
+</div>
+
+<script>
+const crumbs={dash:'Dashboard',cases:'Cases',detail:'Cases / COL-2847',alloc:'Allocation',terr:'Territories'};
+function go(p){
+  document.querySelectorAll('.page').forEach(x=>x.classList.remove('on'));
+  document.getElementById('page-'+p).classList.add('on');
+  document.querySelectorAll('.nav a[data-nav]').forEach(a=>a.classList.toggle('on',a.dataset.nav===(p==='detail'?'cases':p)));
+  document.getElementById('crumb').innerHTML='Collections / <b>'+crumbs[p]+'</b>';
+  window.scrollTo(0,0);
+}
+function bulk(cb){
+  const n=document.querySelectorAll('#page-cases tbody input:checked').length;
+  document.getElementById('bulkbar').classList.toggle('on',n>0);
+  document.getElementById('selcount').textContent=n;
+}
+function openModal(){document.getElementById('modal-reassign').classList.add('on')}
+function openDryRun(){document.getElementById('modal-dryrun').classList.add('on')}
+function closeModal(){document.querySelectorAll('.overlay').forEach(o=>o.classList.remove('on'))}
+document.querySelectorAll('.overlay').forEach(o=>o.addEventListener('click',e=>{if(e.target===o)closeModal()}));
+document.querySelectorAll('.toggle').forEach(t=>t.addEventListener('click',()=>t.classList.toggle('on')));
+document.querySelectorAll('.fpill').forEach(p=>p.addEventListener('click',()=>{p.parentElement.querySelectorAll('.fpill').forEach(x=>x.classList.remove('on'));p.classList.add('on')}));
+</script>
+</body>
+</html>
