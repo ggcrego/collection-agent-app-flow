@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crego Omni — LMS Console (Design)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+
+<!-- ======================= SIDEBAR ======================= -->
+<aside class="sidebar">
+  <div class="brand">
+    <div class="brand-mark">C</div>
+    <div>
+      <div class="brand-name">Crego Omni</div>
+      <div class="brand-sub">LMS Console</div>
+    </div>
+  </div>
+  <nav class="nav">
+    <div class="nav-label">Portfolio</div>
+    <button class="nav-item" data-view="account">
+      <svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V8l7-5 7 5v13M9 21v-6h6v6"/></svg>
+      Loan Account
+    </button>
+    <button class="nav-item" data-view="contact">
+      <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      Contact
+    </button>
+    <button class="nav-item" data-view="loan">
+      <svg viewBox="0 0 24 24"><path d="M4 4h16v16H4zM4 9h16M9 9v11"/></svg>
+      Loans <span class="count">4</span>
+    </button>
+    <div class="nav-label">Money Movement</div>
+    <button class="nav-item" data-view="payment">
+      <svg viewBox="0 0 24 24"><path d="M12 19V5M5 12l7 7 7-7"/></svg>
+      Payments <span class="count">3</span>
+    </button>
+    <button class="nav-item" data-view="payout">
+      <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12l7-7 7 7"/></svg>
+      Payouts <span class="count">3</span>
+    </button>
+    <div class="nav-label">Books</div>
+    <button class="nav-item" data-view="transactions">
+      <svg viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
+      Transactions <span class="count">12</span>
+    </button>
+    <button class="nav-item" data-view="demands">
+      <svg viewBox="0 0 24 24"><path d="M8 2v4M16 2v4M3 9h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/></svg>
+      Demands &amp; Schedules
+    </button>
+    <button class="nav-item active" data-view="ledger">
+      <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 19.5A2.5 2.5 0 0 0 6.5 22H20V2H6.5A2.5 2.5 0 0 0 4 4.5z"/></svg>
+      Ledger &amp; GL
+    </button>
+    <div class="nav-label">Setup</div>
+    <button class="nav-item" data-view="configuration">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h.09a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v.09a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+      Configuration
+    </button>
+  </nav>
+  <div class="sidebar-foot">
+    <div class="avatar">AB</div>
+    <div class="foot-meta">
+      <div class="foot-name">Abhishek</div>
+      <div class="foot-role">Ops · Lending</div>
+    </div>
+  </div>
+</aside>
+
+<!-- ======================= MAIN ======================= -->
+<div class="main">
+  <div class="topbar">
+    <div class="crumbs" id="crumbs">
+      <span>Meridian Agro Traders</span><span class="sep">/</span><b>Ledger &amp; GL</b>
+    </div>
+    <div class="topbar-right">
+      <div class="search">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        Search UTR, loan, contact…
+        <kbd>⌘K</kbd>
+      </div>
+      <button class="btn">Export</button>
+      <button class="btn primary">New Payment</button>
+    </div>
+  </div>
+
+  <!-- ======================================================
+       VIEW: LEDGER & GL
+  ======================================================= -->
+  <section class="view active" id="view-ledger">
+    <div class="page-head">
+      <div class="page-icon"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 19.5A2.5 2.5 0 0 0 6.5 22H20V2H6.5A2.5 2.5 0 0 0 4 4.5z"/></svg></div>
+      <div>
+        <div class="page-title"><h1>Ledger &amp; GL</h1></div>
+        <div class="page-meta"><span>Business ledger (component × posting_type) → mapped to double-entry GL via <b>ComponentGLMapping</b></span></div>
+      </div>
+      <div class="page-actions"><button class="btn">Trial balance</button><button class="btn primary">Post to GL</button></div>
+    </div>
+
+    <div class="filters">
+      <button class="fchip on">Payment UTR512044987N</button>
+      <button class="fchip">Upfront settle TXN-UIS-88213</button>
+      <button class="fchip">Disbursement PO-45102</button>
+      <span style="margin-left:auto" class="small mut">Ledger rows for selected event</span>
+    </div>
+
+    <div class="card">
+      <div class="card-h">
+        <h3>Business ledger — repayment of ₹6,00,000</h3>
+      </div>
+      <div class="card-b flush">
+        <table>
+          <thead><tr>
+            <th>Value date</th><th>Loan / Entity</th><th>Component</th><th>Posting type</th><th>Demand</th><th class="r">Amount</th>
+          </tr></thead>
+          <tbody>
+            <tr><td class="num">14 Jul 26</td><td><span class="ref link" data-nav="loan">LN-2406-0187</span></td><td>interest</td><td><span class="badge green outline">paid</span></td><td><span class="ref">DMD-49102</span></td><td class="r amt">₹42,300</td></tr>
+            <tr><td class="num">14 Jul 26</td><td><span class="ref link" data-nav="loan">LN-2406-0187</span></td><td>principal</td><td><span class="badge green outline">paid</span></td><td><span class="ref">DMD-49101</span></td><td class="r amt">₹3,37,700</td></tr>
+            <tr><td class="num">14 Jul 26</td><td><span class="ref link" data-nav="loan">LN-2407-0212</span></td><td>interest</td><td><span class="badge green outline">paid</span></td><td><span class="ref">DMD-50233</span></td><td class="r amt">₹21,400</td></tr>
+            <tr><td class="num">14 Jul 26</td><td><span class="ref link" data-nav="loan">LN-2407-0212</span></td><td>penal_charge</td><td><span class="badge green outline">paid</span></td><td><span class="ref">DMD-50236</span></td><td class="r amt">₹4,120</td></tr>
+            <tr><td class="num">14 Jul 26</td><td><span class="ref link" data-nav="loan">LN-2407-0212</span></td><td>principal</td><td><span class="badge green outline">paid</span></td><td><span class="ref">DMD-50232</span></td><td class="r amt">₹1,69,480</td></tr>
+            <tr style="background:var(--amber-bg)"><td class="num">14 Jul 26</td><td>CON-9134 <span class="sub small">contact</span></td><td>repayment</td><td><span class="badge amber outline">excess</span></td><td><span class="ref">DMD-EXC-CON-9134</span></td><td class="r amt">₹25,000</td></tr>
+            <tr><td class="num">21 Jul 26</td><td>CON-9134 <span class="sub small">contact</span></td><td>repayment</td><td><span class="badge violet outline">settled</span></td><td><span class="ref">DMD-EXC-CON-9134</span></td><td class="r amt">₹25,000</td></tr>
+          </tbody>
+          <tfoot><tr><td colspan="5">Total posted</td><td class="r amt">₹6,25,000 <span class="sub small">(incl. excess re-application)</span></td></tr></tfoot>
+        </table>
+      </div>
+    </div>
+
+    <!-- GL double entry -->
+    <div class="card mt-lg">
+      <div class="card-h">
+        <h3>GL entries — drill-down</h3>
+        <div class="right"><span class="badge outline">posting batch · PGB-140726-02</span></div>
+      </div>
+      <div class="card-b flush">
+        <table>
+          <thead><tr>
+            <th>GL account</th><th>Type</th><th>Narration</th><th class="r">Debit</th><th class="r">Credit</th>
+          </tr></thead>
+          <tbody>
+            <tr><td></td><td class="sub">asset</td><td class="small">Receipt UTR512044987N</td><td class="r amt">₹6,00,000</td><td class="r amt dim">—</td></tr>
+            <tr><td></td><td class="sub">asset</td><td class="small">Principal recovery LN-0187 / LN-0212</td><td class="r amt dim">—</td><td class="r amt">₹5,07,180</td></tr>
+            <tr><td></td><td class="sub">income</td><td class="small">Interest realised</td><td class="r amt dim">—</td><td class="r amt">₹63,700</td></tr>
+            <tr><td></td><td class="sub">income</td><td class="small">Penal charges LN-0212</td><td class="r amt dim">—</td><td class="r amt">₹4,120</td></tr>
+            <tr><td></td><td class="sub">liability</td><td class="small">Unallocated parked (CON-9134)</td><td class="r amt dim">—</td><td class="r amt">₹25,000</td></tr>
+          </tbody>
+          <tfoot><tr><td colspan="3">Batch totals</td><td class="r amt">₹6,00,000</td><td class="r amt">₹6,00,000</td></tr></tfoot>
+        </table>
+      </div>
+      <div class="card-b" style="border-top:1px solid var(--border);padding:10px 16px;display:flex;gap:8px;align-items:center">
+        <span class="badge green outline">Balanced ✓</span>
+        <span class="small mut">DR = CR per posting batch · voucher numbers generated from GLRefIdGeneration pattern · Tally sync pending for 2 items</span>
+      </div>
+    </div>
+
+    <div class="card mt-lg">
+      <div class="card-h">
+        <h3>Posting types — how a ledger row mutates its demand</h3>
+      </div>
+      <div class="card-b flush">
+        <table>
+          <thead><tr><th>Posting type</th><th>Demand bucket moved</th><th>Example</th><th class="r">Was → Δ → Now</th><th>Event</th></tr></thead>
+          <tbody>
+            <tr><td><span class="badge blue outline">outstanding</span></td><td>outstanding ↑ <span class="sub small">(receivable created)</span></td><td>principal · LN-2406-0187</td><td class="r num">0 → <b style="color:var(--blue)">+34,00,000</b> → 34,00,000</td><td><span class="ref link">PYTUTR861204</span></td></tr>
+            <tr><td><span class="badge blue outline">accrued</span></td><td>accrued ↑ · outstanding ↑ <span class="sub small">(income earned)</span></td><td>interest · LN-2406-0187</td><td class="r num">48,420 → <b style="color:var(--blue)">+17,000</b> → 65,420</td><td><span class="ref">TXN-ACR-72410</span></td></tr>
+            <tr><td><span class="badge green outline">paid</span></td><td>paid ↑ · outstanding ↓</td><td>interest · LN-2406-0187</td><td class="r num">6,120 → <b style="color:var(--green)">+42,300</b> → 48,420</td><td><span class="ref link">UTR512044987N</span></td></tr>
+            <tr><td><span class="badge green outline">tax_paid</span></td><td>tax_paid ↑ · tax ↓</td><td>GST on service_fee</td><td class="r num">360 → <b style="color:var(--green)">+360</b> → paid</td><td><span class="ref link">TXN-UIS-88213</span></td></tr>
+            <tr><td><span class="badge teal outline">hold</span></td><td>hold ↑ <span class="sub small">(collected, not yet earned)</span></td><td>upfront_interest · LN-2406-0187</td><td class="r num">0 → <b style="color:var(--teal)">+75,507</b> → 75,507</td><td><span class="ref link">PYTUTR861204</span></td></tr>
+            <tr><td><span class="badge amber outline">deducted</span></td><td>settled at source from payout</td><td>processing_fee · LN-2406-0187</td><td class="r num">0 → <b style="color:var(--amber)">+12,282</b> → 12,282</td><td><span class="ref link">PYTUTR861204</span></td></tr>
+            <tr><td><span class="badge amber outline">excess</span></td><td>excess ↑ <span class="sub small">(unallocated parked)</span></td><td>repayment · wallet CON-9134</td><td class="r num">0 → <b style="color:var(--amber)">+25,000</b> → 25,000</td><td><span class="ref link">UTR512044987N</span></td></tr>
+            <tr><td><span class="badge violet outline">settled</span></td><td>excess ↓ · settled ↑ <span class="sub small">(excess consumed)</span></td><td>upfront_interest · DMD-UI-4471</td><td class="r num">28,450 → <b style="color:var(--violet)">−28,450</b> → 0</td><td><span class="ref link">TXN-UIS-88213</span></td></tr>
+            <tr><td><span class="badge outline">waived</span></td><td>waived ↑ · outstanding ↓</td><td>bounce_fee · LN-TL-0098</td><td class="r num">2,280 → <b>−2,280</b> → 0</td><td><span class="ref link">LN-TL-0098</span></td></tr>
+            <tr><td><span class="badge red outline">refunded</span></td><td>refunded ↑ · excess ↓ <span class="sub small">(returned to borrower)</span></td><td>repayment · wallet CON-9134</td><td class="r num">12,340 → <b style="color:var(--red)">−12,340</b> → 0</td><td><span class="ref link">PYTUTR812440</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="callout mt">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+      <span><b>Trace any rupee end-to-end:</b> <span class="mono">Payment(UTR) → Transaction(reference) → Ledger(component + posting_type + demand) → GLEntry(DR/CR + gl_account)</span> — and for cross-loan flows, the ledger's <span class="mono">demand</span> points at the source while its <span class="mono">account</span> points at the destination.</span>
+    </div>
+  </section>
+
+</div>
+
+<!-- ======================= RESOURCE DRAWER ======================= -->
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer">
+  <div class="drawer-h" style="position:relative">
+    <div class="drawer-type" id="dType">Resource</div>
+    <div class="drawer-title" id="dTitle">—</div>
+    <div class="drawer-badges" id="dBadges"></div>
+    <button class="drawer-x" id="dClose" aria-label="Close">✕</button>
+  </div>
+  <div class="drawer-b" id="dBody"></div>
+  <div class="drawer-f">
+    <button class="btn" id="dCopy">Copy ref</button>
+    <button class="btn primary" id="dOpen">Open full page →</button>
+  </div>
+</aside>
+
+<!-- load order matters: data -> nav -> drawer -> refs -> tabs -> filters -->
+<script src="js/data.js"></script>
+<script src="js/nav.js"></script>
+<script src="js/drawer.js"></script>
+<script src="js/refs.js"></script>
+<script src="js/tabs.js"></script>
+<script src="js/filters.js"></script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+/* ============================================================
+   Crego Omni — LMS Console
+   Stylesheet entry point. Every page links only this file.
+
+   ORDER IS LOAD-BEARING. These were split out of one stylesheet
+   and later rules intentionally override earlier ones, so this
+   sequence must not be rearranged.
+   ============================================================ */
+
+@import "base.css";              /* :root design tokens, reset, body, ::selection      */
+@import "sidebar.css";           /* sidebar shell, brand, nav items, footer            */
+@import "shell.css";             /* main offset, topbar, search, buttons, .view        */
+@import "primitives.css";        /* cards, badges, .ref chips, typography helpers      */
+@import "tables-grid.css";       /* tables, grid columns, spacing utils, stat tiles    */
+@import "components.css";        /* page header, key-value, dates, segbar, tabs        */
+@import "timeline-flow.css";     /* timeline, details, impact strip, flow, callouts    */
+@import "popover.css";           /* .pop hover cards, .ptab mini-table                 */
+@import "waterfall-config.css";  /* waterfall steps, configuration page                */
+@import "drawer.css";            /* scrim, resource drawer, @media breakpoints         */

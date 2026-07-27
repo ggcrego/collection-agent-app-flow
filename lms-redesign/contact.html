@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crego Omni — LMS Console (Design)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+
+<!-- ======================= SIDEBAR ======================= -->
+<aside class="sidebar">
+  <div class="brand">
+    <div class="brand-mark">C</div>
+    <div>
+      <div class="brand-name">Crego Omni</div>
+      <div class="brand-sub">LMS Console</div>
+    </div>
+  </div>
+  <nav class="nav">
+    <div class="nav-label">Portfolio</div>
+    <button class="nav-item" data-view="account">
+      <svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V8l7-5 7 5v13M9 21v-6h6v6"/></svg>
+      Loan Account
+    </button>
+    <button class="nav-item active" data-view="contact">
+      <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      Contact
+    </button>
+    <button class="nav-item" data-view="loan">
+      <svg viewBox="0 0 24 24"><path d="M4 4h16v16H4zM4 9h16M9 9v11"/></svg>
+      Loans <span class="count">4</span>
+    </button>
+    <div class="nav-label">Money Movement</div>
+    <button class="nav-item" data-view="payment">
+      <svg viewBox="0 0 24 24"><path d="M12 19V5M5 12l7 7 7-7"/></svg>
+      Payments <span class="count">3</span>
+    </button>
+    <button class="nav-item" data-view="payout">
+      <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12l7-7 7 7"/></svg>
+      Payouts <span class="count">3</span>
+    </button>
+    <div class="nav-label">Books</div>
+    <button class="nav-item" data-view="transactions">
+      <svg viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
+      Transactions <span class="count">12</span>
+    </button>
+    <button class="nav-item" data-view="demands">
+      <svg viewBox="0 0 24 24"><path d="M8 2v4M16 2v4M3 9h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/></svg>
+      Demands &amp; Schedules
+    </button>
+    <button class="nav-item" data-view="ledger">
+      <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 19.5A2.5 2.5 0 0 0 6.5 22H20V2H6.5A2.5 2.5 0 0 0 4 4.5z"/></svg>
+      Ledger &amp; GL
+    </button>
+    <div class="nav-label">Setup</div>
+    <button class="nav-item" data-view="configuration">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h.09a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v.09a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+      Configuration
+    </button>
+  </nav>
+  <div class="sidebar-foot">
+    <div class="avatar">AB</div>
+    <div class="foot-meta">
+      <div class="foot-name">Abhishek</div>
+      <div class="foot-role">Ops · Lending</div>
+    </div>
+  </div>
+</aside>
+
+<!-- ======================= MAIN ======================= -->
+<div class="main">
+  <div class="topbar">
+    <div class="crumbs" id="crumbs">
+      <span>Meridian Agro Traders</span><span class="sep">/</span><b>Contact</b>
+    </div>
+    <div class="topbar-right">
+      <div class="search">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        Search UTR, loan, contact…
+        <kbd>⌘K</kbd>
+      </div>
+      <button class="btn">Export</button>
+      <button class="btn primary">New Payment</button>
+    </div>
+  </div>
+
+  <!-- ======================================================
+       VIEW: CONTACT (customer 360)
+  ======================================================= -->
+  <section class="view active" id="view-contact">
+    <div class="page-head">
+      <div class="page-icon"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+      <div>
+        <div class="page-title">
+          <h1>Meridian Agro Traders Pvt Ltd</h1>
+          <span class="ref">CON-9134</span>
+          <span class="badge green"><span class="dot"></span>Active</span>
+        </div>
+        <div class="page-meta">
+          <span>PAN <b class="mono">AAJCM4821K</b></span>
+          <span>GSTIN <b class="mono">23AAJCM4821K1Z5</b></span>
+          <span>Branch <b>Indore</b></span>
+          <span>RM <b>Kavita Sharma</b></span>
+          <span>Since <b>Nov 2024</b></span>
+        </div>
+      </div>
+      <div class="page-actions">
+        <button class="btn">Statement</button>
+        <button class="btn primary">New drawdown</button>
+      </div>
+    </div>
+
+    <div class="grid g4">
+      <div class="card stat"><div class="k">Total exposure</div><div class="v">₹65,58,370</div><div class="d">3 active loans · 1 closed</div></div>
+      <div class="card stat"><div class="k">Limit available</div><div class="v" style="color:var(--green)">₹1,26,60,000</div><div class="d">of ₹2,00,00,000 approved</div></div>
+      <div class="card stat"><div class="k">Overdue</div><div class="v" style="color:var(--amber)">₹1,18,900</div><div class="d">DPD 4 · LN-TL-0098 EMI #14</div></div>
+      <div class="card stat"><div class="k">Excess wallet</div><div class="v">₹0</div><div class="d">last: ₹25,000 swept on 21 Jul</div></div>
+    </div>
+
+    <div class="grid g23 mt-lg">
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div class="card">
+          <div class="card-h"><h3>Accounts &amp; loans</h3></div>
+          <div class="card-b flush">
+            <table>
+              <thead><tr><th>Ref</th><th>Type</th><th>Program / Product</th><th class="r">Outstanding</th><th>Status</th></tr></thead>
+              <tbody>
+                <tr><td><span class="ref link">ACC-GRP-00218</span></td><td><span class="badge outline">account</span></td><td>Kisan SCF · SCF-SID</td><td class="r amt">₹46,39,330</td><td><span class="badge green outline">Active</span></td></tr>
+                <tr><td style="padding-left:28px"><span class="ref link">LN-2406-0187</span></td><td><span class="badge outline">loan</span></td><td class="sub">↳ under ACC-GRP-00218</td><td class="r amt">₹30,59,330</td><td><span class="badge green outline">Active</span></td></tr>
+                <tr><td style="padding-left:28px"><span class="ref link">LN-2407-0212</span></td><td><span class="badge outline">loan</span></td><td class="sub">↳ under ACC-GRP-00218</td><td class="r amt">₹15,80,000</td><td><span class="badge green outline">Active</span></td></tr>
+                <tr><td style="padding-left:28px"><span class="ref link">LN-2401-0114</span></td><td><span class="badge outline">loan</span></td><td class="sub">↳ under ACC-GRP-00218</td><td class="r amt dim">₹0</td><td><span class="badge outline">Closed</span></td></tr>
+                <tr><td><span class="ref link">LN-TL-0098</span></td><td><span class="badge outline">loan</span></td><td>Business TL · term_loan</td><td class="r amt">₹19,19,040</td><td><span class="badge green outline">Active</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-h"><h3>Recent activity</h3></div>
+          <div class="card-b flush">
+            <table>
+              <thead><tr><th>Date</th><th>Event</th><th>Reference</th><th class="r">Amount</th><th>Status</th></tr></thead>
+              <tbody>
+                <tr><td class="num">14 Jul 26</td><td><span class="badge green"><span class="dot"></span>Payment</span></td><td><span class="ref link">UTR512044987N</span></td><td class="r amt pos">+₹6,00,000</td><td><span class="badge green outline">Processed</span></td></tr>
+                <tr><td class="num">06 Jul 26</td><td><span class="badge blue"><span class="dot"></span>Disbursement</span></td><td><span class="ref link">PYTUTR884521</span></td><td class="r amt neg">−₹17,55,000</td><td><span class="badge green outline">Processed</span></td></tr>
+                <tr><td class="num">05 Jul 26</td><td><span class="badge green"><span class="dot"></span>NACH EMI</span></td><td><span class="ref link">UTR498232771N</span></td><td class="r amt pos">+₹1,12,500</td><td><span class="badge green outline">Processed</span></td></tr>
+                <tr><td class="num">18 Jun 26</td><td><span class="badge green"><span class="dot"></span>Loan closure</span></td><td><span class="ref link">UTR461920034N</span></td><td class="r amt pos">+₹25,61,200</td><td><span class="badge green outline">Processed</span></td></tr>
+                <tr><td class="num">02 Jun 26</td><td><span class="badge blue"><span class="dot"></span>Disbursement</span></td><td><span class="ref link">PYTUTR861204</span></td><td class="r amt neg">−₹33,10,000</td><td><span class="badge green outline">Processed</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div class="card">
+          <div class="card-h"><h3>Identity &amp; profile</h3></div>
+          <div class="card-b">
+            <dl class="kv">
+              <dt>Legal name</dt><dd>Meridian Agro Traders Pvt Ltd</dd>
+              <dt>Entity type</dt><dd>Private Limited</dd>
+              <dt>Segment</dt><dd>Agri distribution</dd>
+              <dt>CIN</dt><dd class="mono">U51909MP2011PTC026781</dd>
+              <dt>Phone</dt><dd class="mono">+91 98930 44127</dd>
+              <dt>Email</dt><dd>accounts@meridianagro.in</dd>
+              <dt>Address</dt><dd style="text-align:right">14-B Industrial Area,<br>Dewas Naka, Indore 452010</dd>
+            </dl>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-h"><h3>Bank accounts</h3></div>
+          <div class="card-b">
+            <div style="display:flex;flex-direction:column;gap:10px">
+              <div style="display:flex;align-items:center;gap:10px">
+                <div style="flex:1"><b style="font-size:12.5px">HDFC Bank ••4410</b><div class="small mut">Current · primary</div></div>
+                <span class="badge outline">repayment</span><span class="badge outline">disbursement</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:10px">
+                <div style="flex:1"><b style="font-size:12.5px">SBI ••7719</b><div class="small mut">Current</div></div>
+                <span class="badge outline">backup</span>
+              </div>
+            </div>
+            <div class="divider"></div>
+            <div style="display:flex;align-items:center;gap:8px">
+              <span class="badge green outline">NACH mandate active</span>
+              <span class="small mut">₹1,50,000 cap · till Mar 2028</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-h"><h3>Collections</h3></div>
+          <div class="card-b">
+            <dl class="kv">
+              <dt>Last enquiry</dt><dd><span class="ref">CE-7719</span></dd>
+              <dt>PTP status</dt><dd><span class="badge green outline">Kept</span></dd>
+              <dt>Promised</dt><dd class="num">₹6,00,000 · 12 Jul</dd>
+              <dt>Paid via</dt><dd><span class="ref link">PAY-88712</span></dd>
+              <dt>Field visit</dt><dd class="num">geo-tagged · 10 Jul</dd>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card mt-lg">
+      <div class="card-h">
+        <h3>Aggregated summary — all lending</h3>
+        <div class="right"><span class="small mut">as of 27 Jul 26</span><span class="badge outline">4 loans · 2 products</span></div>
+      </div>
+      <div class="card-b">
+        <div class="grid g4" style="gap:10px">
+          <div class="blk">
+            <div class="blk-t">Exposure</div>
+            <dl class="kv">
+              <dt>Disbursed lifetime</dt><dd class="amt">₹1,01,00,000</dd>
+              <dt>Collected lifetime</dt><dd class="amt pos">₹47,36,200</dd>
+              <dt>Outstanding</dt><dd class="amt" style="font-weight:650">₹65,58,370</dd>
+              <dt>Limit available</dt><dd class="amt">₹1,26,60,000</dd>
+            </dl>
+          </div>
+          <div class="blk">
+            <div class="blk-t">Outstanding by component</div>
+            <dl class="kv">
+              <dt>Principal</dt><dd class="amt">₹65,02,850</dd>
+              <dt>Interest</dt><dd class="amt">₹49,120</dd>
+              <dt>Charges</dt><dd class="amt">₹6,400</dd>
+            </dl>
+          </div>
+          <div class="blk">
+            <div class="blk-t">Due &amp; risk</div>
+            <dl class="kv">
+              <dt>Net due</dt><dd class="amt" style="color:var(--amber)">₹1,18,900</dd>
+              <dt>DPD</dt><dd class="num">4 · peak 11</dd>
+              <dt>RBI category</dt><dd><span class="badge green outline">STD · 01</span></dd>
+              <dt>Driver</dt><dd><span class="ref link">LN-TL-0098</span></dd>
+            </dl>
+          </div>
+          <div class="blk">
+            <div class="blk-t">Wallet &amp; mandates</div>
+            <dl class="kv">
+              <dt>Excess wallet</dt><dd class="amt dim">₹0</dd>
+              <dt>Upfront hold</dt><dd class="amt" style="color:var(--teal)">₹61,087</dd>
+              <dt>NACH mandate</dt><dd><span class="badge green outline">Active</span></dd>
+              <dt>Last movement</dt><dd class="num">21 Jul 26</dd>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ======================= RESOURCE DRAWER ======================= -->
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer">
+  <div class="drawer-h" style="position:relative">
+    <div class="drawer-type" id="dType">Resource</div>
+    <div class="drawer-title" id="dTitle">—</div>
+    <div class="drawer-badges" id="dBadges"></div>
+    <button class="drawer-x" id="dClose" aria-label="Close">✕</button>
+  </div>
+  <div class="drawer-b" id="dBody"></div>
+  <div class="drawer-f">
+    <button class="btn" id="dCopy">Copy ref</button>
+    <button class="btn primary" id="dOpen">Open full page →</button>
+  </div>
+</aside>
+
+<!-- load order matters: data -> nav -> drawer -> refs -> tabs -> filters -->
+<script src="js/data.js"></script>
+<script src="js/nav.js"></script>
+<script src="js/drawer.js"></script>
+<script src="js/refs.js"></script>
+<script src="js/tabs.js"></script>
+<script src="js/filters.js"></script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+:root{
+  --background:#fafafa; --surface:#ffffff; --foreground:#09090b;
+  --muted:#f4f4f5; --muted-2:#e4e4e7; --muted-fg:#71717a; --subtle-fg:#a1a1aa;
+  --border:#e4e4e7; --border-strong:#d4d4d8;
+  --primary:#18181b; --primary-fg:#fafafa;
+  --ring:#18181b;
+  --green:#16a34a; --green-bg:#f0fdf4; --green-bd:#bbf7d0;
+  --amber:#d97706; --amber-bg:#fffbeb; --amber-bd:#fde68a;
+  --red:#dc2626; --red-bg:#fef2f2; --red-bd:#fecaca;
+  --blue:#2563eb; --blue-bg:#eff6ff; --blue-bd:#bfdbfe;
+  --violet:#7c3aed; --violet-bg:#f5f3ff; --violet-bd:#ddd6fe;
+  --teal:#0d9488; --teal-bg:#f0fdfa; --teal-bd:#99f6e4;
+  --radius:10px; --radius-sm:6px;
+  --shadow-sm:0 1px 2px rgba(9,9,11,.05);
+  --shadow-md:0 1px 3px rgba(9,9,11,.06),0 4px 12px rgba(9,9,11,.05);
+  --sidebar-w:248px;
+  --font-sans:"Geist",ui-sans-serif,system-ui,sans-serif;
+  --font-mono:"Geist Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--font-sans);background:var(--background);color:var(--foreground);
+  font-size:13.5px;line-height:1.5;-webkit-font-smoothing:antialiased;
+}
+::selection{background:#18181b;color:#fafafa}
+

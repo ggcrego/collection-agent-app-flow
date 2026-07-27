@@ -1,0 +1,35 @@
+/* ---------- popover ---------- */
+.pop{position:relative;cursor:help;border-bottom:1px dashed var(--subtle-fg);display:inline-block}
+.pop .pop-card{
+  position:absolute;bottom:calc(100% + 9px);left:50%;transform:translate(-50%,4px);z-index:120;
+  min-width:235px;background:var(--surface);border:1px solid var(--border);border-radius:9px;
+  box-shadow:var(--shadow-md);padding:10px 12px;opacity:0;visibility:hidden;
+  transition:opacity .14s ease,transform .14s ease,visibility .14s;
+  font-weight:400;text-align:left;cursor:default;white-space:normal;
+}
+.pop:hover .pop-card{opacity:1;visibility:visible;transform:translate(-50%,0)}
+/* first/last columns: keep the card inside the viewport */
+.impact>div:first-child .pop .pop-card{left:0;transform:translate(0,4px)}
+.impact>div:first-child .pop:hover .pop-card{transform:translate(0,0)}
+.impact>div:last-child .pop .pop-card{left:auto;right:0;transform:translate(0,4px)}
+.impact>div:last-child .pop:hover .pop-card{transform:translate(0,0)}
+.pop-row .pv.mini{font-size:10.5px}
+.pop-t{font-size:9.5px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;color:var(--subtle-fg);
+  margin-bottom:5px;font-family:var(--font-sans)}
+.pop-row{display:flex;justify-content:space-between;gap:16px;padding:2.5px 0;font-size:11.5px;font-family:var(--font-sans)}
+.pop-row .pk{color:var(--muted-fg)}
+.pop-row .pv{font-family:var(--font-mono);font-variant-numeric:tabular-nums;font-weight:500;color:var(--foreground)}
+.pop-row.tot{border-top:1px solid var(--border);margin-top:4px;padding-top:5px;font-weight:600}
+/* ledger → demand mutation mini-table: was → Δ → now */
+.ptab{border-collapse:collapse;min-width:320px;margin:2px 0 4px}
+.ptab th{font-size:9px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;color:var(--subtle-fg);
+  text-align:right;padding:0 0 4px 14px;background:none;border:0;font-family:var(--font-sans);white-space:nowrap}
+.ptab th:first-child{text-align:left;padding-left:0}
+.ptab td{padding:3px 0 3px 14px;border:0;text-align:right;font-family:var(--font-mono);
+  font-variant-numeric:tabular-nums;font-size:11px;color:var(--foreground);white-space:nowrap}
+.ptab td:first-child{font-family:var(--font-sans);text-align:left;color:var(--muted-fg);padding-left:0;font-size:11px;
+  white-space:nowrap;padding-right:8px}
+.pop .pop-card:has(.ptab){min-width:360px}
+.ptab td.d{font-weight:600}
+.ptab tr.sep td{border-top:1px dashed var(--border);padding-top:5px}
+

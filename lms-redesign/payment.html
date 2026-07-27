@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crego Omni — LMS Console (Design)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+
+<!-- ======================= SIDEBAR ======================= -->
+<aside class="sidebar">
+  <div class="brand">
+    <div class="brand-mark">C</div>
+    <div>
+      <div class="brand-name">Crego Omni</div>
+      <div class="brand-sub">LMS Console</div>
+    </div>
+  </div>
+  <nav class="nav">
+    <div class="nav-label">Portfolio</div>
+    <button class="nav-item" data-view="account">
+      <svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V8l7-5 7 5v13M9 21v-6h6v6"/></svg>
+      Loan Account
+    </button>
+    <button class="nav-item" data-view="contact">
+      <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      Contact
+    </button>
+    <button class="nav-item" data-view="loan">
+      <svg viewBox="0 0 24 24"><path d="M4 4h16v16H4zM4 9h16M9 9v11"/></svg>
+      Loans <span class="count">4</span>
+    </button>
+    <div class="nav-label">Money Movement</div>
+    <button class="nav-item active" data-view="payment">
+      <svg viewBox="0 0 24 24"><path d="M12 19V5M5 12l7 7 7-7"/></svg>
+      Payments <span class="count">3</span>
+    </button>
+    <button class="nav-item" data-view="payout">
+      <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12l7-7 7 7"/></svg>
+      Payouts <span class="count">3</span>
+    </button>
+    <div class="nav-label">Books</div>
+    <button class="nav-item" data-view="transactions">
+      <svg viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
+      Transactions <span class="count">12</span>
+    </button>
+    <button class="nav-item" data-view="demands">
+      <svg viewBox="0 0 24 24"><path d="M8 2v4M16 2v4M3 9h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/></svg>
+      Demands &amp; Schedules
+    </button>
+    <button class="nav-item" data-view="ledger">
+      <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 19.5A2.5 2.5 0 0 0 6.5 22H20V2H6.5A2.5 2.5 0 0 0 4 4.5z"/></svg>
+      Ledger &amp; GL
+    </button>
+    <div class="nav-label">Setup</div>
+    <button class="nav-item" data-view="configuration">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h.09a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v.09a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+      Configuration
+    </button>
+  </nav>
+  <div class="sidebar-foot">
+    <div class="avatar">AB</div>
+    <div class="foot-meta">
+      <div class="foot-name">Abhishek</div>
+      <div class="foot-role">Ops · Lending</div>
+    </div>
+  </div>
+</aside>
+
+<!-- ======================= MAIN ======================= -->
+<div class="main">
+  <div class="topbar">
+    <div class="crumbs" id="crumbs">
+      <span>Meridian Agro Traders</span><span class="sep">/</span><b>Payments</b>
+    </div>
+    <div class="topbar-right">
+      <div class="search">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        Search UTR, loan, contact…
+        <kbd>⌘K</kbd>
+      </div>
+      <button class="btn">Export</button>
+      <button class="btn primary">New Payment</button>
+    </div>
+  </div>
+
+  <!-- ======================================================
+       VIEW: PAYMENT
+  ======================================================= -->
+  <section class="view active" id="view-payment">
+    <div class="page-head">
+      <div class="page-icon"><svg viewBox="0 0 24 24"><path d="M12 19V5M5 12l7 7 7-7"/></svg></div>
+      <div>
+        <div class="page-title">
+          <h1>Payment ₹6,00,000</h1>
+          <span class="ref">UTR512044987N</span>
+          <span class="badge green"><span class="dot"></span>Processed</span>
+        </div>
+        <div class="page-meta">
+          <span>Payment <span class="ref">PAY-88712</span></span>
+          <span>From <b>Meridian Agro — HDFC ••4410</b></span>
+          <span>To <b>Lender Escrow — ICICI ••8821</b></span>
+          <span>Target <span class="ref link" data-nav="account">ACC-GRP-00218</span> <span class="sub">(Account → expands to its loans)</span></span>
+        </div>
+      </div>
+      <div class="page-actions">
+        <button class="btn">Refund excess</button>
+        <button class="btn">Reverse</button>
+        <button class="btn primary">Receipt</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-b">
+        <div class="grid g4" style="gap:10px">
+          <div class="stat" style="padding:0"><div class="k">Received</div><div class="v">₹6,00,000</div><div class="d">bank credit confirmed</div></div>
+          <div class="stat" style="padding:0"><div class="k">Used (settled)</div><div class="v" style="color:var(--green)">₹5,75,000</div><div class="d">across 2 loans · 5 components</div></div>
+          <div class="stat" style="padding:0"><div class="k">Excess parked</div><div class="v" style="color:var(--amber)">₹25,000</div><div class="d">→ contact excess wallet, later re-applied</div></div>
+          <div class="stat" style="padding:0"><div class="k">Refund / TDS</div><div class="v">₹0 / ₹0</div><div class="d">amount = used + excess + refund − tds ✓</div></div>
+        </div>
+      </div>
+      <div class="dates" style="border:0;border-top:1px solid var(--border);border-radius:0 0 var(--radius) var(--radius)">
+        <div><div class="k">Txn date</div><div class="v">14 Jul 26, 11:42</div></div>
+        <div><div class="k">Value date</div><div class="v">14 Jul 26</div></div>
+        <div><div class="k">Bank date</div><div class="v">14 Jul 26, 10:58</div></div>
+        <div><div class="k">Mode</div><div class="v">NEFT</div></div>
+        <div><div class="k">Narration</div><div class="v">NEFT-MERIDIAN-JULY-COLLECTION</div></div>
+      </div>
+    </div>
+
+    <!-- Settlement waterfall -->
+    <div class="card mt-lg">
+      <div class="card-h">
+        <h3>Settlement waterfall</h3>
+        <div class="right"><span class="badge outline">settlement-details</span></div>
+      </div>
+      <div class="card-b">
+        <div class="small mut" style="margin-bottom:4px">Receipt <span class="ref link">UTR512044987N</span> of <b class="mono">₹6,00,000</b> targeted <span class="ref link">ACC-GRP-00218</span> (Account) → expanded to 2 eligible loans, ordered by maturity. Each step shows cash in → applied → carried forward.</div>
+
+        <div class="wf-step">
+          <div class="wf-rank">1</div>
+          <div>
+            <div><span class="ref link">LN-2406-0187</span> <span class="badge green outline">repayment</span></div>
+            <div class="small mut" style="margin-top:3px">earliest maturity · 31 Aug 26</div>
+          </div>
+          <div class="impact" style="grid-template-columns:1fr 1fr 1fr;margin-top:0">
+            <div class="open"><div class="k">Cash in</div><div class="v">₹6,00,000</div></div>
+            <div><div class="k">Applied</div><div class="v pay pop">−3,80,000<span class="pop-card">
+              <div class="pop-t">Settled by component</div>
+              <div class="pop-row"><span class="pk">Interest</span><span class="pv">₹42,300</span></div>
+              <div class="pop-row"><span class="pk">Principal</span><span class="pv">₹3,37,700</span></div>
+              <div class="pop-row tot"><span class="pk">Total</span><span class="pv">₹3,80,000</span></div>
+              <div class="pop-row"><span class="pk">Txn ref</span><span class="pv mini">…REPAYMENT_LN-2406-0187_9f21ac04</span></div>
+              <div class="pop-row"><span class="pk">Value date</span><span class="pv mini">14 Jul 26</span></div>
+            </span></div></div>
+            <div class="close"><div class="k">Carry fwd</div><div class="v">₹2,20,000</div></div>
+          </div>
+        </div>
+
+        <div class="wf-step">
+          <div class="wf-rank">2</div>
+          <div>
+            <div><span class="ref link">LN-2407-0212</span> <span class="badge green outline">repayment</span></div>
+            <div class="small mut" style="margin-top:3px">next maturity · 04 Oct 26</div>
+          </div>
+          <div class="impact" style="grid-template-columns:1fr 1fr 1fr;margin-top:0">
+            <div class="open"><div class="k">Cash in</div><div class="v">₹2,20,000</div></div>
+            <div><div class="k">Applied</div><div class="v pay pop">−1,95,000<span class="pop-card">
+              <div class="pop-t">Settlement order</div>
+              <div class="pop-row"><span class="pk">1 · Penal charge</span><span class="pv">₹4,120</span></div>
+              <div class="pop-row"><span class="pk">2 · Interest</span><span class="pv">₹21,400</span></div>
+              <div class="pop-row"><span class="pk">3 · Principal</span><span class="pv">₹1,69,480</span></div>
+              <div class="pop-row tot"><span class="pk">Total</span><span class="pv">₹1,95,000</span></div>
+              <div class="pop-row"><span class="pk">Txn ref</span><span class="pv mini">…REPAYMENT_LN-2407-0212_b83d1e77</span></div>
+              <div class="pop-row"><span class="pk">Value date</span><span class="pv mini">14 Jul 26</span></div>
+            </span></div></div>
+            <div class="close"><div class="k">Carry fwd</div><div class="v">₹25,000</div></div>
+          </div>
+        </div>
+
+        <div class="wf-step">
+          <div class="wf-rank exc">₹</div>
+          <div>
+            <div><span class="ref link">DMD-EXC-CON-9134</span> <span class="badge amber outline">excess</span></div>
+            <div class="small mut" style="margin-top:3px">parked to contact wallet · swept 21 Jul via <span class="ref link">TXN-EPS-90412</span></div>
+          </div>
+          <div class="impact" style="grid-template-columns:1fr 1fr 1fr;margin-top:0">
+            <div class="open"><div class="k">Cash in</div><div class="v">₹25,000</div></div>
+            <div><div class="k">Parked</div><div class="v wav pop">+25,000<span class="pop-card">
+              <div class="pop-t">Excess wallet</div>
+              <div class="pop-row"><span class="pk">Source UTR</span><span class="pv mini">UTR512044987N</span></div>
+              <div class="pop-row"><span class="pk">Ledger posting</span><span class="pv">excess</span></div>
+              <div class="pop-row"><span class="pk">Demand level</span><span class="pv">contact</span></div>
+              <div class="pop-row"><span class="pk">Swept to LN-2407-0212</span><span class="pv">21 Jul</span></div>
+            </span></div></div>
+            <div class="close"><div class="k">Unallocated</div><div class="v zero">₹0</div></div>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+          <b style="font-size:12.5px">Allocation</b>
+        </div>
+        <div class="segbar" style="height:12px">
+          <span style="width:63.3%;background:#16a34a" title="LN-2406-0187"></span>
+          <span style="width:32.5%;background:#15803d;opacity:.75" title="LN-2407-0212"></span>
+          <span style="width:4.2%;background:#d97706" title="Excess"></span>
+        </div>
+        <div class="legend">
+          <span><i style="background:#16a34a"></i>LN-2406-0187 · ₹3,80,000</span>
+          <span><i style="background:#15803d;opacity:.75"></i>LN-2407-0212 · ₹1,95,000</span>
+          <span><i style="background:#d97706"></i>Excess · ₹25,000</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Excess lifecycle + linked txns -->
+    <div class="grid g23 mt-lg">
+      <div class="card">
+        <div class="card-h"><h3>Excess lifecycle</h3></div>
+        <div class="card-b">
+          <div class="tl">
+            <div class="tl-item">
+              <div class="tl-dot amber"></div>
+              <div class="tl-head"><b>Parked to excess wallet · ₹25,000</b><span class="badge amber outline">excess</span></div>
+              <div class="tl-sub">14 Jul 26 · leftover after last loan in order · Ledger(posting_type=excess, contact=CON-9134)</div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-dot violet"></div>
+              <div class="tl-head"><b>Excess payment settlement · ₹25,000</b><span class="badge violet outline">excess_payment_settlement</span><span class="ref link" data-nav="transactions">TXN-EPS-90412</span></div>
+              <div class="tl-sub">21 Jul 26 · EOD sweep applied wallet balance to LN-2407-0212 · Transaction keeps <span class="mono">payment FK → PAY-88712</span>, so the trail back to this UTR survives</div>
+              <div class="tl-card">
+                Applied on <span class="ref link" data-nav="loan">LN-2407-0212</span>: interest ₹8,900 · principal ₹16,100
+              </div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-dot green"></div>
+              <div class="tl-head"><b>Wallet balance after sweep</b></div>
+              <div class="tl-sub">₹0 remaining on DMD-EXC-CON-9134 · shown ₹25,000 in account view as of 20 Jul snapshot</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-h"><h3>Linked records</h3></div>
+        <div class="card-b">
+          <dl class="kv">
+            <dt>Transactions</dt><dd><span class="ref link" data-nav="transactions">3 repayment txns</span></dd>
+            <dt>Ledger rows</dt><dd><span class="ref link" data-nav="ledger">11 postings</span></dd>
+            <dt>GL entries</dt><dd><span class="ref link" data-nav="ledger">22 (DR/CR)</span></dd>
+            <dt>Collection enquiry</dt><dd><span class="ref">CE-7719</span> <span class="sub">(PTP kept)</span></dd>
+            <dt>Batch item</dt><dd><span class="ref">TB-ACC218-0714</span> <span class="sub">payment_settlement</span></dd>
+          </dl>
+          <div class="divider"></div>
+          <div class="small mut">Every settled rupee is traceable: <span class="mono">Payment → Transaction(payment FK) → Ledger(component, posting_type, demand) → GLEntry(DR/CR)</span>.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Other payments list -->
+    <div class="card mt-lg">
+      <div class="card-h"><h3>All payments — Meridian Agro</h3></div>
+      <div class="card-b flush">
+        <table>
+          <thead><tr><th>UTR</th><th>Mode</th><th>Value date</th><th class="r">Amount</th><th class="r">Used</th><th class="r">Excess</th><th>Targets</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr style="background:#fafafa"><td><span class="ref">UTR512044987N</span> <span class="sub small">← viewing</span></td><td>NEFT</td><td class="num">14 Jul 26</td><td class="r amt">₹6,00,000</td><td class="r amt">₹5,75,000</td><td class="r amt" style="color:var(--amber)">₹25,000</td><td><span class="ref link" data-nav="account">ACC-GRP-00218</span></td><td><span class="badge green outline">Processed</span></td></tr>
+            <tr><td><span class="ref">UTR498232771N</span></td><td>NACH</td><td class="num">05 Jul 26</td><td class="r amt">₹1,12,500</td><td class="r amt">₹1,12,500</td><td class="r amt dim">₹0</td><td><span class="ref link" data-nav="loan">LN-TL-0098</span></td><td><span class="badge green outline">Processed</span></td></tr>
+            <tr><td><span class="ref">UTR461920034N</span></td><td>RTGS</td><td class="num">18 Jun 26</td><td class="r amt">₹25,61,200</td><td class="r amt">₹25,61,200</td><td class="r amt dim">₹0</td><td><span class="ref link" data-nav="loan">LN-2401-0114</span> <span class="sub small">closure</span></td><td><span class="badge green outline">Processed</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card mt-lg">
+      <details class="clps">
+      <summary class="card-h">
+        <svg class="chev" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg>
+        <h3>Payment types — what each settles</h3>
+      </summary>
+      <div class="card-b flush">
+        <table>
+          <thead><tr><th>Type</th><th>Targets</th><th>What settles</th><th>Key data points</th><th>Example</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><span class="badge green outline">loan_settlement</span></td>
+              <td>Account and/or loans <span class="sub small">(PaymentAccount + order)</span></td>
+              <td>Penal → fees → interest → principal across loans by maturity waterfall</td>
+              <td class="small">UTR · banks · date triplet · used / excess / refund / TDS · one REPAYMENT txn per loan · excess → wallet</td>
+              <td><span class="ref link">UTR512044987N</span></td>
+            </tr>
+            <tr>
+              <td><span class="badge amber outline">account_fee_settlement</span></td>
+              <td>One Account</td>
+              <td>Account-level fee demands only — never principal or interest</td>
+              <td class="small">fee component split + GST · no loan expansion · settles account fee demands directly</td>
+              <td class="sub small">annual review fee</td>
+            </tr>
+            <tr>
+              <td><span class="badge amber outline">contact_fee_settlement</span></td>
+              <td>Contact</td>
+              <td>Contact-level fee demands (onboarding, documentation)</td>
+              <td class="small">contact FK only · no account linkage · fee + tax postings</td>
+              <td class="sub small">doc charges · CON-9134</td>
+            </tr>
+            <tr>
+              <td><span class="badge blue outline">program_fee_settlement</span></td>
+              <td>Program(s) <span class="sub small">(PaymentProgram + order)</span></td>
+              <td>Program-level fees — platform, subvention, anchor fees</td>
+              <td class="small">program FK · payment_order across programs · partner split if co-lent</td>
+              <td class="sub small">platform fee · Kisan SCF</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      </details>
+    </div>
+  </section>
+
+</div>
+
+<!-- ======================= RESOURCE DRAWER ======================= -->
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer">
+  <div class="drawer-h" style="position:relative">
+    <div class="drawer-type" id="dType">Resource</div>
+    <div class="drawer-title" id="dTitle">—</div>
+    <div class="drawer-badges" id="dBadges"></div>
+    <button class="drawer-x" id="dClose" aria-label="Close">✕</button>
+  </div>
+  <div class="drawer-b" id="dBody"></div>
+  <div class="drawer-f">
+    <button class="btn" id="dCopy">Copy ref</button>
+    <button class="btn primary" id="dOpen">Open full page →</button>
+  </div>
+</aside>
+
+<!-- load order matters: data -> nav -> drawer -> refs -> tabs -> filters -->
+<script src="js/data.js"></script>
+<script src="js/nav.js"></script>
+<script src="js/drawer.js"></script>
+<script src="js/refs.js"></script>
+<script src="js/tabs.js"></script>
+<script src="js/filters.js"></script>
+</body>
+</html>

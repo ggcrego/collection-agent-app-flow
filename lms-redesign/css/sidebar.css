@@ -1,0 +1,31 @@
+/* ---------- Sidebar ---------- */
+.sidebar{
+  position:fixed;inset:0 auto 0 0;width:var(--sidebar-w);
+  background:var(--surface);border-right:1px solid var(--border);
+  display:flex;flex-direction:column;z-index:50;
+}
+.brand{display:flex;align-items:center;gap:10px;padding:18px 18px 14px;border-bottom:1px solid var(--border)}
+.brand-mark{width:30px;height:30px;border-radius:8px;background:var(--primary);color:var(--primary-fg);
+  display:grid;place-items:center;font-weight:700;font-size:14px;letter-spacing:-.5px}
+.brand-name{font-weight:600;font-size:14px;letter-spacing:-.2px}
+.brand-sub{font-size:10.5px;color:var(--muted-fg);letter-spacing:.4px;text-transform:uppercase}
+.nav{flex:1;overflow-y:auto;padding:12px 10px}
+.nav-label{font-size:10.5px;font-weight:600;letter-spacing:.7px;text-transform:uppercase;color:var(--subtle-fg);padding:14px 10px 6px}
+.nav-item{
+  display:flex;align-items:center;gap:10px;width:100%;padding:7px 10px;border:0;background:none;
+  border-radius:var(--radius-sm);font:inherit;font-weight:500;color:var(--muted-fg);cursor:pointer;
+  text-align:left;transition:background .12s,color .12s;
+}
+.nav-item svg{width:16px;height:16px;flex:none;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.nav-item:hover{background:var(--muted);color:var(--foreground)}
+.nav-item.active{background:var(--muted);color:var(--foreground);font-weight:600}
+.nav-item .count{margin-left:auto;font-size:11px;font-family:var(--font-mono);color:var(--subtle-fg);
+  background:var(--muted);border:1px solid var(--border);border-radius:99px;padding:0 7px;line-height:18px}
+.nav-item.active .count{background:var(--surface)}
+.sidebar-foot{border-top:1px solid var(--border);padding:12px 14px;display:flex;align-items:center;gap:10px}
+.avatar{width:30px;height:30px;border-radius:99px;background:linear-gradient(135deg,#18181b,#3f3f46);
+  color:#fff;display:grid;place-items:center;font-size:11px;font-weight:600}
+.foot-meta{line-height:1.25}
+.foot-name{font-size:12.5px;font-weight:600}
+.foot-role{font-size:11px;color:var(--muted-fg)}
+

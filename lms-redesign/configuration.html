@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crego Omni — LMS Console (Design)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+
+<!-- ======================= SIDEBAR ======================= -->
+<aside class="sidebar">
+  <div class="brand">
+    <div class="brand-mark">C</div>
+    <div>
+      <div class="brand-name">Crego Omni</div>
+      <div class="brand-sub">LMS Console</div>
+    </div>
+  </div>
+  <nav class="nav">
+    <div class="nav-label">Portfolio</div>
+    <button class="nav-item" data-view="account">
+      <svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V8l7-5 7 5v13M9 21v-6h6v6"/></svg>
+      Loan Account
+    </button>
+    <button class="nav-item" data-view="contact">
+      <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      Contact
+    </button>
+    <button class="nav-item" data-view="loan">
+      <svg viewBox="0 0 24 24"><path d="M4 4h16v16H4zM4 9h16M9 9v11"/></svg>
+      Loans <span class="count">4</span>
+    </button>
+    <div class="nav-label">Money Movement</div>
+    <button class="nav-item" data-view="payment">
+      <svg viewBox="0 0 24 24"><path d="M12 19V5M5 12l7 7 7-7"/></svg>
+      Payments <span class="count">3</span>
+    </button>
+    <button class="nav-item" data-view="payout">
+      <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12l7-7 7 7"/></svg>
+      Payouts <span class="count">3</span>
+    </button>
+    <div class="nav-label">Books</div>
+    <button class="nav-item" data-view="transactions">
+      <svg viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
+      Transactions <span class="count">12</span>
+    </button>
+    <button class="nav-item" data-view="demands">
+      <svg viewBox="0 0 24 24"><path d="M8 2v4M16 2v4M3 9h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/></svg>
+      Demands &amp; Schedules
+    </button>
+    <button class="nav-item" data-view="ledger">
+      <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 19.5A2.5 2.5 0 0 0 6.5 22H20V2H6.5A2.5 2.5 0 0 0 4 4.5z"/></svg>
+      Ledger &amp; GL
+    </button>
+    <div class="nav-label">Setup</div>
+    <button class="nav-item active" data-view="configuration">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h.09a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v.09a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+      Configuration
+    </button>
+  </nav>
+  <div class="sidebar-foot">
+    <div class="avatar">AB</div>
+    <div class="foot-meta">
+      <div class="foot-name">Abhishek</div>
+      <div class="foot-role">Ops · Lending</div>
+    </div>
+  </div>
+</aside>
+
+<!-- ======================= MAIN ======================= -->
+<div class="main">
+  <div class="topbar">
+    <div class="crumbs" id="crumbs">
+      <span>Meridian Agro Traders</span><span class="sep">/</span><b>Configuration</b>
+    </div>
+    <div class="topbar-right">
+      <div class="search">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        Search UTR, loan, contact…
+        <kbd>⌘K</kbd>
+      </div>
+      <button class="btn">Export</button>
+      <button class="btn primary">New Payment</button>
+    </div>
+  </div>
+
+  <!-- ======================================================
+       VIEW: CONFIGURATION
+  ======================================================= -->
+  <section class="view active" id="view-configuration">
+    <div class="page-head">
+      <div class="page-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h.09a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v.09a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></div>
+      <div>
+        <div class="page-title"><h1>Configuration</h1></div>
+        <div class="page-meta"><span>Values resolve down the cascade — the most specific scope wins. Blue pills mark overrides.</span></div>
+      </div>
+      <div class="page-actions">
+        <button class="btn">View raw JSON</button>
+        <button class="btn primary">Propose change</button>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom:16px">
+      <div class="card-b" style="padding:13px 16px">
+        <div class="cascade" id="cfgCascade">
+          <button class="node" data-scope="product"><div class="t">Product</div><div class="n">SCF-SID</div><div class="s">defaults</div></button>
+          <span class="arr">→</span>
+          <button class="node cur" data-scope="program"><div class="t">Program</div><div class="n">Kisan SCF</div><div class="s">7 overrides</div></button>
+          <span class="arr">→</span>
+          <button class="node" data-scope="account"><div class="t">Account</div><div class="n">ACC-GRP-00218</div><div class="s">1 override</div></button>
+          <span class="arr">→</span>
+          <button class="node" data-scope="contact"><div class="t">Contact</div><div class="n">CON-9134</div><div class="s">no overrides</div></button>
+          <span style="margin-left:auto" class="small mut">click a level to edit it · last change 12 Jul 26 by Kavita S.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== SCOPE: PRODUCT (defaults, mostly locked) ===== -->
+    <div class="scopepane" id="scope-product">
+    <div style="margin-bottom:14px" class="tabs" id="cfgTabs">
+      <button class="tab active" data-cfg="scf">Kisan SCF · SCF-SID</button>
+      <button class="tab" data-cfg="tl">Business TL · term_loan</button>
+    </div>
+
+    <!-- ============ SCF CONFIG PANE ============ -->
+    <div class="tabpane active" id="cfgpane-scf">
+
+      <div class="card">
+        <div class="card-h">
+          <h3>Identity &amp; structure</h3>
+          <div class="right"><span class="badge red outline">set once</span></div>
+        </div>
+        <div class="card-b flush">
+          <div class="cfg-row">
+            <div class="cfg-main">
+              <div class="cfg-name">Product type <svg class="lock-ic" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div>
+              <div class="cfg-desc">Selects the transaction processor, origination chain and allowed operations.</div>
+            </div>
+            <div class="cfg-ctl"><span class="scope-pill">product</span><span class="selectish">SCF · Sales invoice discounting</span></div>
+          </div>
+          <div class="cfg-row">
+            <div class="cfg-main">
+              <div class="cfg-name">Requires parent Account <svg class="lock-ic" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div>
+              <div class="cfg-desc">Every loan is created under a borrower-level Account; limits are shared through it.</div>
+            </div>
+            <div class="cfg-ctl"><span class="scope-pill">product</span><span class="sw locked on"></span></div>
+          </div>
+          <div class="cfg-row">
+            <div class="cfg-main">
+              <div class="cfg-name">Multi-tranche drawdowns <svg class="lock-ic" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div>
+              <div class="cfg-desc">Allows several partial disbursements against one approved loan.</div>
+            </div>
+            <div class="cfg-ctl"><span class="scope-pill ovr">overridden · program</span><span class="sw locked on"></span></div>
+          </div>
+          <div class="cfg-row">
+            <div class="cfg-main">
+              <div class="cfg-name">Schedule-based repayment <svg class="lock-ic" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div>
+              <div class="cfg-desc">Off = bullet repayment at maturity; on = EMI-style schedule grid.</div>
+            </div>
+            <div class="cfg-ctl"><span class="scope-pill">product</span><span class="sw locked"></span></div>
+          </div>
+          <div class="cfg-row">
+            <div class="cfg-main">
+              <div class="cfg-name">Secondary product <svg class="lock-ic" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div>
+              <div class="cfg-desc">Transactions process inline instead of through the per-account batch queue.</div>
+            </div>
+            <div class="cfg-ctl"><span class="scope-pill">product</span><span class="sw locked"></span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mt">
+        <div class="card-h">
+          <h3>Financial terms</h3>
+          <div class="right"><span class="badge amber outline">amendment</span></div>
+        </div>
+        <div class="card-b flush">
+          <div class="cfg-row">
+            <div class="cfg-main">
+              <div class="cfg-name">Upfront interest rate </div>
+              <div class="cfg-desc">Deducted from the payout at disbursal; earns down daily over the cover period.</div>
+            </div>
+            <div class="cfg-ctl"><span class="scope-pill ovr">overridden · program</span><span class="selectish mono">13.50% p.a.</span></div>
+          </div>
+          <div class="cfg-row">
+            <div class="cfg-main">
+              <div class="cfg-name">Upfront cover period </div>
+              <div class="cfg-desc">Days of interest collected upfront; interest beyond this accrues normally.</div>
+            </div>
+            <div class="cfg-ctl"><span class="scope-pill">product</span><span class="selectish mono">90 days</span></div>
+          </div>
+          <div class="cfg-row">
+            <div class="cfg-main">
+              <div class="cfg-name">Processing fee </div>
+              <div class="cfg-desc">Deducted at source from every drawdown. GST added on top.</div>
+            </div>
+            <div class="cfg-ctl"><span class="scope-pill">product</span><span class="selectish mono">0.68% + GST</span></div>
+          </div>
+          <div class="cfg-row">
+            <div class="cfg-main">
+              <div class="cfg-name">Penal charge </div>
+              <div class="cfg-desc">Applied on overdue amounts past the grace period.</div>
+            </div>
+            <div class="cfg-ctl"><span class="scope-pill ovr">overridden · program</span><span class="selectish mono">24% p.a. · grace 3d</span></div>
+          </div>
+          <div class="cfg-row">
+            <div class="cfg-main">
+              <div class="cfg-name">Financing ratio cap </div>
+              <div class="cfg-desc">Maximum share of the invoice value that can be financed.</div>
+            </div>
+            <div class="cfg-ctl"><span class="scope-pill">product</span><span class="selectish mono">85% of invoice</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mt">
+        <div class="card-h">
+          <h3>Repayment behaviour</h3>
+          <div class="right"><span class="badge green outline">ops-tunable</span></div>
+        </div>
+        <div class="card-b flush">
+          <div class="cfg-row">
+            <div class="cfg-main">
+              <div class="cfg-name">Component settlement order </div>
+              <div class="cfg-desc">Waterfall within a loan. Can be overridden per payment via payload.</div>
+            </div>
+            <div class="cfg-ctl"><span class="scope-pill ovr">overridden · program</span>
+              <span class="ord"><span><i>1</i>penal</span><span><i>2</i>fees</span><span><i>3</i>interest</span><span><i>4</i>principal</span></span>
+            </div>
+          </div>
+          <div class="cfg-row">
+            <div class="cfg-main">
+              <div class="cfg-name">Loan order for settlement </div>
+              <div class="cfg-desc">Which loan gets the money first when a payment targets the Account.</div>
+            </div>
+            <div class="cfg-ctl"><span class="scope-pill">product</span><span class="selectish">Earliest maturity first <svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></span></div>
+          </div>
+          <div class="cfg-row">
+            <div class="cfg-main">
+              <div class="cfg-name">Upfront cashback on early closure </div>
+              <div class="cfg-desc">Releases unearned upfront interest to excess — enables cross-loan settlement.</div>
+            </div>
+            <div class="cfg-ctl"><span class="scope-pill ovr">overridden · program</span><span class="sw on"></span></div>
+          </div>
+          <div class="cfg-row">
+            <div class="cfg-main">
+              <div class="cfg-name">Auto-sweep excess wallet </div>
+              <div class="cfg-desc">EOD job applies parked excess to the next due demand automatically.</div>
+            </div>
+            <div class="cfg-ctl"><span class="scope-pill">product</span><span class="sw on"></span></div>
+          </div>
+          <div class="cfg-row">
+            <div class="cfg-main">
+              <div class="cfg-name">TDS handling </div>
+              <div class="cfg-desc">Accept borrower-deducted TDS on receipts; attaches to the first repayment transaction.</div>
+            </div>
+            <div class="cfg-ctl"><span class="scope-pill">product</span><span class="sw on"></span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid g2 mt">
+        <div class="card">
+          <div class="card-h">
+            <h3>Co-lending</h3>
+            <div class="right"><span class="badge blue outline">partner</span></div>
+          </div>
+          <div class="card-b flush">
+            <div class="cfg-row">
+              <div class="cfg-main">
+                <div class="cfg-name">Co-lending enabled </div>
+                <div class="cfg-desc">Creates mirror accounts, split transactions and IFT flows.</div>
+              </div>
+              <div class="cfg-ctl"><span class="scope-pill ovr">program</span><span class="sw on"></span></div>
+            </div>
+            <div class="cfg-row">
+              <div class="cfg-main">
+                <div class="cfg-name">Split ratio </div>
+                <div class="cfg-desc">Nexa Capital (lender) / Crego NBFC (co-lender).</div>
+              </div>
+              <div class="cfg-ctl"><span class="selectish mono">80 / 20</span></div>
+            </div>
+            <div class="cfg-row">
+              <div class="cfg-main">
+                <div class="cfg-name">IFT routing </div>
+                <div class="cfg-desc">Repayments land in escrow, then split to each lender's current account.</div>
+              </div>
+              <div class="cfg-ctl"><span class="selectish">escrow → current</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-h">
+            <h3>Risk &amp; accrual</h3>
+            <div class="right"><span class="badge amber outline">amendment</span></div>
+          </div>
+          <div class="card-b flush">
+            <div class="cfg-row">
+              <div class="cfg-main">
+                <div class="cfg-name">Run accrual </div>
+                <div class="cfg-desc">Daily interest accrual beyond the upfront cover.</div>
+              </div>
+              <div class="cfg-ctl"><span class="scope-pill">product</span><span class="sw on"></span></div>
+            </div>
+            <div class="cfg-row">
+              <div class="cfg-main">
+                <div class="cfg-name">NPA threshold </div>
+                <div class="cfg-desc">DPD at which the loan is marked NPA and income is suspended.</div>
+              </div>
+              <div class="cfg-ctl"><span class="scope-pill">product</span><span class="selectish mono">90 DPD</span></div>
+            </div>
+            <div class="cfg-row">
+              <div class="cfg-main">
+                <div class="cfg-name">SMA ladder </div>
+                <div class="cfg-desc">RBI buckets applied by DPD.</div>
+              </div>
+              <div class="cfg-ctl"><span class="ord"><span><i>0</i>STD</span><span><i>1–30</i>SMA0</span><span><i>31–60</i>SMA1</span><span><i>61–90</i>SMA2</span></span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout mt">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+        <span><b>Hidden for this product:</b> EMI frequency, schedule count, pre-EMI, restructure permissions and NACH retry policy don't apply to SCF-SID — switch to the <b>Business TL</b> tab to see them.</span>
+      </div>
+    </div>
+
+    <!-- ============ TERM LOAN CONFIG PANE ============ -->
+    <div class="tabpane" id="cfgpane-tl">
+      <div class="card">
+        <div class="card-h">
+          <h3>Identity &amp; structure</h3>
+          <div class="right"><span class="badge red outline">set once</span></div>
+        </div>
+        <div class="card-b flush">
+          <div class="cfg-row">
+            <div class="cfg-main">
+              <div class="cfg-name">Product type <svg class="lock-ic" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div>
+              <div class="cfg-desc">Term loan — EMI schedules, restructuring, TL accrual cycle.</div>
+            </div>
+            <div class="cfg-ctl"><span class="scope-pill">product</span><span class="selectish">Term loan</span></div>
+          </div>
+          <div class="cfg-row">
+            <div class="cfg-main">
+              <div class="cfg-name">Schedule-based repayment <svg class="lock-ic" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div>
+              <div class="cfg-desc">EMI grid with per-component demands per schedule.</div>
+            </div>
+            <div class="cfg-ctl"><span class="scope-pill">product</span><span class="sw locked on"></span></div>
+          </div>
+          <div class="cfg-row off">
+            <div class="cfg-main">
+              <div class="cfg-name">Upfront interest </div>
+              <div class="cfg-desc">Not applicable to term loans — interest accrues on schedule.</div>
+            </div>
+            <div class="cfg-ctl"><span class="scope-pill">n/a</span><span class="sw locked"></span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mt">
+        <div class="card-h">
+          <h3>EMI &amp; schedule terms</h3>
+          <div class="right"><span class="badge amber outline">amendment</span></div>
+        </div>
+        <div class="card-b flush">
+          <div class="cfg-row">
+            <div class="cfg-main"><div class="cfg-name">EMI frequency </div>
+              <div class="cfg-desc">Repayment cadence for generated schedules.</div></div>
+            <div class="cfg-ctl"><span class="scope-pill">product</span><span class="selectish">Monthly <svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></span></div>
+          </div>
+          <div class="cfg-row">
+            <div class="cfg-main"><div class="cfg-name">Tenure </div>
+              <div class="cfg-desc">Number of schedules generated at disbursal.</div></div>
+            <div class="cfg-ctl"><span class="scope-pill ovr">overridden · program</span><span class="selectish mono">24 EMIs</span></div>
+          </div>
+          <div class="cfg-row">
+            <div class="cfg-main"><div class="cfg-name">Broken-period interest </div>
+              <div class="cfg-desc">Charge BPI between disbursal and the first schedule start.</div></div>
+            <div class="cfg-ctl"><span class="scope-pill">product</span><span class="sw on"></span></div>
+          </div>
+          <div class="cfg-row">
+            <div class="cfg-main"><div class="cfg-name">Pre-EMI allowed </div>
+              <div class="cfg-desc">Interest-only period before the EMI cycle begins.</div></div>
+            <div class="cfg-ctl"><span class="scope-pill">product</span><span class="sw"></span></div>
+          </div>
+          <div class="cfg-row">
+            <div class="cfg-main"><div class="cfg-name">Accrual cycle </div>
+              <div class="cfg-desc">When interest is booked to the GL for term loans.</div></div>
+            <div class="cfg-ctl"><span class="scope-pill ovr">overridden · program</span><span class="selectish">Month-end <svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mt">
+        <div class="card-h">
+          <h3>Restructuring permissions</h3>
+          <div class="right"><span class="badge green outline">ops-tunable</span></div>
+        </div>
+        <div class="card-b flush">
+          <div class="cfg-row">
+            <div class="cfg-main"><div class="cfg-name">Tenure / EMI change </div>
+              <div class="cfg-desc">Reschedule remaining EMIs on rate or tenure amendments.</div></div>
+            <div class="cfg-ctl"><span class="scope-pill">product</span><span class="sw on"></span></div>
+          </div>
+          <div class="cfg-row">
+            <div class="cfg-main"><div class="cfg-name">Pre-payment </div>
+              <div class="cfg-desc">Partial prepayment reducing either tenure or EMI.</div></div>
+            <div class="cfg-ctl"><span class="scope-pill ovr">overridden · program</span><span class="selectish">Reduce tenure <svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></span></div>
+          </div>
+          <div class="cfg-row">
+            <div class="cfg-main"><div class="cfg-name">EMI due-date change </div>
+              <div class="cfg-desc">Move the monthly due date; regenerates future schedules.</div></div>
+            <div class="cfg-ctl"><span class="scope-pill">product</span><span class="sw on"></span></div>
+          </div>
+          <div class="cfg-row">
+            <div class="cfg-main"><div class="cfg-name">NACH retry policy </div>
+              <div class="cfg-desc">Re-present bounced mandates before raising a bounce fee.</div></div>
+            <div class="cfg-ctl"><span class="scope-pill">program</span><span class="selectish mono">2 retries · T+3</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout mt">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+        <span><b>Hidden for this product:</b> upfront interest, invoice financing ratio, multi-tranche and drawdown settings apply only to SCF products.</span>
+      </div>
+    </div>
+    </div><!-- /scope-product -->
+
+    <!-- ===== SCOPE: PROGRAM (default editing level) ===== -->
+    <div class="scopepane active" id="scope-program">
+      <div class="card">
+        <div class="card-h">
+          <h3>Financial terms</h3>
+          <div class="right"><span class="badge amber outline">amendment</span></div>
+        </div>
+        <div class="card-b flush">
+          <div class="cfg-row">
+            <div class="cfg-main">
+              <div class="cfg-name">Upfront interest rate </div>
+              <div class="cfg-desc">Deducted from payout at disbursal; earns down daily.</div>
+            </div>
+            <div class="cfg-ctl">
+              <span class="scope-pill ovr">override · here</span>
+              <span class="inp-wrap"><input class="inp num" type="number" step="0.05" value="13.50"><span class="unit">% p.a.</span></span>
+              <button class="btn sm ghost">Revert</button>
+            </div>
+          </div>
+          <div class="cfg-row">
+            <div class="cfg-main">
+              <div class="cfg-name">Upfront cover period </div>
+              <div class="cfg-desc">Days of interest collected upfront.</div>
+            </div>
+            <div class="cfg-ctl">
+              <span class="scope-pill">inherited · product</span>
+              <span class="inp-wrap"><input class="inp num" type="number" value="90" disabled><span class="unit">days</span></span>
+              <button class="btn sm">Override</button>
+            </div>
+          </div>
+          <div class="cfg-row">
+            <div class="cfg-main">
+              <div class="cfg-name">Processing fee </div>
+              <div class="cfg-desc">Deducted at source per drawdown; GST on top.</div>
+            </div>
+            <div class="cfg-ctl">
+              <span class="scope-pill">inherited · product</span>
+              <span class="inp-wrap"><input class="inp num" type="number" step="0.01" value="0.68" disabled><span class="unit">% + GST</span></span>
+              <button class="btn sm">Override</button>
+            </div>
+          </div>
+          <div class="cfg-row">
+            <div class="cfg-main">
+              <div class="cfg-name">Penal charge </div>
+              <div class="cfg-desc">On overdue amounts past the grace period.</div>
+            </div>
+            <div class="cfg-ctl">
+              <span class="scope-pill ovr">override · here</span>
+              <span class="inp-wrap"><input class="inp num" type="number" value="24"><span class="unit">% p.a.</span><input class="inp num" type="number" value="3" style="width:60px"><span class="unit">grace days</span></span>
+              <button class="btn sm ghost">Revert</button>
+            </div>
+          </div>
+          <div class="cfg-row">
+            <div class="cfg-main">
+              <div class="cfg-name">Financing ratio cap </div>
+              <div class="cfg-desc">Max share of invoice value financed.</div>
+            </div>
+            <div class="cfg-ctl">
+              <span class="scope-pill">inherited · product</span>
+              <span class="inp-wrap"><input class="inp num" type="number" value="85" disabled><span class="unit">% of invoice</span></span>
+              <button class="btn sm">Override</button>
+            </div>
+          </div>
+        </div>
+        <div class="savebar"><span class="dirty-dot"></span><b style="color:var(--foreground)">1 unsaved change</b><span>· upfront rate — pricing goes to maker-checker</span><span style="margin-left:auto"></span><button class="btn sm">Discard</button><button class="btn sm primary">Submit for approval</button></div>
+      </div>
+
+      <div class="card mt">
+        <div class="card-h">
+          <h3>Repayment behaviour</h3>
+          <div class="right"><span class="badge green outline">ops-tunable</span></div>
+        </div>
+        <div class="card-b flush">
+          <div class="cfg-row">
+            <div class="cfg-main">
+              <div class="cfg-name">Component settlement order </div>
+              <div class="cfg-desc">Waterfall within a loan; drag to reorder.</div>
+            </div>
+            <div class="cfg-ctl">
+              <span class="scope-pill ovr">override · here</span>
+              <span class="ord"><span><i>1</i>penal</span><span><i>2</i>fees</span><span><i>3</i>interest</span><span><i>4</i>principal</span></span>
+              <button class="btn sm">Edit order</button>
+              <button class="btn sm ghost">Revert</button>
+            </div>
+          </div>
+          <div class="cfg-row">
+            <div class="cfg-main">
+              <div class="cfg-name">Loan order for settlement </div>
+              <div class="cfg-desc">Which loan gets money first for Account-level payments.</div>
+            </div>
+            <div class="cfg-ctl">
+              <span class="scope-pill">inherited · product</span>
+              <select class="inp" disabled><option>Earliest maturity first</option><option>Upfront cover end first</option></select>
+              <button class="btn sm">Override</button>
+            </div>
+          </div>
+          <div class="cfg-row">
+            <div class="cfg-main">
+              <div class="cfg-name">Upfront cashback on early closure </div>
+              <div class="cfg-desc">Releases unearned upfront to excess; enables cross-loan settle.</div>
+            </div>
+            <div class="cfg-ctl"><span class="scope-pill ovr">override · here</span><span class="sw on"></span><button class="btn sm ghost">Revert</button></div>
+          </div>
+          <div class="cfg-row">
+            <div class="cfg-main">
+              <div class="cfg-name">Auto-sweep excess wallet </div>
+              <div class="cfg-desc">EOD applies parked excess to the next due demand.</div>
+            </div>
+            <div class="cfg-ctl"><span class="scope-pill">inherited · product</span><span class="sw locked on"></span><button class="btn sm">Override</button></div>
+          </div>
+          <div class="cfg-row">
+            <div class="cfg-main">
+              <div class="cfg-name">Accept borrower TDS </div>
+              <div class="cfg-desc">Allow TDS-deducted receipts.</div>
+            </div>
+            <div class="cfg-ctl"><span class="scope-pill">inherited · product</span><span class="sw locked on"></span><button class="btn sm">Override</button></div>
+          </div>
+        </div>
+        <div class="savebar"><span>No unsaved changes</span><span style="margin-left:auto"></span><button class="btn sm" disabled style="opacity:.5">Discard</button><button class="btn sm primary" disabled style="opacity:.5">Save</button></div>
+      </div>
+
+      <div class="card mt">
+        <div class="card-h">
+          <h3>Co-lending</h3>
+          <div class="right"><span class="badge blue outline">partner</span></div>
+        </div>
+        <div class="card-b flush">
+          <div class="cfg-row">
+            <div class="cfg-main">
+              <div class="cfg-name">Co-lending enabled </div>
+              <div class="cfg-desc">Mirror accounts, split transactions, IFT flows.</div>
+            </div>
+            <div class="cfg-ctl"><span class="scope-pill ovr">defined · here</span><span class="sw on"></span></div>
+          </div>
+          <div class="cfg-row">
+            <div class="cfg-main">
+              <div class="cfg-name">Partner &amp; split </div>
+              <div class="cfg-desc">Lender / co-lender participation.</div>
+            </div>
+            <div class="cfg-ctl">
+              <select class="inp"><option>Nexa Capital NBFC</option><option>Aurum Finance</option></select>
+              <span class="inp-wrap"><input class="inp num" type="number" value="80" style="width:60px"><span class="unit">/</span><input class="inp num" type="number" value="20" style="width:60px" disabled><span class="unit">%</span></span>
+            </div>
+          </div>
+          <div class="cfg-row">
+            <div class="cfg-main">
+              <div class="cfg-name">IFT routing </div>
+              <div class="cfg-desc">Repayments land in escrow, then split to lender accounts.</div>
+            </div>
+            <div class="cfg-ctl"><select class="inp"><option>Escrow → lender current accounts</option><option>Direct to lender accounts</option></select></div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /scope-program -->
+
+    <!-- ===== SCOPE: ACCOUNT ===== -->
+    <div class="scopepane" id="scope-account">
+      <div class="callout" style="margin-bottom:14px">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+        <span><b>ACC-GRP-00218</b> inherits from Program <b>Kisan SCF</b>. Only repayment behaviour can be overridden here — identity and pricing are locked at Product/Program.</span>
+      </div>
+      <div class="card">
+        <div class="card-h"><h3>Overridable at Account level</h3><div class="right"><span class="badge green outline">ops-tunable</span></div></div>
+        <div class="card-b flush">
+          <div class="cfg-row">
+            <div class="cfg-main">
+              <div class="cfg-name">Component settlement order </div>
+              <div class="cfg-desc">Applies to payments settling this Account's loans.</div>
+            </div>
+            <div class="cfg-ctl">
+              <span class="scope-pill ovr">override · here</span>
+              <span class="ord"><span><i>1</i>fees</span><span><i>2</i>interest</span><span><i>3</i>principal</span><span><i>4</i>penal</span></span>
+              <button class="btn sm">Edit order</button>
+              <button class="btn sm ghost">Revert</button>
+            </div>
+          </div>
+          <div class="cfg-row">
+            <div class="cfg-main">
+              <div class="cfg-name">Run accrual </div>
+              <div class="cfg-desc">Per-account accrual switch (used for written-off recovery).</div>
+            </div>
+            <div class="cfg-ctl"><span class="scope-pill">inherited · program</span><span class="sw locked on"></span><button class="btn sm">Override</button></div>
+          </div>
+          <div class="cfg-row">
+            <div class="cfg-main">
+              <div class="cfg-name">Auto-sweep excess wallet </div>
+              <div class="cfg-desc">Disable to hold excess for manual allocation.</div>
+            </div>
+            <div class="cfg-ctl"><span class="scope-pill">inherited · program</span><span class="sw locked on"></span><button class="btn sm">Override</button></div>
+          </div>
+          <div class="cfg-row">
+            <div class="cfg-main">
+              <div class="cfg-name">NACH presentation day </div>
+              <div class="cfg-desc">Day of month mandates are presented.</div>
+            </div>
+            <div class="cfg-ctl">
+              <span class="scope-pill">inherited · program</span>
+              <select class="inp" disabled><option>5th of month</option></select>
+              <button class="btn sm">Override</button>
+            </div>
+          </div>
+        </div>
+        <div class="savebar"><span>No unsaved changes</span><span style="margin-left:auto"></span><button class="btn sm" disabled style="opacity:.5">Discard</button><button class="btn sm primary" disabled style="opacity:.5">Save</button></div>
+      </div>
+    </div><!-- /scope-account -->
+
+    <!-- ===== SCOPE: CONTACT ===== -->
+    <div class="scopepane" id="scope-contact">
+      <div class="callout" style="margin-bottom:14px">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+        <span><b>CON-9134</b> has no overrides — every value resolves from Program <b>Kisan SCF</b>. Contact-level overrides apply across all of this borrower's Accounts.</span>
+      </div>
+      <div class="card">
+        <div class="card-h"><h3>Overridable at Contact level</h3><div class="right"><span class="badge green outline">ops-tunable</span></div></div>
+        <div class="card-b flush">
+          <div class="cfg-row">
+            <div class="cfg-main">
+              <div class="cfg-name">Accept borrower TDS </div>
+              <div class="cfg-desc">This borrower deducts TDS on interest — allow on receipts.</div>
+            </div>
+            <div class="cfg-ctl"><span class="scope-pill">inherited · program</span><span class="sw locked on"></span><button class="btn sm">Override</button></div>
+          </div>
+          <div class="cfg-row">
+            <div class="cfg-main">
+              <div class="cfg-name">Excess handling </div>
+              <div class="cfg-desc">Hold in wallet vs auto-refund unallocated money.</div>
+            </div>
+            <div class="cfg-ctl">
+              <span class="scope-pill">inherited · program</span>
+              <select class="inp" disabled><option>Hold in wallet, sweep at EOD</option><option>Auto-refund after 7 days</option></select>
+              <button class="btn sm">Override</button>
+            </div>
+          </div>
+        </div>
+        <div class="savebar"><span>No unsaved changes</span><span style="margin-left:auto"></span><button class="btn sm" disabled style="opacity:.5">Discard</button><button class="btn sm primary" disabled style="opacity:.5">Save</button></div>
+      </div>
+    </div><!-- /scope-contact -->
+  </section>
+
+</div>
+
+<!-- ======================= RESOURCE DRAWER ======================= -->
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer">
+  <div class="drawer-h" style="position:relative">
+    <div class="drawer-type" id="dType">Resource</div>
+    <div class="drawer-title" id="dTitle">—</div>
+    <div class="drawer-badges" id="dBadges"></div>
+    <button class="drawer-x" id="dClose" aria-label="Close">✕</button>
+  </div>
+  <div class="drawer-b" id="dBody"></div>
+  <div class="drawer-f">
+    <button class="btn" id="dCopy">Copy ref</button>
+    <button class="btn primary" id="dOpen">Open full page →</button>
+  </div>
+</aside>
+
+<!-- load order matters: data -> nav -> drawer -> refs -> tabs -> filters -->
+<script src="js/data.js"></script>
+<script src="js/nav.js"></script>
+<script src="js/drawer.js"></script>
+<script src="js/refs.js"></script>
+<script src="js/tabs.js"></script>
+<script src="js/filters.js"></script>
+</body>
+</html>

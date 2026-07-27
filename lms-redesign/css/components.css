@@ -1,0 +1,37 @@
+/* entity page header */
+.page-head{display:flex;align-items:flex-start;gap:16px;margin-bottom:18px}
+.page-icon{width:42px;height:42px;border-radius:11px;border:1px solid var(--border);background:var(--surface);
+  display:grid;place-items:center;box-shadow:var(--shadow-sm)}
+.page-icon svg{width:20px;height:20px;stroke:var(--foreground);fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.page-title{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.page-title h1{font-size:19px;font-weight:650;letter-spacing:-.4px}
+.page-meta{display:flex;gap:14px;flex-wrap:wrap;margin-top:5px;font-size:12.5px;color:var(--muted-fg)}
+.page-meta b{color:var(--foreground);font-weight:550}
+.page-actions{margin-left:auto;display:flex;gap:8px}
+
+/* key-value */
+.kv{display:grid;grid-template-columns:auto 1fr;gap:7px 18px;font-size:12.5px}
+.kv dt{color:var(--muted-fg);white-space:nowrap}
+.kv dd{font-weight:500;text-align:right}
+
+/* date triplet */
+.dates{display:flex;gap:0;border:1px solid var(--border);border-radius:var(--radius-sm);overflow:hidden}
+.dates>div{flex:1;padding:8px 12px;border-right:1px solid var(--border)}
+.dates>div:last-child{border-right:0}
+.dates .k{font-size:10px;font-weight:600;letter-spacing:.6px;text-transform:uppercase;color:var(--subtle-fg)}
+.dates .v{font-family:var(--font-mono);font-size:12px;margin-top:2px}
+
+/* progress / segmented bar */
+.segbar{display:flex;height:10px;border-radius:99px;overflow:hidden;background:var(--muted);border:1px solid var(--border)}
+.segbar span{display:block;height:100%}
+.legend{display:flex;gap:16px;flex-wrap:wrap;margin-top:9px;font-size:11.5px;color:var(--muted-fg)}
+.legend i{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:5px}
+
+/* tabs */
+.tabs{display:flex;gap:2px;background:var(--muted);border:1px solid var(--border);border-radius:8px;padding:3px;width:max-content}
+.tab{border:0;background:none;font:inherit;font-size:12.5px;font-weight:500;color:var(--muted-fg);
+  padding:5px 13px;border-radius:6px;cursor:pointer;transition:all .12s}
+.tab:hover{color:var(--foreground)}
+.tab.active{background:var(--surface);color:var(--foreground);font-weight:600;box-shadow:var(--shadow-sm)}
+.tabpane{display:none}.tabpane.active{display:block;animation:rise .2s ease both}
+
