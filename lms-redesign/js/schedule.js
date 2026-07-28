@@ -19,10 +19,10 @@ window.LMS = window.LMS || {};
       total:24, settled:13, due:14,
       firstDue:{ month:5, year:2025 },      // EMI #1 — 05 Jun 25 (0-indexed month)
       emi:"₹1,12,500",
-      dueNote:"DPD 4",
+      dueNote:"DPD 22",
       stats:[
         ["Monthly EMI",  "₹1,12,500"],
-        ["Collected",    "₹15,75,000"],
+        ["Collected",    "₹14,62,500"],
         ["On-time rate", "86%"],
         ["Avg delay",    "2.1 days"],
       ],

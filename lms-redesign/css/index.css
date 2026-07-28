@@ -19,5 +19,6 @@
 @import "waterfall-config.css";  /* waterfall steps, configuration page                */
 @import "schedule.css";          /* repayment schedule progress                        */
 @import "summary.css";           /* summary card expander                              */
-@import "ledger.css";            /* loan activity ledger table                         */
+@import "activity2.css";         /* loan activity ledger — v2 proposal                 */
+@import "loan-layout.css";       /* loan detail: identity rail + sectioned content     */
 @import "drawer.css";            /* scrim, resource drawer, @media breakpoints         */

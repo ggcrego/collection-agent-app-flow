@@ -1,0 +1,200 @@
+/* ---------- loan activity ledger — v2 proposal ----------
+   Same spine as .ledger, plus the classification rail, folded
+   machine rows, pinned postings and a visible net Δ.
+
+   No overflow container anywhere: hover cards must escape the table.
+
+   Selector discipline: every body cell rule is written as
+   `.a2 tbody td.x` so it outranks the `.a2 tbody td` base. Writing
+   `.a2 .x` loses that fight silently — the base has one more element
+   in it. Colour convention: red = the borrower owes more, green =
+   the borrower owes less, on both the chips and the net column. */
+
+table.a2{
+  width:100%;table-layout:fixed;border-collapse:separate;border-spacing:0;
+  font-size:12px;font-variant-numeric:tabular-nums
+}
+.a2 col.w-rail{width:6px}
+.a2 col.w-date{width:130px}   /* fits "21 Jun – 08 Jul 26" without colliding */
+.a2 col.w-emi {width:46px}
+.a2 col.w-bal {width:104px}
+.a2 col.w-mv  {width:26%}
+.a2 col.w-net {width:96px}
+
+/* ---- header ---- */
+.a2 thead th{
+  position:sticky;top:54px;z-index:2;background:var(--muted);
+  font-size:9.5px;font-weight:600;letter-spacing:.55px;text-transform:uppercase;
+  color:var(--subtle-fg);white-space:nowrap;text-align:right;
+  padding:7px 10px;border-bottom:1px solid var(--border)
+}
+.a2 thead th.l{text-align:left}
+.a2 thead th.a2-rail{padding:0}
+.a2 thead th .op{font-weight:400;letter-spacing:.3px;text-transform:none;
+  font-size:10px;color:var(--subtle-fg);margin-left:8px}
+
+/* ---- body base ---- */
+.a2 tbody td{
+  padding:7px 10px;text-align:right;vertical-align:top;
+  border-bottom:1px solid var(--border);background:var(--surface)
+}
+.a2 tbody tr:last-child td{border-bottom:0}
+.a2 tbody tr.a2-row{cursor:pointer}
+
+/* ---- classification rail: the one continuous read down the page.
+       Absolutely positioned so consecutive same-band rows form an
+       unbroken stripe rather than a dashed column of blocks. ---- */
+.a2 tbody td.a2-rail{padding:0;width:6px;border-bottom:0;position:relative;background:var(--surface)}
+.a2 td.a2-rail i{position:absolute;inset:0;background:#e4e4e7}
+.a2 td.a2-rail i.std {background:#e4e4e7}
+.a2 td.a2-rail i.sma0{background:#f59e0b}
+.a2 td.a2-rail i.sma1{background:#ea580c}
+.a2 td.a2-rail i.sma2{background:#dc2626}
+.a2 td.a2-rail i.npa {background:#991b1b}
+
+/* ---- date + EMI ---- */
+.a2 tbody td.a2-date{text-align:left;font-family:var(--font-mono);font-size:11px;
+  color:var(--muted-fg);white-space:nowrap}
+.a2 td.a2-date .a2-sub{display:block;font-family:var(--font-sans);font-size:10px;color:var(--subtle-fg)}
+.a2 tbody td.a2-emi{text-align:left;font-family:var(--font-mono);font-size:11px;color:var(--muted-fg)}
+
+/* ---- activity cell: the title line, and the meta line v1 hid in a title= ---- */
+.a2 tbody td.a2-act{text-align:left;overflow:hidden}
+.a2 .a2-t{display:flex;align-items:center;gap:6px;font-size:12.5px;font-weight:500;line-height:17px}
+/* the title yields last: a row truncated to "I.." tells the reader nothing,
+   while "11 days folded" is already implied by the date range beside it */
+.a2 .a2-title{flex:0 1 auto;min-width:7ch;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+/* expander: a real triangle, because a 9px ▸ glyph reads as a speck */
+.a2 .a2-x{flex:none;width:0;height:0;margin-right:1px;
+  border-left:4.5px solid var(--subtle-fg);border-top:3.5px solid transparent;
+  border-bottom:3.5px solid transparent;transition:transform .12s}
+.a2 .a2-x.off{visibility:hidden}
+.a2 tbody tr.open .a2-x{transform:rotate(90deg)}
+.a2 tbody tr.a2-row:hover .a2-x{border-left-color:var(--foreground)}
+
+.a2 .a2-cnt{flex:0 2 auto;font-weight:400;font-size:10.5px;color:var(--subtle-fg);
+  white-space:nowrap;overflow:hidden}
+
+/* one line, always — ragged row heights are what make a long ledger
+   unscannable. The full text lives in the pinned detail. */
+.a2 .a2-m{display:flex;align-items:center;gap:5px;margin:1px 0 0 12px;
+  font-size:11px;color:var(--muted-fg);line-height:15px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.a2 .a2-note{min-width:0;overflow:hidden;text-overflow:ellipsis}
+/* the reference never truncates — a half-shown UTR is worse than none */
+.a2 .a2-ref{flex:none;font-family:var(--font-mono);font-size:10.5px;color:var(--foreground);
+  background:var(--muted);border:1px solid var(--border);border-radius:4px;padding:0 5px;white-space:nowrap}
+.a2 .a2-ref.link{color:var(--blue);background:var(--blue-bg);border-color:var(--blue-bd);cursor:pointer}
+.a2 .a2-ref.link:hover{border-color:#93c5fd}
+
+.a2 .a2-flag{font-size:9.5px;font-weight:600;letter-spacing:.3px;text-transform:uppercase;
+  border-radius:4px;padding:0 5px;border:1px solid;line-height:15px;white-space:nowrap}
+.a2 .a2-flag{flex:none}
+.a2 .a2-flag.rev,.a2 .a2-flag.con{color:var(--violet);border-color:var(--violet-bd);background:var(--violet-bg)}
+.a2 .a2-flag.sch {color:var(--muted-fg);border-color:var(--border);background:var(--muted)}
+.a2 .a2-flag.back{color:var(--amber);border-color:var(--amber-bd);background:var(--amber-bg);
+  text-transform:none;letter-spacing:0;font-weight:500;font-family:var(--font-mono)}
+
+/* the episode label: named once, at the top of each block on the rail */
+.a2 .a2-flag.risk{font-family:var(--font-mono);letter-spacing:0;font-weight:500;text-transform:none}
+.a2 .a2-flag.risk.std {color:var(--green);border-color:var(--green-bd);background:var(--green-bg)}
+.a2 .a2-flag.risk.sma0{color:#b45309;border-color:var(--amber-bd);background:var(--amber-bg)}
+.a2 .a2-flag.risk.sma1{color:#c2410c;border-color:#fed7aa;background:#fff7ed}
+.a2 .a2-flag.risk.sma2,
+.a2 .a2-flag.risk.npa {color:var(--red);border-color:var(--red-bd);background:var(--red-bg)}
+
+/* the charge that was undone is struck; its contra is not — the contra
+   is a real posting, and finance never deletes, it offsets */
+.a2 .a2-t:has(.a2-flag.rev) .a2-title{text-decoration:line-through;
+  text-decoration-color:var(--violet);text-decoration-thickness:1px}
+
+/* ---- balances ---- */
+.a2 tbody td.a2-bal{font-family:var(--font-mono);font-weight:600;color:var(--foreground);
+  white-space:nowrap;background:var(--muted)}
+.a2 tbody td.a2-bal.open{border-right:1px solid var(--border-strong)}
+.a2 tbody td.a2-bal.close{border-left:1px solid var(--border-strong)}
+
+/* ---- net Δ: the number v1 made the reader compute ---- */
+.a2 tbody td.a2-net{font-family:var(--font-mono);font-weight:600;white-space:nowrap}
+.a2 tbody td.a2-net.pos {color:var(--red)}     /* outstanding grew  */
+.a2 tbody td.a2-net.neg {color:var(--green)}   /* outstanding shrank */
+.a2 tbody td.a2-net.zero{color:var(--muted-2)}
+
+/* ---- movement chips ---- */
+/* chips sit against the Net Δ column, not stranded at the far left of a
+   wide cell — the eye reads movement → net → closing as one phrase */
+.a2 tbody td.a2-mv{text-align:right}
+.a2 .a2-chips{display:flex;flex-wrap:wrap;gap:4px;align-items:center;justify-content:flex-end}
+.a2 .a2-chip{display:inline-flex;align-items:center;gap:5px;white-space:nowrap;
+  padding:1px 6px;border-radius:5px;border:1px solid var(--border);
+  background:var(--surface);font-size:10.5px;line-height:16px}
+.a2 .a2-chip .k{color:var(--muted-fg);font-size:10px}
+.a2 .a2-chip .v{font-family:var(--font-mono);font-variant-numeric:tabular-nums;font-weight:550}
+.a2 .a2-chip .pos{color:var(--red)}
+.a2 .a2-chip .neg{color:var(--green)}
+.a2 .a2-chip.memo{border-style:dashed;cursor:help}
+.a2 .a2-chip.memo .k,.a2 .a2-chip.memo .v{color:var(--teal)}
+.a2 .a2-dash{color:var(--subtle-fg);font-size:10.5px;font-style:italic}
+
+/* ---- hover: lift the whole row, keep the balance columns distinct ---- */
+.a2 tbody tr.a2-row:hover td{background:#f7f7f8}
+.a2 tbody tr.a2-row:hover td.a2-bal{background:var(--muted-2)}
+.a2 tbody tr.a2-row:hover td.a2-rail{background:#f7f7f8}
+.a2 tbody tr.a2-row:hover .a2-chip{background:var(--surface)}
+.a2 tbody tr.a2-row.open td{background:#f4f4f5}
+.a2 tbody tr.a2-row.open td.a2-bal{background:var(--muted-2)}
+
+/* ---- folded machine rows ---- */
+.a2 tbody tr.isfold .a2-t{color:var(--muted-fg)}
+.a2 tbody tr.child td{background:#fcfcfd}
+.a2 tbody tr.child td.a2-bal{background:var(--muted)}
+.a2 tbody tr.child td.a2-date,.a2 tbody tr.child td.a2-act{padding-left:24px}
+.a2 tbody tr.child .a2-t{font-weight:400;color:var(--muted-fg);font-size:12px}
+.a2 tbody tr.child td.a2-bal,.a2 tbody tr.child td.a2-net{font-weight:500;color:var(--muted-fg)}
+
+/* ---- pinned postings: hover to peek, click to keep ---- */
+.a2 tbody tr.a2-detail td{background:#fafafa;text-align:left}
+.a2 .a2-pin{padding:2px 0 4px 15px}
+.a2 .a2-pin-t{font-size:9.5px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;
+  color:var(--subtle-fg);margin-bottom:6px}
+/* the global `table{width:100%}` stretches .ptab here — in a popover the card
+   width hides it, but a full-width cell spreads the columns to nonsense */
+.a2 .a2-pin .ptab{width:auto;min-width:0}
+
+/* ---- reconciliation break ---- */
+.a2 tbody tr.broken td.a2-bal{color:var(--red)}
+.a2 tbody tr.a2-break td{background:var(--red-bg);color:var(--red);font-size:11px;
+  text-align:left;padding:5px 10px;border-bottom:1px solid var(--red-bd)}
+
+/* ---- totals ---- */
+.a2 tfoot td{padding:8px 10px;text-align:right;background:var(--muted);
+  border-top:1px solid var(--border-strong);
+  font-family:var(--font-mono);font-weight:600;white-space:nowrap}
+.a2 tfoot td.l{text-align:left;font-family:var(--font-sans);font-size:10.5px;font-weight:600;
+  letter-spacing:.55px;text-transform:uppercase;color:var(--subtle-fg)}
+.a2 tfoot td.l .a2-sub{display:block;letter-spacing:0;text-transform:none;font-weight:400;
+  font-size:10.5px;color:var(--subtle-fg);font-family:var(--font-mono)}
+.a2 tfoot td.a2-mv{white-space:normal;text-align:right}
+.a2 tfoot .a2-chip{background:var(--surface)}
+.a2 tfoot td.a2-rail{padding:0;background:var(--muted)}
+.a2 tfoot td.a2-net.pos{color:var(--red)}
+.a2 tfoot td.a2-net.neg{color:var(--green)}
+
+/* ---- rail legend ---- */
+.a2-foot{display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+  padding:9px 16px;border-top:1px solid var(--border);font-size:11px;color:var(--muted-fg)}
+.a2-leg{display:inline-flex;align-items:center;gap:6px}
+.a2-leg i{width:9px;height:9px;border-radius:2px;background:var(--muted-2)}
+.a2-leg.std  i{background:#e4e4e7}
+.a2-leg.sma0 i{background:#f59e0b}
+.a2-leg.sma1 i{background:#ea580c}
+.a2-leg.sma2 i{background:#dc2626}
+.a2-leg.npa  i{background:#991b1b}
+.a2-leg-note{margin-left:auto;font-family:var(--font-mono);font-size:10.5px;color:var(--subtle-fg)}
+
+@media (max-width:1200px){
+  .a2 col.w-mv{width:30%}
+  .a2 .a2-m{font-size:10.5px}
+  .a2 .a2-cnt{display:none}
+}

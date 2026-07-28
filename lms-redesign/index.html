@@ -78,7 +78,7 @@
 <div class="main">
   <div class="topbar">
     <div class="crumbs" id="crumbs">
-      <span>Meridian Agro Traders</span><span class="sep">/</span><b>Loan Account</b>
+      <span>Portfolio</span><span class="sep">/</span><b>Loan Account</b>
     </div>
     <div class="topbar-right">
       <div class="search">
@@ -91,24 +91,13 @@
     </div>
   </div>
 
-  <!-- ======================================================
-       VIEW: LOAN ACCOUNT (group level)
-  ======================================================= -->
-  <section class="view active" id="view-account">
+  <section class="view wide active" id="view-account">
+
     <div class="page-head">
       <div class="page-icon"><svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V8l7-5 7 5v13M9 21v-6h6v6"/></svg></div>
       <div>
-        <div class="page-title">
-          <h1>Meridian Agro Traders Pvt Ltd</h1>
-          <span class="ref">ACC-GRP-00218</span>
-          <span class="badge green"><span class="dot"></span>Active</span>
-        </div>
-        <div class="page-meta">
-          <span>Program <b>Kisan SCF — Invoice Discounting</b></span>
-          <span>Product <b>SCF-SID</b></span>
-          <span>Branch <b>Indore</b></span>
-          <span>Contact <span class="ref">CON-9134</span></span>
-        </div>
+        <div class="page-title"><h1>Meridian Agro Traders Pvt Ltd</h1></div>
+        <div class="page-meta"><span>Group account · a collection of loans under one programme limit</span></div>
       </div>
       <div class="page-actions">
         <button class="btn">Statement</button>
@@ -116,282 +105,240 @@
       </div>
     </div>
 
-    <div class="card">
-      <div class="card-h">
-        <h3>Account summary</h3>
-        <div class="right">
-          <select class="inp" style="padding:4px 28px 4px 10px;font-size:12px"><option selected>By value date</option><option>By txn date</option></select>
-          <input class="inp" type="date" value="2026-07-27" style="padding:4px 10px;font-size:12px">
-          <span class="badge green outline">Today · valid ✓</span>
-        </div>
-      </div>
-      <div class="card-b">
-        <div class="grid g4" style="gap:10px">
-          <div class="stat" style="padding:0"><div class="k">Disbursed</div><div class="v">₹77,00,000</div></div>
-          <div class="stat" style="padding:0"><div class="k">Outstanding</div><div class="v">₹46,39,330</div></div>
-          <div class="stat" style="padding:0"><div class="k">Net due</div><div class="v" style="color:var(--green)">₹0</div></div>
-          <div class="stat" style="padding:0"><div class="k">Loans</div><div class="v">3</div></div>
-        </div>
-        <details class="led" style="margin-top:12px;background:var(--surface)">
-          <summary><svg class="chev chev-d" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>View Full</summary>
-          <div class="led-b" style="padding:10px 12px">
-            <div class="grid g4" style="gap:10px">
-              <div class="blk">
-                <div class="blk-t">Portfolio</div>
-                <dl class="kv">
-                  <dt>Disbursed</dt><dd class="amt">₹77,00,000</dd>
-                  <dt>Collected (cash)</dt><dd class="amt pos">₹31,61,200</dd>
-                  <dt>Internal settles</dt><dd class="amt" style="color:var(--violet)">₹28,450</dd>
-                  <dt>Loans</dt><dd class="num">2 active · 1 closed</dd>
-                </dl>
-              </div>
-              <div class="blk">
-                <div class="blk-t">Outstanding</div>
-                <dl class="kv">
-                  <dt>Principal</dt><dd class="amt">₹46,08,750</dd>
-                  <dt>Interest</dt><dd class="amt">₹30,580</dd>
-                  <dt>Total</dt><dd class="amt" style="font-weight:650">₹46,39,330</dd>
-                </dl>
-              </div>
-              <div class="blk">
-                <div class="blk-t">Due &amp; risk</div>
-                <dl class="kv">
-                  <dt>Net due</dt><dd class="amt dim">₹0</dd>
-                  <dt>Max DPD</dt><dd class="num">0</dd>
-                  <dt>RBI category</dt><dd><span class="badge green outline">STD · 01</span></dd>
-                  <dt>Last paid</dt><dd class="num">14 Jul 26</dd>
-                </dl>
-              </div>
-              <div class="blk">
-                <div class="blk-t">Upfront &amp; wallet</div>
-                <dl class="kv">
-                  <dt>Upfront deducted</dt><dd class="amt">₹2,34,795</dd>
-                  <dt>Upfront hold</dt><dd class="amt" style="color:var(--teal)">₹61,087</dd>
-                  <dt>Settled cross-loan</dt><dd class="amt" style="color:var(--violet)">₹28,450</dd>
-                  <dt>Excess wallet</dt><dd class="amt dim">₹0</dd>
-                </dl>
-              </div>
-            </div>
-          </div>
-        </details>
-      </div>
-    </div>
+    <div class="loan-split">
+      <div class="loan-rail">
 
-    <!-- Limit — bar is scaled to the sanctioned amount (₹2.5 Cr = full track) -->
-    <section class="limit mt">
-      <div class="limit-h">
-        <span class="limit-t">Limit</span>
-        <span class="ref">LMT-PRI-0451</span>
-        <span class="small mut">Primary · valid till 31 Mar 2027</span>
-        <span class="limit-util"><b>34.2%</b> of approved utilised</span>
-      </div>
-
-      <div class="limit-bar">
-        <div class="limit-track">
-          <div class="segbar">
-            <span class="seg-used" style="width:27.36%"></span>
-            <span class="seg-blk" style="width:2%"></span>
-            <span class="seg-avl" style="width:50.64%"></span>
-            <span class="seg-hdr" style="width:20%"></span>
-          </div>
-          <i class="limit-tick" style="left:80%"></i>
-        </div>
-        <div class="limit-axis">
-          <span class="ax ax-tick" style="left:80%">Approved <b>₹2,00,00,000</b></span>
-          <span class="ax ax-end">Sanctioned <b>₹2,50,00,000</b></span>
-        </div>
-      </div>
-
-      <div class="limit-keys">
-        <div class="lk">
-          <div class="lk-k"><i class="sw-used"></i>Used</div>
-          <div class="lk-v">₹68,40,000</div>
-          <div class="lk-d">across 3 SCF loans</div>
-        </div>
-        <div class="lk">
-          <div class="lk-k"><i class="sw-blk"></i>Blocked</div>
-          <div class="lk-v">₹5,00,000</div>
-          <div class="lk-d">pending drawdown</div>
-        </div>
-        <div class="lk">
-          <div class="lk-k"><i class="sw-avl"></i>Available</div>
-          <div class="lk-v pos">₹1,26,60,000</div>
-          <div class="lk-d">drawable against approved</div>
-        </div>
-        <div class="lk">
-          <div class="lk-k"><i class="sw-hdr"></i>Headroom</div>
-          <div class="lk-v">₹50,00,000</div>
-          <div class="lk-d">sanctioned, not yet approved</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Loans under account + right rail -->
-    <div class="grid g23 mt-lg">
-      <div class="card">
-        <div class="card-h">
-          <h3>Loans under this Account</h3>
-          <div class="right"><button class="btn sm" data-nav="loan">Open loans view</button></div>
-        </div>
-        <div class="card-b flush">
-          <table>
-            <thead><tr>
-              <th>Loan</th><th>Origin</th><th class="r">Disbursed</th><th class="r">Outstanding</th><th class="r">DPD</th><th>Maturity</th><th>Status</th>
-            </tr></thead>
-            <tbody>
-              <tr class="click" data-nav="loan">
-                <td><span class="ref link">LN-2406-0187</span><div class="small sub" style="margin-top:2px">SCF-SID · upfront interest</div></td>
-                <td><span class="ref">INV-MERI-1904</span></td>
-                <td class="r amt">₹34,00,000</td>
-                <td class="r amt">₹30,59,330</td>
-                <td class="r num">0</td>
-                <td class="num">31 Aug 26</td>
-                <td><span class="badge green"><span class="dot"></span>Active</span></td>
-              </tr>
-              <tr class="click" data-nav="loan">
-                <td><span class="ref link">LN-2407-0212</span><div class="small sub" style="margin-top:2px">SCF-SID · upfront interest</div></td>
-                <td><span class="ref">INV-MERI-2088</span></td>
-                <td class="r amt">₹18,00,000</td>
-                <td class="r amt">₹15,80,000</td>
-                <td class="r num">0</td>
-                <td class="num">04 Oct 26</td>
-                <td><span class="badge green"><span class="dot"></span>Active</span></td>
-              </tr>
-              <tr class="click" data-nav="loan">
-                <td><span class="ref link">LN-2401-0114</span><div class="small sub" style="margin-top:2px">SCF-SID · closed early</div></td>
-                <td><span class="ref">INV-MERI-1121</span></td>
-                <td class="r amt">₹25,00,000</td>
-                <td class="r amt dim">₹0</td>
-                <td class="r num">—</td>
-                <td class="num">10 Jun 26</td>
-                <td><span class="badge"><span class="dot"></span>Closed</span></td>
-              </tr>
-            </tbody>
-            <tfoot><tr>
-              <td colspan="2">3 loans · 2 active</td>
-              <td class="r amt">₹77,00,000</td>
-              <td class="r amt">₹46,39,330</td>
-              <td colspan="3"></td>
-            </tr></tfoot>
-          </table>
-        </div>
-      </div>
-
-      <div style="display:flex;flex-direction:column;gap:14px">
-        <!-- Excess wallet -->
         <div class="card">
-          <div class="card-h"><h3>Excess wallet</h3></div>
-          <div class="card-b">
-            <div style="display:flex;align-items:baseline;gap:8px">
-              <span class="amt" style="font-size:22px;font-weight:650">₹25,000</span>
-              <span class="badge amber"><span class="dot"></span>Parked</span>
+          <div class="idc-h">
+            <div class="idc-name">ACC-GRP-00218</div>
+            <div class="idc-badges">
+              <span class="badge green"><span class="dot"></span>Active</span>
+              <span class="badge violet">SCF-SID</span>
             </div>
-            <div class="small mut" style="margin-top:6px">Unallocated from payment <span class="ref link" data-nav="payment">UTR512044987N</span>. Auto-settles against the next due demand (EOD sweep) or can be refunded.</div>
-            <div class="divider"></div>
-            <dl class="kv">
-              <dt>Demand</dt><dd><span class="ref">DMD-EXC-CON-9134</span></dd>
-              <dt>Component</dt><dd>repayment · payable</dd>
-              <dt>Last movement</dt><dd class="num">21 Jul 26</dd>
-            </dl>
-            <div style="display:flex;gap:8px;margin-top:12px">
-              <button class="btn sm">Refund</button>
-              <button class="btn sm primary">Settle now</button>
+          </div>
+          <div class="idc-b">
+            <button class="rel" data-res="CON-9134">
+              <span class="rel-k">Contact</span>
+              <span class="rel-l"><span class="rel-v">Meridian Agro Traders</span><span class="rel-id">CON-9134</span></span>
+            </button>
+            <button class="rel" data-res="LMT-PRI-0451">
+              <span class="rel-k">Limit</span>
+              <span class="rel-l"><span class="rel-v">Primary · till 31 Mar 27</span><span class="rel-id">LMT-PRI-0451</span></span>
+            </button>
+            <div class="rel static">
+              <span class="rel-k">Programme</span>
+              <span class="rel-l"><span class="rel-v">Kisan SCF — Invoice Disc.</span><span class="rel-id">SCF-SID</span></span>
+            </div>
+            <div class="rel static">
+              <span class="rel-k">Branch</span>
+              <span class="rel-l"><span class="rel-v">Indore</span></span>
             </div>
           </div>
         </div>
 
-        <!-- Upfront interest pool -->
         <div class="card">
-          <div class="card-h"><h3>Upfront interest cashback</h3></div>
+          <nav class="secnav" data-secnav role="tablist" aria-label="Account sections">
+            <button class="sec" role="tab" data-sec="overview" aria-selected="true" aria-controls="sec-overview">
+              <span class="sec-i"></span>Loans<span class="sec-n">3</span>
+            </button>
+            <button class="sec" role="tab" data-sec="limit" aria-selected="false" aria-controls="sec-limit">
+              <span class="sec-i"></span>Limit
+            </button>
+            <button class="sec" role="tab" data-sec="money" aria-selected="false" aria-controls="sec-money">
+              <span class="sec-i"></span>Money movement<span class="sec-n">5</span>
+            </button>
+            <button class="sec" role="tab" data-sec="wallet" aria-selected="false" aria-controls="sec-wallet">
+              <span class="sec-i"></span>Wallet &amp; cashback
+            </button>
+            <button class="sec" role="tab" data-sec="risk" aria-selected="false" aria-controls="sec-risk">
+              <span class="sec-i"></span>Risk
+            </button>
+          </nav>
+        </div>
+
+        <div class="card">
+          <div class="card-h"><h3>Account facts</h3></div>
           <div class="card-b">
             <dl class="kv">
-              <dt>Pool released</dt><dd class="amt">₹28,450</dd>
-              <dt>Settled to siblings</dt><dd class="amt pos">₹28,450</dd>
-              <dt>Available</dt><dd class="amt dim">₹0</dd>
+              <dt title="sanctioned_amount">Sanctioned</dt><dd class="amt">₹2,50,00,000</dd>
+              <dt title="approved_amount">Approved</dt><dd class="amt">₹2,00,00,000</dd>
+              <dt title="disbursed">Disbursed to date</dt><dd class="amt">₹77,00,000</dd>
+              <dt title="collected">Collected (cash)</dt><dd class="amt pos">₹31,61,200</dd>
+              <dt title="internal">Internal settles</dt><dd class="amt" style="color:var(--violet)">₹28,450</dd>
+              <dt title="loans">Loans</dt><dd class="num">2 active · 1 closed</dd>
             </dl>
-            <div class="callout amber" style="margin-top:12px">
-              <svg viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>
-              <span>₹28,450 unearned upfront interest from <b>LN-2401-0114</b> (closed 18 Jun) was settled into <b>LN-2406-0187</b> on 20 Jun. <span class="ref link" data-nav="transactions">TXN-UIS-88213</span></span>
+          </div>
+        </div>
+
+      </div>
+
+      <div>
+        <div class="card">
+          <div class="statstrip">
+            <div class="stat" style="padding:12px 16px"><div class="k">Disbursed</div><div class="v">₹77,00,000</div><div class="d">across 3 loans</div></div>
+            <div class="stat" style="padding:12px 16px"><div class="k">Outstanding</div><div class="v">₹46,39,095</div><div class="d">2 active loans</div></div>
+            <div class="stat" style="padding:12px 16px"><div class="k">Net due</div><div class="v" style="color:var(--green)">₹0</div><div class="d">nothing overdue</div></div>
+            <div class="stat" style="padding:12px 16px"><div class="k">Limit used</div><div class="v" style="font-size:17px">34.2%</div><div class="d">₹1,26,60,000 available</div></div>
+          </div>
+        </div>
+
+        <div class="secpane active mt-lg" id="sec-overview" role="tabpanel">
+          <div class="card">
+            <div class="card-h"><h3>Loans under this account</h3>
+              <div class="right"><button class="btn sm" data-nav="loan-scf">Open loan →</button></div>
+            </div>
+            <div class="card-b flush">
+              <table>
+                <thead><tr>
+                  <th>Loan</th><th>Origin</th><th class="r">Disbursed</th><th class="r">Outstanding</th><th class="r">DPD</th><th>Maturity</th><th>Status</th>
+                </tr></thead>
+                <tbody>
+                  <tr class="click" data-nav="loan-scf">
+                    <td><span class="ref link">LN-2406-0187</span><div class="small sub" style="margin-top:2px">SCF-SID · upfront interest</div></td>
+                    <td><span class="ref">INV-MERI-1904</span></td>
+                    <td class="r amt">₹34,00,000</td><td class="r amt">₹30,59,095</td>
+                    <td class="r num">0</td><td class="num">31 Aug 26</td>
+                    <td><span class="badge green"><span class="dot"></span>Active</span></td>
+                  </tr>
+                  <tr class="click" data-nav="loan-scf">
+                    <td><span class="ref link">LN-2407-0212</span><div class="small sub" style="margin-top:2px">SCF-SID · upfront interest</div></td>
+                    <td><span class="ref">INV-MERI-2088</span></td>
+                    <td class="r amt">₹18,00,000</td><td class="r amt">₹15,80,000</td>
+                    <td class="r num">0</td><td class="num">04 Oct 26</td>
+                    <td><span class="badge green"><span class="dot"></span>Active</span></td>
+                  </tr>
+                  <tr class="click" data-nav="loan-scf">
+                    <td><span class="ref link">LN-2401-0114</span><div class="small sub" style="margin-top:2px">SCF-SID · closed early</div></td>
+                    <td><span class="ref">INV-MERI-1121</span></td>
+                    <td class="r amt">₹25,00,000</td><td class="r amt dim">₹0</td>
+                    <td class="r num">—</td><td class="num">10 Jun 26</td>
+                    <td><span class="badge"><span class="dot"></span>Closed</span></td>
+                  </tr>
+                </tbody>
+                <tfoot><tr>
+                  <td colspan="2">3 loans · 2 active</td>
+                  <td class="r amt">₹77,00,000</td><td class="r amt">₹46,39,095</td>
+                  <td colspan="3"></td>
+                </tr></tfoot>
+              </table>
             </div>
           </div>
         </div>
+
+        <div class="secpane mt-lg" id="sec-limit" role="tabpanel">
+          <div class="card">
+            <div class="card-h"><h3>Limit</h3>
+              <div class="right"><span class="ref">LMT-PRI-0451</span><span class="small mut">Primary · valid till 31 Mar 2027</span></div>
+            </div>
+            <div class="card-b">
+              <section class="limit" style="margin:0;border:0;padding:0;background:none">
+                <div class="limit-bar">
+                  <div class="limit-track">
+                    <div class="segbar">
+                      <span class="seg-used" style="width:27.36%"></span>
+                      <span class="seg-blk" style="width:2%"></span>
+                      <span class="seg-avl" style="width:50.64%"></span>
+                      <span class="seg-hdr" style="width:20%"></span>
+                    </div>
+                    <i class="limit-tick" style="left:80%"></i>
+                  </div>
+                  <div class="limit-axis">
+                    <span class="ax ax-tick" style="left:80%">Approved <b>₹2,00,00,000</b></span>
+                    <span class="ax ax-end">Sanctioned <b>₹2,50,00,000</b></span>
+                  </div>
+                </div>
+                <div class="limit-keys">
+                  <div class="lk"><div class="lk-k"><i class="sw-used"></i>Used</div><div class="lk-v">₹68,40,000</div><div class="lk-d">across 3 SCF loans</div></div>
+                  <div class="lk"><div class="lk-k"><i class="sw-blk"></i>Blocked</div><div class="lk-v">₹5,00,000</div><div class="lk-d">pending drawdown</div></div>
+                  <div class="lk"><div class="lk-k"><i class="sw-avl"></i>Available</div><div class="lk-v pos">₹1,26,60,000</div><div class="lk-d">drawable against approved</div></div>
+                  <div class="lk"><div class="lk-k"><i class="sw-hdr"></i>Headroom</div><div class="lk-v">₹50,00,000</div><div class="lk-d">sanctioned, not yet approved</div></div>
+                </div>
+              </section>
+            </div>
+          </div>
+        </div>
+
+        <div class="secpane mt-lg" id="sec-money" role="tabpanel">
+          <div class="card">
+            <div class="card-h"><h3>Money movement</h3>
+              <div class="right"><button class="btn sm" data-nav="payment">Payments</button><button class="btn sm" data-nav="payout">Payouts</button></div>
+            </div>
+            <div class="card-b flush">
+              <table>
+                <thead><tr><th>Type</th><th>UTR / Reference</th><th>Value date</th><th class="r">Amount</th><th class="r">Applied</th><th>Status</th></tr></thead>
+                <tbody>
+                  <tr class="click" data-nav="payment"><td><span class="badge green"><span class="dot"></span>Payment</span></td><td><span class="ref link">UTR512044987N</span></td><td class="num">14 Jul 26</td><td class="r amt pos">+₹6,00,000</td><td class="r amt">₹5,75,000</td><td><span class="badge green outline">Processed</span></td></tr>
+                  <tr class="click" data-nav="payout"><td><span class="badge blue"><span class="dot"></span>Disbursement</span></td><td><span class="ref link">PYTUTR884521</span></td><td class="num">06 Jul 26</td><td class="r amt neg">−₹17,55,000</td><td class="r amt">₹18,00,000</td><td><span class="badge green outline">Processed</span></td></tr>
+                  <tr class="click" data-nav="payment"><td><span class="badge green"><span class="dot"></span>Payment</span></td><td><span class="ref link">UTR498232771N</span></td><td class="num">05 Jul 26</td><td class="r amt pos">+₹1,12,500</td><td class="r amt">₹1,12,500</td><td><span class="badge green outline">Processed</span></td></tr>
+                  <tr class="click" data-nav="payout"><td><span class="badge blue"><span class="dot"></span>Disbursement</span></td><td><span class="ref link">PYTUTR861204</span></td><td class="num">02 Jun 26</td><td class="r amt neg">−₹33,10,000</td><td class="r amt">₹34,00,000</td><td><span class="badge green outline">Processed</span></td></tr>
+                  <tr><td><span class="badge amber"><span class="dot"></span>Refund</span></td><td><span class="ref">PYTUTR812440</span></td><td class="num">22 Apr 26</td><td class="r amt neg">−₹12,340</td><td class="r amt">₹12,340</td><td><span class="badge green outline">Processed</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="secpane mt-lg" id="sec-wallet" role="tabpanel">
+          <div class="grid g2">
+            <div class="card">
+              <div class="card-h"><h3>Excess wallet</h3></div>
+              <div class="card-b">
+                <div style="display:flex;align-items:baseline;gap:8px">
+                  <span class="amt" style="font-size:22px;font-weight:650">₹25,000</span>
+                  <span class="badge amber"><span class="dot"></span>Parked</span>
+                </div>
+                <div class="small mut" style="margin-top:6px">Unallocated from payment <span class="ref link" data-nav="payment">UTR512044987N</span>. Auto-settles against the next due demand (EOD sweep) or can be refunded.</div>
+                <div class="divider"></div>
+                <dl class="kv">
+                  <dt>Demand</dt><dd><span class="ref">DMD-EXC-CON-9134</span></dd>
+                  <dt>Component</dt><dd>repayment · payable</dd>
+                  <dt>Last movement</dt><dd class="num">21 Jul 26</dd>
+                </dl>
+                <div style="display:flex;gap:8px;margin-top:12px">
+                  <button class="btn sm">Refund</button>
+                  <button class="btn sm primary">Settle now</button>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-h"><h3>Upfront interest cashback</h3></div>
+              <div class="card-b">
+                <dl class="kv">
+                  <dt>Pool released</dt><dd class="amt">₹28,450</dd>
+                  <dt>Settled to siblings</dt><dd class="amt pos">₹28,450</dd>
+                  <dt>Available</dt><dd class="amt dim">₹0</dd>
+                </dl>
+                <div class="callout amber" style="margin-top:12px">
+                  <svg viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>
+                  <span>₹28,450 unearned upfront interest from <b>LN-2401-0114</b> (closed 18 Jun) was settled into <b>LN-2406-0187</b> on 20 Jun. <span class="ref link" data-nav="transactions">TXN-UIS-88213</span></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="secpane mt-lg" id="sec-risk" role="tabpanel">
+          <div class="card">
+            <div class="card-h"><h3>Risk &amp; classification</h3></div>
+            <div class="card-b">
+              <dl class="kv">
+                <dt>Asset category</dt><dd><span class="badge green outline">Standard (STD)</span></dd>
+                <dt>RBI category</dt><dd class="mono">01 · STD</dd>
+                <dt>Current DPD (max)</dt><dd class="num">0 days</dd>
+                <dt>Peak DPD</dt><dd class="num">6 days · LN-2406-0187, cured 14 Jul</dd>
+                <dt>Overdue amount</dt><dd class="amt dim">₹0</dd>
+                <dt>Last payment</dt><dd class="num">14 Jul 26</dd>
+                <dt>NPA marked</dt><dd class="sub">—</dd>
+                <dt>Income suspended</dt><dd class="sub">No</dd>
+              </dl>
+              <div class="divider"></div>
+              <div class="small mut">All SCF loans under this account are current. The term loan <span class="ref link" data-nav="loan-term">LN-TL-0098</span> (SMA-0 · DPD 22) sits directly under the contact — not this account — see <span class="ref link" data-nav="contact">CON-9134</span>.</div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
-
-    <!-- Money movements + risk -->
-    <div class="grid g23 mt-lg">
-      <div class="card">
-        <div class="card-h">
-          <h3>Recent money movements</h3>
-        </div>
-        <div class="card-b flush">
-          <table>
-            <thead><tr><th>Type</th><th>UTR / Reference</th><th>Value date</th><th class="r">Amount</th><th class="r">Applied</th><th>Status</th></tr></thead>
-            <tbody>
-              <tr class="click" data-nav="payment">
-                <td><span class="badge green"><span class="dot"></span>Payment</span></td>
-                <td><span class="ref link">UTR512044987N</span></td>
-                <td class="num">14 Jul 26</td>
-                <td class="r amt pos">+₹6,00,000</td>
-                <td class="r amt">₹5,75,000</td>
-                <td><span class="badge green outline">Processed</span></td>
-              </tr>
-              <tr class="click" data-nav="payout">
-                <td><span class="badge blue"><span class="dot"></span>Disbursement</span></td>
-                <td><span class="ref link">PYTUTR884521</span></td>
-                <td class="num">06 Jul 26</td>
-                <td class="r amt neg">−₹17,55,000</td>
-                <td class="r amt">₹18,00,000</td>
-                <td><span class="badge green outline">Processed</span></td>
-              </tr>
-              <tr class="click" data-nav="payment">
-                <td><span class="badge green"><span class="dot"></span>Payment</span></td>
-                <td><span class="ref link">UTR498232771N</span></td>
-                <td class="num">05 Jul 26</td>
-                <td class="r amt pos">+₹1,12,500</td>
-                <td class="r amt">₹1,12,500</td>
-                <td><span class="badge green outline">Processed</span></td>
-              </tr>
-              <tr class="click" data-nav="payout">
-                <td><span class="badge blue"><span class="dot"></span>Disbursement</span></td>
-                <td><span class="ref link">PYTUTR861204</span></td>
-                <td class="num">02 Jun 26</td>
-                <td class="r amt neg">−₹33,10,000</td>
-                <td class="r amt">₹34,00,000</td>
-                <td><span class="badge green outline">Processed</span></td>
-              </tr>
-              <tr>
-                <td><span class="badge amber"><span class="dot"></span>Refund</span></td>
-                <td><span class="ref">PYTUTR812440</span></td>
-                <td class="num">22 Apr 26</td>
-                <td class="r amt neg">−₹12,340</td>
-                <td class="r amt">₹12,340</td>
-                <td><span class="badge green outline">Processed</span></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-h"><h3>Risk & classification</h3></div>
-        <div class="card-b">
-          <dl class="kv">
-            <dt>Asset category</dt><dd><span class="badge green outline">Standard (STD)</span></dd>
-            <dt>RBI category</dt><dd class="mono">01 · STD</dd>
-            <dt>Current DPD (max)</dt><dd class="num">0 days</dd>
-            <dt>Peak DPD</dt><dd class="num">0 days</dd>
-            <dt>Overdue amount</dt><dd class="amt dim">₹0</dd>
-            <dt>Last payment</dt><dd class="num">14 Jul 26</dd>
-            <dt>NPA marked</dt><dd class="sub">—</dd>
-            <dt>Income suspended</dt><dd class="sub">No</dd>
-          </dl>
-          <div class="divider"></div>
-          <div class="small mut">All SCF loans are current. The term loan <span class="ref link">LN-TL-0098</span> (DPD 4) sits directly under the contact — not this Account — see <span class="ref link">CON-9134</span>.</div>
-        </div>
-      </div>
-    </div>
-  <!-- @@ACCOUNT_END@@ -->
   </section>
 
 </div>
@@ -412,14 +359,12 @@
   </div>
 </aside>
 
-<!-- load order matters: data -> nav -> drawer -> refs -> tabs -> filters -->
+<!-- load order matters: data -> nav -> drawer -> refs -> sections -> activity -->
 <script src="js/data.js"></script>
 <script src="js/nav.js"></script>
 <script src="js/drawer.js"></script>
 <script src="js/refs.js"></script>
-<script src="js/tabs.js"></script>
-<script src="js/filters.js"></script>
-<script src="js/activity.js"></script>
-<script src="js/schedule.js"></script>
+<script src="js/sections.js"></script>
+<script src="js/activity2.js"></script>
 </body>
 </html>
