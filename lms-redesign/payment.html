@@ -29,9 +29,13 @@
       <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
       Contact
     </button>
-    <button class="nav-item" data-view="loan">
+    <button class="nav-item" data-view="loan-scf">
       <svg viewBox="0 0 24 24"><path d="M4 4h16v16H4zM4 9h16M9 9v11"/></svg>
-      Loans <span class="count">4</span>
+      SCF Loans <span class="count">3</span>
+    </button>
+    <button class="nav-item" data-view="loan-term">
+      <svg viewBox="0 0 24 24"><path d="m17 2 4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="m7 22-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/></svg>
+      Term Loans <span class="count">1</span>
     </button>
     <div class="nav-label">Money Movement</div>
     <button class="nav-item active" data-view="payment">
@@ -269,7 +273,7 @@
           <thead><tr><th>UTR</th><th>Mode</th><th>Value date</th><th class="r">Amount</th><th class="r">Used</th><th class="r">Excess</th><th>Targets</th><th>Status</th></tr></thead>
           <tbody>
             <tr style="background:#fafafa"><td><span class="ref">UTR512044987N</span> <span class="sub small">← viewing</span></td><td>NEFT</td><td class="num">14 Jul 26</td><td class="r amt">₹6,00,000</td><td class="r amt">₹5,75,000</td><td class="r amt" style="color:var(--amber)">₹25,000</td><td><span class="ref link" data-nav="account">ACC-GRP-00218</span></td><td><span class="badge green outline">Processed</span></td></tr>
-            <tr><td><span class="ref">UTR498232771N</span></td><td>NACH</td><td class="num">05 Jul 26</td><td class="r amt">₹1,12,500</td><td class="r amt">₹1,12,500</td><td class="r amt dim">₹0</td><td><span class="ref link" data-nav="loan">LN-TL-0098</span></td><td><span class="badge green outline">Processed</span></td></tr>
+            <tr><td><span class="ref">UTR498232771N</span></td><td>NACH</td><td class="num">05 Jul 26</td><td class="r amt">₹1,12,500</td><td class="r amt">₹1,12,500</td><td class="r amt dim">₹0</td><td><span class="ref link" data-nav="loan-term">LN-TL-0098</span></td><td><span class="badge green outline">Processed</span></td></tr>
             <tr><td><span class="ref">UTR461920034N</span></td><td>RTGS</td><td class="num">18 Jun 26</td><td class="r amt">₹25,61,200</td><td class="r amt">₹25,61,200</td><td class="r amt dim">₹0</td><td><span class="ref link" data-nav="loan">LN-2401-0114</span> <span class="sub small">closure</span></td><td><span class="badge green outline">Processed</span></td></tr>
           </tbody>
         </table>
@@ -346,5 +350,7 @@
 <script src="js/refs.js"></script>
 <script src="js/tabs.js"></script>
 <script src="js/filters.js"></script>
+<script src="js/activity.js"></script>
+<script src="js/schedule.js"></script>
 </body>
 </html>

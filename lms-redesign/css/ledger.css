@@ -1,0 +1,89 @@
+/* ---------- loan activity ledger ----------
+   Six columns, sized to fit — no horizontal scroll, no frozen columns.
+   Deliberately NO overflow container anywhere in here: the hover cards
+   must be able to escape the table, exactly as they did in the timeline. */
+table.ledger{
+  width:100%;table-layout:fixed;border-collapse:separate;border-spacing:0;
+  font-size:12px;font-variant-numeric:tabular-nums
+}
+.ledger col.w-date{width:84px}    /* fits "25 Jul 26" without spilling */
+.ledger col.w-act {width:140px}
+.ledger col.w-ref {width:104px}
+.ledger col.w-bal {width:96px}    /* opening + closing */
+
+/* ---- header: sticks under the 54px topbar while the page scrolls ---- */
+.ledger thead th{
+  position:sticky;top:54px;z-index:2;background:var(--muted);
+  font-size:9.5px;font-weight:600;letter-spacing:.55px;text-transform:uppercase;
+  color:var(--subtle-fg);white-space:nowrap;text-align:right;
+  padding:7px 10px;border-bottom:1px solid var(--border)
+}
+.ledger thead th.l{text-align:left}
+.ledger thead th .op{font-weight:400;letter-spacing:.3px;text-transform:none;
+  font-size:10px;color:var(--subtle-fg);margin-left:6px}
+
+/* ---- body ---- */
+.ledger tbody td{
+  padding:6px 10px;text-align:right;vertical-align:middle;
+  border-bottom:1px solid var(--border);background:var(--surface)
+}
+.ledger tbody tr:last-child td{border-bottom:0}
+.ledger td.l{text-align:left}
+.ledger tbody tr.clickable{cursor:pointer}
+.ledger tbody tr:hover td{background:#f7f7f8}
+
+.ledger .c-date{font-family:var(--font-mono);font-size:11px;color:var(--muted-fg);white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis}
+.ledger .c-act{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ledger .c-act b{font-weight:550}
+.ledger .c-act .sub{font-size:11px;margin-left:6px}
+.ledger .c-ref{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ledger .c-ref .ref{font-size:11px;padding:1px 5px}
+.ledger .dash{color:var(--muted-2)}
+
+/* balance columns: same emphasis on every row */
+.ledger .c-open,.ledger .c-close{
+  font-family:var(--font-mono);font-weight:600;color:var(--foreground);
+  white-space:nowrap;background:var(--muted)
+}
+.ledger tbody tr:hover .c-open,.ledger tbody tr:hover .c-close{background:var(--muted-2)}
+.ledger .c-open{border-right:1px solid var(--border-strong)}
+.ledger .c-close{border-left:1px solid var(--border-strong)}
+
+/* ---- movement chips: only what actually changed on that row ---- */
+.ledger .c-mv{white-space:normal}
+.ledger .mv{display:flex;flex-wrap:wrap;gap:4px;align-items:center;justify-content:flex-end}
+.ledger .mv-chip{
+  display:inline-flex;align-items:center;gap:5px;white-space:nowrap;
+  padding:1px 6px;border-radius:5px;border:1px solid var(--border);
+  background:var(--surface);font-size:10.5px;line-height:16px
+}
+.ledger .mv-chip .mv-k{color:var(--muted-fg);font-size:10px}
+.ledger .mv-chip .mv-v{font-family:var(--font-mono);font-variant-numeric:tabular-nums;font-weight:550}
+.ledger .mv-chip .pos{color:var(--green)}
+.ledger .mv-chip .neg{color:var(--red)}
+.ledger .mv-chip.memo{border-style:dashed}
+.ledger .mv-chip.memo .mv-k{color:var(--teal)}
+
+/* hoverable chips: override .pop's dashed underline, keep its cursor + card */
+.ledger .mv-chip.pop{border-bottom:1px solid var(--border);cursor:help}
+.ledger .mv-chip.memo.pop{border-bottom-style:dashed}
+.ledger .mv-chip.pop:hover{border-color:var(--border-strong);background:var(--muted)}
+.ledger tbody tr:hover .mv-chip{background:var(--surface)}
+.ledger tbody tr:hover .mv-chip.pop:hover{background:var(--muted)}
+
+/* balance figures with a component breakdown on hover */
+.ledger .c-open .pop,.ledger .c-close .pop{border-bottom:1px dashed var(--subtle-fg)}
+/* keep the card inside the page at the table's edges */
+.ledger .c-close .pop .pop-card{left:auto;right:0;transform:translate(0,4px)}
+.ledger .c-close .pop:hover .pop-card{transform:translate(0,0)}
+
+/* ---- totals ---- */
+.ledger tfoot td{
+  padding:7px 10px;text-align:right;background:var(--muted);
+  border-top:1px solid var(--border-strong);
+  font-family:var(--font-mono);font-weight:600;white-space:nowrap
+}
+.ledger tfoot td.l{text-align:left;font-family:var(--font-sans);
+  font-size:10.5px;font-weight:600;letter-spacing:.55px;text-transform:uppercase;color:var(--subtle-fg)}
+.ledger tfoot .mv-chip{background:var(--surface)}

@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crego Omni — LMS Console (Design)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+
+<!-- ======================= SIDEBAR ======================= -->
+<aside class="sidebar">
+  <div class="brand">
+    <div class="brand-mark">C</div>
+    <div>
+      <div class="brand-name">Crego Omni</div>
+      <div class="brand-sub">LMS Console</div>
+    </div>
+  </div>
+  <nav class="nav">
+    <div class="nav-label">Portfolio</div>
+    <button class="nav-item" data-view="account">
+      <svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V8l7-5 7 5v13M9 21v-6h6v6"/></svg>
+      Loan Account
+    </button>
+    <button class="nav-item" data-view="contact">
+      <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      Contact
+    </button>
+    <button class="nav-item active" data-view="loan-scf">
+      <svg viewBox="0 0 24 24"><path d="M4 4h16v16H4zM4 9h16M9 9v11"/></svg>
+      SCF Loans <span class="count">3</span>
+    </button>
+    <button class="nav-item" data-view="loan-term">
+      <svg viewBox="0 0 24 24"><path d="m17 2 4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="m7 22-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/></svg>
+      Term Loans <span class="count">1</span>
+    </button>
+    <div class="nav-label">Money Movement</div>
+    <button class="nav-item" data-view="payment">
+      <svg viewBox="0 0 24 24"><path d="M12 19V5M5 12l7 7 7-7"/></svg>
+      Payments <span class="count">3</span>
+    </button>
+    <button class="nav-item" data-view="payout">
+      <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12l7-7 7 7"/></svg>
+      Payouts <span class="count">3</span>
+    </button>
+    <div class="nav-label">Books</div>
+    <button class="nav-item" data-view="transactions">
+      <svg viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
+      Transactions <span class="count">12</span>
+    </button>
+    <button class="nav-item" data-view="demands">
+      <svg viewBox="0 0 24 24"><path d="M8 2v4M16 2v4M3 9h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/></svg>
+      Demands &amp; Schedules
+    </button>
+    <button class="nav-item" data-view="ledger">
+      <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 19.5A2.5 2.5 0 0 0 6.5 22H20V2H6.5A2.5 2.5 0 0 0 4 4.5z"/></svg>
+      Ledger &amp; GL
+    </button>
+    <div class="nav-label">Setup</div>
+    <button class="nav-item" data-view="configuration">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h.09a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v.09a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+      Configuration
+    </button>
+  </nav>
+  <div class="sidebar-foot">
+    <div class="avatar">AB</div>
+    <div class="foot-meta">
+      <div class="foot-name">Abhishek</div>
+      <div class="foot-role">Ops · Lending</div>
+    </div>
+  </div>
+</aside>
+
+<!-- ======================= MAIN ======================= -->
+<div class="main">
+  <div class="topbar">
+    <div class="crumbs" id="crumbs">
+      <span>Meridian Agro Traders</span><span class="sep">/</span><b>SCF Loans</b>
+    </div>
+    <div class="topbar-right">
+      <div class="search">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        Search UTR, loan, contact…
+        <kbd>⌘K</kbd>
+      </div>
+      <button class="btn">Export</button>
+      <button class="btn primary">New Payment</button>
+    </div>
+  </div>
+
+  <!-- ======================================================
+       VIEW: LOAN (individual level)
+  ======================================================= -->
+  <section class="view active" id="view-loan">
+    <div class="page-head">
+      <div class="page-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4zM4 9h16M9 9v11"/></svg></div>
+      <div>
+        <div class="page-title">
+          <h1>Loan LN-2406-0187</h1>
+          <span class="badge green"><span class="dot"></span>Active</span>
+          <span class="badge violet">SCF-SID</span>
+        </div>
+        <div class="page-meta">
+          <span>Parent account <span class="ref link" data-nav="account">ACC-GRP-00218</span></span>
+          <span>Borrower <span class="ref link">Meridian Agro Traders</span></span>
+          <span>Origin invoice <span class="ref">INV-MERI-1904</span> · Drawdown <span class="ref">DD-1044</span></span>
+        </div>
+      </div>
+      <div class="page-actions">
+        <button class="btn">Waive</button>
+        <button class="btn">Foreclose</button>
+        <button class="btn primary">Repay</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-h">
+        <h3>Loan summary</h3>
+        <div class="right">
+          <select class="inp" style="padding:4px 28px 4px 10px;font-size:12px"><option selected>By value date</option><option>By txn date</option></select>
+          <input class="inp" type="date" value="2026-07-27" style="padding:4px 10px;font-size:12px">
+          <span class="badge green outline">Today · valid ✓</span>
+        </div>
+      </div>
+      <div class="card-b">
+        <div class="grid g4" style="gap:10px">
+          <div class="stat" style="padding:0"><div class="k">Loan amount</div><div class="v">₹34,00,000</div></div>
+          <div class="stat" style="padding:0"><div class="k">Outstanding</div><div class="v">₹30,59,330</div></div>
+          <div class="stat" style="padding:0"><div class="k">Net due</div><div class="v" style="color:var(--green)">₹0</div></div>
+          <div class="stat" style="padding:0"><div class="k">Maturity</div><div class="v">31 Aug 26</div></div>
+        </div>
+        <details class="led" style="margin-top:12px;background:var(--surface)">
+          <summary><svg class="chev chev-d" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>View Full</summary>
+          <div class="led-b" style="padding:10px 12px">
+            <div class="grid g4" style="gap:10px">
+              <div class="blk">
+                <div class="blk-t">Loan details</div>
+                <dl class="kv">
+                  <dt>Loan amount</dt><dd class="amt">₹34,00,000</dd>
+                  <dt>Net payout</dt><dd class="amt">₹33,10,000</dd>
+                  <dt>Start</dt><dd class="num">02 Jun 26</dd>
+                  <dt>Maturity</dt><dd class="num">31 Aug 26</dd>
+                  <dt>Status</dt><dd><span class="badge green outline">Active</span></dd>
+                </dl>
+              </div>
+              <div class="blk">
+                <div class="blk-t">Outstanding</div>
+                <dl class="kv">
+                  <dt>Principal</dt><dd class="amt">₹30,42,330</dd>
+                  <dt>Interest</dt><dd class="amt">₹17,000</dd>
+                  <dt>Total</dt><dd class="amt" style="font-weight:650">₹30,59,330</dd>
+                  <dt>Collected to date</dt><dd class="amt pos">₹4,08,450</dd>
+                </dl>
+              </div>
+              <div class="blk">
+                <div class="blk-t">Due &amp; risk</div>
+                <dl class="kv">
+                  <dt>Net due</dt><dd class="amt dim">₹0</dd>
+                  <dt>Current DPD</dt><dd class="num">0</dd>
+                  <dt>Peak DPD</dt><dd class="num">0</dd>
+                  <dt>RBI category</dt><dd><span class="badge green outline">STD · 01</span></dd>
+                  <dt>Last paid</dt><dd class="num">14 Jul 26</dd>
+                </dl>
+              </div>
+              <div class="blk">
+                <div class="blk-t">Upfront interest</div>
+                <dl class="kv">
+                  <dt>Deducted</dt><dd class="amt">₹75,507</dd>
+                  <dt>Earned</dt><dd class="amt">₹46,120</dd>
+                  <dt>Hold</dt><dd class="amt" style="color:var(--teal)">₹29,387</dd>
+                  <dt>Received cross-loan</dt><dd class="amt pos">₹28,450</dd>
+                  <dt>Excess</dt><dd class="amt dim">₹0</dd>
+                </dl>
+              </div>
+            </div>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <div class="grid g23 mt-lg">
+      <div>
+        <!-- Loan activity timeline (primary) -->
+        <div class="card">
+          <div class="card-h"><h3>Activity</h3>
+            <div class="right"><button class="btn sm" data-nav="ledger">Ledger entries</button><button class="btn sm" data-nav="transactions">All transactions</button></div>
+          </div>
+          <div class="card-b flush" id="activity-scf"></div>
+        </div>
+      </div>
+
+      <!-- Right rail: facts + demands -->
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div class="card">
+          <div class="card-h"><h3>Loan facts</h3></div>
+          <div class="card-b">
+            <dl class="kv">
+              <dt title="loan_amount">Loan amount</dt><dd class="amt">₹34,00,000</dd>
+              <dt title="payout_amount">Net payout</dt><dd class="amt">₹33,10,000</dd>
+              <dt title="disbursement_date">Disbursed on</dt><dd class="num">02 Jun 26</dd>
+              <dt title="loan_start_date">Start date</dt><dd class="num">02 Jun 26</dd>
+              <dt title="loan_end_date">Maturity date</dt><dd class="num">31 Aug 26</dd>
+              <dt title="upfront_interest">Upfront interest</dt><dd class="amt">₹75,507</dd>
+              <dt title="upfront_interest_rate">Upfront rate</dt><dd class="num">13.50% p.a.</dd>
+              <dt title="upfront_interest_days">Upfront cover</dt><dd class="num">90 days</dd>
+              <dt title="run_accrual">Accrual</dt><dd><span class="badge green outline">Running</span></dd>
+            </dl>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-h"><h3>Demands on this loan</h3></div>
+          <div class="card-b flush">
+            <table>
+              <thead><tr><th>Component</th><th class="r">Amount</th><th class="r">Paid</th><th class="r">O/s</th></tr></thead>
+              <tbody>
+                <tr><td title="principal">Principal</td><td class="r amt">₹34,00,000</td><td class="r amt pos">₹3,57,670</td><td class="r amt">₹30,42,330</td></tr>
+                <tr><td title="interest">Interest <span class="sub small">beyond upfront</span></td><td class="r amt">₹65,420</td><td class="r amt pos">₹48,420</td><td class="r amt">₹17,000</td></tr>
+                <tr><td title="service_fee">Service fee <span class="sub small">incl. GST</span></td><td class="r amt">₹2,360</td><td class="r amt pos">₹2,360</td><td class="r amt dim">₹0</td></tr>
+              </tbody>
+              <tfoot><tr><td>Net outstanding</td><td colspan="3" class="r amt">₹30,59,330</td></tr></tfoot>
+            </table>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-h"><h3>Limit linkage</h3></div>
+          <div class="card-b">
+            <dl class="kv">
+              <dt>Linked limit</dt><dd><span class="ref">LMT-PRI-0451</span></dd>
+              <dt>Used from limit</dt><dd class="amt">₹34,00,000</dd>
+              <dt>Released on close</dt><dd class="sub">on principal repayment</dd>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Upfront interest & cross-loan settlement (collapsed, full width) -->
+    <div class="card mt-lg">
+      <details class="clps">
+      <summary class="card-h">
+        <svg class="chev" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg>
+        <h3>Upfront interest &amp; cross-loan settlement</h3>
+        <div class="right"><span class="badge teal outline">upfront_interest</span></div>
+      </summary>
+      <div class="card-b">
+        <div class="grid g3" style="gap:10px">
+          <div><div class="small sub">Deducted</div><div class="amt" style="font-size:16px">₹75,507</div></div>
+          <div><div class="small sub">Accrued (earned)</div><div class="amt" style="font-size:16px">₹46,120</div></div>
+          <div><div class="small sub">Available (hold)</div><div class="amt" style="font-size:16px">₹29,387</div></div>
+        </div>
+        <div class="divider"></div>
+        <div class="segbar" style="height:8px">
+          <span style="width:61%;background:#0d9488"></span>
+          <span style="width:39%;background:#99f6e4"></span>
+        </div>
+        <div class="legend">
+          <span><i style="background:#0d9488"></i>Earned 61%</span>
+          <span><i style="background:#99f6e4"></i>Unearned (hold) 39%</span>
+          <span style="margin-left:auto">@ 13.5% p.a. · 90 days · ends <b class="mono">31 Aug 26</b></span>
+        </div>
+        <div class="divider"></div>
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:11px">
+          <b style="font-size:12.5px">Cross-loan settlement received</b>
+          <span class="badge violet outline">upfront_interest_settle</span>
+          <span class="ref link">TXN-UIS-88213</span>
+          <span class="small mut" style="margin-left:auto"><b class="mono" style="color:var(--violet)">+₹28,450</b> from <span class="ref link">LN-2401-0114</span> · 20 Jun 26</span>
+        </div>
+        <div class="flow">
+          <div class="flow-col">
+            <div class="flow-node src">
+              <div class="t">1 · Source · closed loan</div>
+              <div class="n"><span class="ref link">LN-2401-0114</span> <span class="badge" style="margin-left:4px"><span class="dot"></span>Closed</span></div>
+              <div class="small mut" style="margin-top:4px">Upfront-interest demand <span class="ref">DMD-UI-4471</span></div>
+              <div class="small mut">excess ₹28,450 → settled ₹28,450</div>
+            </div>
+          </div>
+          <div class="flow-arrow"><svg viewBox="0 0 36 14"><path d="M0 7h30M26 2l6 5-6 5" stroke="currentColor" stroke-width="1.6" fill="none"/></svg></div>
+          <div class="flow-col">
+            <div class="flow-node hub">
+              <div class="t">2 · Transaction · 20 Jun 26</div>
+              <div class="n">upfront_interest_settle</div>
+              <div class="small mut" style="margin-top:4px">moves <b class="mono">₹28,450</b> of excess as repayment</div>
+            </div>
+          </div>
+          <div class="flow-arrow"><svg viewBox="0 0 36 14"><path d="M0 7h30M26 2l6 5-6 5" stroke="currentColor" stroke-width="1.6" fill="none"/></svg></div>
+          <div class="flow-col">
+            <div class="flow-node dst">
+              <div class="t">3 · Destination · this loan</div>
+              <div class="n">LN-2406-0187</div>
+              <div class="small mut" style="margin-top:4px">applied: fee <b class="mono">₹2,360</b> · interest <b class="mono">₹6,120</b> · principal <b class="mono">₹19,970</b></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </details>
+    </div>
+
+    <!-- Origination chain (collapsed, full width) -->
+    <div class="card mt-lg">
+      <details class="clps">
+      <summary class="card-h">
+        <svg class="chev" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg>
+        <h3>Origination chain</h3>
+        <div class="right"><span class="ref">INV-MERI-1904</span></div>
+      </summary>
+      <div class="card-b">
+        <div class="flow">
+          <div class="flow-col">
+            <div class="flow-node">
+              <div class="t">1 · Invoice</div>
+              <div class="n"><span class="ref link">INV-MERI-1904</span> <span class="badge green outline" style="margin-left:4px">Financed</span></div>
+              <div class="small mut" style="margin-top:4px">Buyer / anchor: AgroVeda Retail Ltd</div>
+              <div class="small mut">Invoice value <b class="mono">₹40,00,000</b> · due 30 Aug 26</div>
+            </div>
+          </div>
+          <div class="flow-arrow"><svg viewBox="0 0 36 14"><path d="M0 7h30M26 2l6 5-6 5" stroke="currentColor" stroke-width="1.6" fill="none"/></svg></div>
+          <div class="flow-col">
+            <div class="flow-node hub">
+              <div class="t">2 · Drawdown</div>
+              <div class="n"><span class="ref link">DD-1044</span> <span class="badge green outline" style="margin-left:4px">Disbursed</span></div>
+              <div class="small mut" style="margin-top:4px">financed <b class="mono">85%</b> of invoice → <b class="mono">₹34,00,000</b></div>
+              <div class="small mut">requested = approved = disbursed · 02 Jun 26</div>
+            </div>
+          </div>
+          <div class="flow-arrow"><svg viewBox="0 0 36 14"><path d="M0 7h30M26 2l6 5-6 5" stroke="currentColor" stroke-width="1.6" fill="none"/></svg></div>
+          <div class="flow-col">
+            <div class="flow-node dst">
+              <div class="t">3 · This loan</div>
+              <div class="n">LN-2406-0187</div>
+              <div class="small mut" style="margin-top:4px">gross booked <b class="mono">₹34,00,000</b> under <span class="ref link">ACC-GRP-00218</span></div>
+              <div class="small mut">upfront + fees deducted <b class="mono">₹90,000</b></div>
+            </div>
+          </div>
+          <div class="flow-arrow"><svg viewBox="0 0 36 14"><path d="M0 7h30M26 2l6 5-6 5" stroke="currentColor" stroke-width="1.6" fill="none"/></svg></div>
+          <div class="flow-col">
+            <div class="flow-node" style="border-color:var(--green-bd);background:var(--green-bg)">
+              <div class="t">4 · Borrower bank</div>
+              <div class="n"><span class="ref link">PYTUTR861204</span></div>
+              <div class="small mut" style="margin-top:4px">net transfer <b class="mono">₹33,10,000</b></div>
+              <div class="small mut">HDFC ••4410 · credited 02 Jun 26</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </details>
+    </div>
+  </section>
+
+</div>
+
+<!-- ======================= RESOURCE DRAWER ======================= -->
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer">
+  <div class="drawer-h" style="position:relative">
+    <div class="drawer-type" id="dType">Resource</div>
+    <div class="drawer-title" id="dTitle">—</div>
+    <div class="drawer-badges" id="dBadges"></div>
+    <button class="drawer-x" id="dClose" aria-label="Close">✕</button>
+  </div>
+  <div class="drawer-b" id="dBody"></div>
+  <div class="drawer-f">
+    <button class="btn" id="dCopy">Copy ref</button>
+    <button class="btn primary" id="dOpen">Open full page →</button>
+  </div>
+</aside>
+
+<!-- load order matters: data -> nav -> drawer -> refs -> tabs -> filters -->
+<script src="js/data.js"></script>
+<script src="js/nav.js"></script>
+<script src="js/drawer.js"></script>
+<script src="js/refs.js"></script>
+<script src="js/tabs.js"></script>
+<script src="js/filters.js"></script>
+<script src="js/activity.js"></script>
+<script src="js/schedule.js"></script>
+</body>
+</html>

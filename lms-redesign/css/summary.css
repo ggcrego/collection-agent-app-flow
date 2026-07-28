@@ -1,0 +1,5 @@
+/* ---------- summary card ----------
+   The "View Full" expander uses a chevron that already points down, so it
+   rotates to point up when open. Other collapsibles keep the › -> v behaviour
+   defined in timeline-flow.css. */
+details[open]>summary .chev.chev-d{transform:rotate(180deg)}

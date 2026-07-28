@@ -29,9 +29,13 @@
       <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
       Contact
     </button>
-    <button class="nav-item" data-view="loan">
+    <button class="nav-item" data-view="loan-scf">
       <svg viewBox="0 0 24 24"><path d="M4 4h16v16H4zM4 9h16M9 9v11"/></svg>
-      Loans <span class="count">4</span>
+      SCF Loans <span class="count">3</span>
+    </button>
+    <button class="nav-item" data-view="loan-term">
+      <svg viewBox="0 0 24 24"><path d="m17 2 4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="m7 22-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/></svg>
+      Term Loans <span class="count">1</span>
     </button>
     <div class="nav-label">Money Movement</div>
     <button class="nav-item" data-view="payment">
@@ -112,33 +116,115 @@
       </div>
     </div>
 
-    <!-- Limit utilisation -->
-    <div class="grid g4">
-      <div class="card stat"><div class="k">Sanctioned Limit</div><div class="v">₹2,50,00,000</div><div class="d">Primary · valid till 31 Mar 2027</div></div>
-      <div class="card stat"><div class="k">Approved</div><div class="v">₹2,00,00,000</div><div class="d">= available + used + blocked</div></div>
-      <div class="card stat"><div class="k">Utilised</div><div class="v">₹68,40,000</div><div class="d">across 3 SCF loans</div></div>
-      <div class="card stat"><div class="k">Available</div><div class="v" style="color:var(--green)">₹1,26,60,000</div><div class="d">₹5,00,000 blocked (pending drawdown)</div></div>
-    </div>
-
-    <div class="card mt">
-      <div class="card-b" style="padding:14px 16px">
-        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:9px">
-          <b style="font-size:12.5px">Limit utilisation</b>
-          <span class="small mut">LMT-PRI-0451 · <span class="mono">34.2%</span> of approved</span>
-        </div>
-        <div class="segbar">
-          <span style="width:34.2%;background:#18181b"></span>
-          <span style="width:2.5%;background:#d97706"></span>
-          <span style="width:63.3%;background:transparent"></span>
-        </div>
-        <div class="legend">
-          <span><i style="background:#18181b"></i>Used ₹68,40,000</span>
-          <span><i style="background:#d97706"></i>Blocked ₹5,00,000</span>
-          <span><i style="background:var(--muted-2)"></i>Available ₹1,26,60,000</span>
-          <span style="margin-left:auto">Headroom to sanctioned: <b class="mono">₹50,00,000</b></span>
+    <div class="card">
+      <div class="card-h">
+        <h3>Account summary</h3>
+        <div class="right">
+          <select class="inp" style="padding:4px 28px 4px 10px;font-size:12px"><option selected>By value date</option><option>By txn date</option></select>
+          <input class="inp" type="date" value="2026-07-27" style="padding:4px 10px;font-size:12px">
+          <span class="badge green outline">Today · valid ✓</span>
         </div>
       </div>
+      <div class="card-b">
+        <div class="grid g4" style="gap:10px">
+          <div class="stat" style="padding:0"><div class="k">Disbursed</div><div class="v">₹77,00,000</div></div>
+          <div class="stat" style="padding:0"><div class="k">Outstanding</div><div class="v">₹46,39,330</div></div>
+          <div class="stat" style="padding:0"><div class="k">Net due</div><div class="v" style="color:var(--green)">₹0</div></div>
+          <div class="stat" style="padding:0"><div class="k">Loans</div><div class="v">3</div></div>
+        </div>
+        <details class="led" style="margin-top:12px;background:var(--surface)">
+          <summary><svg class="chev chev-d" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>View Full</summary>
+          <div class="led-b" style="padding:10px 12px">
+            <div class="grid g4" style="gap:10px">
+              <div class="blk">
+                <div class="blk-t">Portfolio</div>
+                <dl class="kv">
+                  <dt>Disbursed</dt><dd class="amt">₹77,00,000</dd>
+                  <dt>Collected (cash)</dt><dd class="amt pos">₹31,61,200</dd>
+                  <dt>Internal settles</dt><dd class="amt" style="color:var(--violet)">₹28,450</dd>
+                  <dt>Loans</dt><dd class="num">2 active · 1 closed</dd>
+                </dl>
+              </div>
+              <div class="blk">
+                <div class="blk-t">Outstanding</div>
+                <dl class="kv">
+                  <dt>Principal</dt><dd class="amt">₹46,08,750</dd>
+                  <dt>Interest</dt><dd class="amt">₹30,580</dd>
+                  <dt>Total</dt><dd class="amt" style="font-weight:650">₹46,39,330</dd>
+                </dl>
+              </div>
+              <div class="blk">
+                <div class="blk-t">Due &amp; risk</div>
+                <dl class="kv">
+                  <dt>Net due</dt><dd class="amt dim">₹0</dd>
+                  <dt>Max DPD</dt><dd class="num">0</dd>
+                  <dt>RBI category</dt><dd><span class="badge green outline">STD · 01</span></dd>
+                  <dt>Last paid</dt><dd class="num">14 Jul 26</dd>
+                </dl>
+              </div>
+              <div class="blk">
+                <div class="blk-t">Upfront &amp; wallet</div>
+                <dl class="kv">
+                  <dt>Upfront deducted</dt><dd class="amt">₹2,34,795</dd>
+                  <dt>Upfront hold</dt><dd class="amt" style="color:var(--teal)">₹61,087</dd>
+                  <dt>Settled cross-loan</dt><dd class="amt" style="color:var(--violet)">₹28,450</dd>
+                  <dt>Excess wallet</dt><dd class="amt dim">₹0</dd>
+                </dl>
+              </div>
+            </div>
+          </div>
+        </details>
+      </div>
     </div>
+
+    <!-- Limit — bar is scaled to the sanctioned amount (₹2.5 Cr = full track) -->
+    <section class="limit mt">
+      <div class="limit-h">
+        <span class="limit-t">Limit</span>
+        <span class="ref">LMT-PRI-0451</span>
+        <span class="small mut">Primary · valid till 31 Mar 2027</span>
+        <span class="limit-util"><b>34.2%</b> of approved utilised</span>
+      </div>
+
+      <div class="limit-bar">
+        <div class="limit-track">
+          <div class="segbar">
+            <span class="seg-used" style="width:27.36%"></span>
+            <span class="seg-blk" style="width:2%"></span>
+            <span class="seg-avl" style="width:50.64%"></span>
+            <span class="seg-hdr" style="width:20%"></span>
+          </div>
+          <i class="limit-tick" style="left:80%"></i>
+        </div>
+        <div class="limit-axis">
+          <span class="ax ax-tick" style="left:80%">Approved <b>₹2,00,00,000</b></span>
+          <span class="ax ax-end">Sanctioned <b>₹2,50,00,000</b></span>
+        </div>
+      </div>
+
+      <div class="limit-keys">
+        <div class="lk">
+          <div class="lk-k"><i class="sw-used"></i>Used</div>
+          <div class="lk-v">₹68,40,000</div>
+          <div class="lk-d">across 3 SCF loans</div>
+        </div>
+        <div class="lk">
+          <div class="lk-k"><i class="sw-blk"></i>Blocked</div>
+          <div class="lk-v">₹5,00,000</div>
+          <div class="lk-d">pending drawdown</div>
+        </div>
+        <div class="lk">
+          <div class="lk-k"><i class="sw-avl"></i>Available</div>
+          <div class="lk-v pos">₹1,26,60,000</div>
+          <div class="lk-d">drawable against approved</div>
+        </div>
+        <div class="lk">
+          <div class="lk-k"><i class="sw-hdr"></i>Headroom</div>
+          <div class="lk-v">₹50,00,000</div>
+          <div class="lk-d">sanctioned, not yet approved</div>
+        </div>
+      </div>
+    </section>
 
     <!-- Loans under account + right rail -->
     <div class="grid g23 mt-lg">
@@ -305,51 +391,6 @@
         </div>
       </div>
     </div>
-    <div class="card mt-lg">
-      <div class="card-h">
-        <h3>Aggregated summary — this Account</h3>
-        <div class="right"><span class="small mut">as of 27 Jul 26</span><span class="badge outline">3 loans</span></div>
-      </div>
-      <div class="card-b">
-        <div class="grid g4" style="gap:10px">
-          <div class="blk">
-            <div class="blk-t">Portfolio</div>
-            <dl class="kv">
-              <dt>Disbursed</dt><dd class="amt">₹77,00,000</dd>
-              <dt>Collected (cash)</dt><dd class="amt pos">₹31,61,200</dd>
-              <dt>Internal settles</dt><dd class="amt" style="color:var(--violet)">₹28,450</dd>
-              <dt>Loans</dt><dd class="num">2 active · 1 closed</dd>
-            </dl>
-          </div>
-          <div class="blk">
-            <div class="blk-t">Outstanding</div>
-            <dl class="kv">
-              <dt>Principal</dt><dd class="amt">₹46,08,750</dd>
-              <dt>Interest</dt><dd class="amt">₹30,580</dd>
-              <dt>Total</dt><dd class="amt" style="font-weight:650">₹46,39,330</dd>
-            </dl>
-          </div>
-          <div class="blk">
-            <div class="blk-t">Due &amp; risk</div>
-            <dl class="kv">
-              <dt>Net due</dt><dd class="amt dim">₹0</dd>
-              <dt>Max DPD</dt><dd class="num">0</dd>
-              <dt>RBI category</dt><dd><span class="badge green outline">STD · 01</span></dd>
-              <dt>Last paid</dt><dd class="num">14 Jul 26</dd>
-            </dl>
-          </div>
-          <div class="blk">
-            <div class="blk-t">Upfront &amp; wallet</div>
-            <dl class="kv">
-              <dt>Upfront deducted</dt><dd class="amt">₹2,34,795</dd>
-              <dt>Upfront hold</dt><dd class="amt" style="color:var(--teal)">₹61,087</dd>
-              <dt>Settled cross-loan</dt><dd class="amt" style="color:var(--violet)">₹28,450</dd>
-              <dt>Excess wallet</dt><dd class="amt dim">₹0</dd>
-            </dl>
-          </div>
-        </div>
-      </div>
-    </div>
   <!-- @@ACCOUNT_END@@ -->
   </section>
 
@@ -378,5 +419,7 @@
 <script src="js/refs.js"></script>
 <script src="js/tabs.js"></script>
 <script src="js/filters.js"></script>
+<script src="js/activity.js"></script>
+<script src="js/schedule.js"></script>
 </body>
 </html>

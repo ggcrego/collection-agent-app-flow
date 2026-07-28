@@ -1,15 +1,6 @@
 window.LMS = window.LMS || {};
 
 (function(){
-  /* loan sub-tabs */
-  const loanTabs = document.querySelectorAll("#loanTabs .tab");
-  loanTabs.forEach(t=>t.addEventListener("click",()=>{
-    loanTabs.forEach(x=>x.classList.toggle("active",x===t));
-    document.getElementById("loanpane-scf").classList.toggle("active", t.dataset.loan==="scf");
-    document.getElementById("loanpane-emi").classList.toggle("active", t.dataset.loan==="emi");
-  }));
-
-
   /* configuration scope cascade */
   const scopeNodes = document.querySelectorAll("#cfgCascade .node");
   scopeNodes.forEach(n=>n.addEventListener("click",()=>{

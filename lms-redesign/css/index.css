@@ -13,7 +13,11 @@
 @import "primitives.css";        /* cards, badges, .ref chips, typography helpers      */
 @import "tables-grid.css";       /* tables, grid columns, spacing utils, stat tiles    */
 @import "components.css";        /* page header, key-value, dates, segbar, tabs        */
+@import "limit.css";             /* account limit meter (bar + inset key strip)       */
 @import "timeline-flow.css";     /* timeline, details, impact strip, flow, callouts    */
 @import "popover.css";           /* .pop hover cards, .ptab mini-table                 */
 @import "waterfall-config.css";  /* waterfall steps, configuration page                */
+@import "schedule.css";          /* repayment schedule progress                        */
+@import "summary.css";           /* summary card expander                              */
+@import "ledger.css";            /* loan activity ledger table                         */
 @import "drawer.css";            /* scrim, resource drawer, @media breakpoints         */

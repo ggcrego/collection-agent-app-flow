@@ -1,0 +1,63 @@
+/* ---------- account limit meter ----------
+   Replaces the four limit stat cards. Every limit property now hangs off the
+   utilisation bar: the track is scaled to the SANCTIONED amount, so approved
+   sits on it as a tick and the un-sanctioned headroom is the hatched tail.
+   Two-tone panel (white head, muted foot) so it does not read as another
+   summary card on the same page. */
+.limit{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+  box-shadow:var(--shadow-sm);overflow:hidden}
+
+.limit-h{display:flex;align-items:center;gap:9px;padding:11px 16px 0}
+.limit-t{font-size:11px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;color:var(--subtle-fg)}
+.limit-util{margin-left:auto;font-size:11.5px;color:var(--muted-fg);white-space:nowrap}
+.limit-util b{font-family:var(--font-mono);font-variant-numeric:tabular-nums;
+  font-size:12.5px;font-weight:600;color:var(--foreground)}
+
+/* bar */
+.limit-bar{padding:13px 16px 11px}
+.limit-track{position:relative}
+.limit-track .segbar{height:14px;border-radius:7px;background:var(--surface)}
+/* semantic segments — the page chrome is zinc/black, so the meter is the one
+   place colour carries meaning: drawn = blue, held = amber, free = green. */
+.seg-used{background:var(--blue)}
+.seg-blk{background:var(--amber)}
+.seg-avl{background:var(--green)}
+.seg-hdr{background:repeating-linear-gradient(45deg,
+  var(--surface) 0 5px,var(--muted-2) 5px 6px)}
+
+/* approved marker — a tick through the track, label hung to its left */
+.limit-tick{position:absolute;top:-5px;bottom:-7px;width:1px;background:var(--foreground);opacity:.5}
+.limit-tick::after{content:"";position:absolute;left:-2px;top:-2px;width:5px;height:5px;
+  border-radius:99px;background:var(--foreground)}
+
+.limit-axis{position:relative;height:15px;margin-top:9px;font-size:11px;color:var(--muted-fg)}
+.limit-axis .ax{position:absolute;top:0;white-space:nowrap}
+.limit-axis .ax b{font-family:var(--font-mono);font-variant-numeric:tabular-nums;
+  font-weight:600;color:var(--foreground)}
+.limit-axis .ax-tick{transform:translateX(-100%);padding-right:8px}
+.limit-axis .ax-end{right:0}
+
+/* the old cards, demoted to an inset footer strip */
+.limit-keys{display:grid;grid-template-columns:repeat(4,1fr);
+  background:var(--muted);border-top:1px solid var(--border)}
+.lk{padding:8px 16px;border-left:1px solid var(--border)}
+.lk:first-child{border-left:0}
+.lk-k{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted-fg)}
+/* .sw- prefix: plain .blk / .used would collide with the block styles in
+   tables-grid.css and inflate the swatch to a padded box. */
+.lk-k i{width:8px;height:8px;border-radius:2px;flex:none;border:1px solid transparent}
+.lk-k i.sw-used{background:var(--blue)}
+.lk-k i.sw-blk{background:var(--amber)}
+.lk-k i.sw-avl{background:var(--green)}
+.lk-k i.sw-hdr{background:repeating-linear-gradient(45deg,
+  var(--surface) 0 3px,var(--muted-2) 3px 4px);border-color:var(--muted-2)}
+.lk-v{font-family:var(--font-mono);font-variant-numeric:tabular-nums;
+  font-size:14px;font-weight:600;margin-top:2px}
+.lk-v.pos{color:var(--green)}
+.lk-d{font-size:10.5px;color:var(--subtle-fg);margin-top:1px}
+
+@media(max-width:1080px){
+  .limit-keys{grid-template-columns:repeat(2,1fr)}
+  .lk:nth-child(odd){border-left:0}
+  .lk:nth-child(n+3){border-top:1px solid var(--border)}
+}

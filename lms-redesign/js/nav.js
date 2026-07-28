@@ -3,7 +3,9 @@ window.LMS = window.LMS || {};
 (function(){
   /* ---------- navigation: every view is its own page ---------- */
   const PAGES = {
-    account:"index.html", contact:"contact.html", loan:"loan.html", payment:"payment.html",
+    account:"index.html", contact:"contact.html", payment:"payment.html",
+    loan:"loan-scf.html",          /* default target for the Loans nav item */
+    "loan-scf":"loan-scf.html", "loan-term":"loan-term.html",
     payout:"payout.html", transactions:"transactions.html", demands:"demands.html",
     ledger:"ledger.html", configuration:"configuration.html"
   };
