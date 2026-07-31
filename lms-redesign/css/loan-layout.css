@@ -81,11 +81,142 @@
    squeezes on its own) and an overflow container would clip its hover cards. */
 .secpane .card-b.flush:not([id^="activity2"]){overflow-x:auto}
 
-/* the state strip sits outside the panes: outstanding, due and risk stay
-   true regardless of which section you are reading */
-.statstrip{display:grid;grid-template-columns:repeat(4,1fr)}
-.statstrip>div{padding:12px 16px;border-right:1px solid var(--border)}
-.statstrip>div:last-child{border-right:0}
+/* ============================================================
+   Hero summary band — sits outside the panes, so outstanding, due
+   and risk stay true whichever section is open.
+
+   Four equal tiles gave four numbers equal weight; nothing led. Here
+   one figure dominates, two support it, the track says where the loan
+   is in its life, and the foot carries everything that is merely true.
+   ============================================================ */
+.ln-hero{overflow:visible}
+.ln-hero-top{display:flex;align-items:center;gap:10px;padding:10px 18px;border-bottom:1px solid var(--border)}
+.ln-hero-top .t{font-size:10.5px;font-weight:600;letter-spacing:.7px;text-transform:uppercase;color:var(--subtle-fg)}
+.ln-hero-top .right{margin-left:auto;display:flex;align-items:center;gap:8px}
+
+.ln-cols{display:grid;grid-template-columns:1.5fr 1fr 1.15fr}
+.ln-col{padding:17px 20px;border-right:1px solid var(--border);min-width:0}
+.ln-col:last-child{border-right:0}
+.ln-k{font-size:10.5px;font-weight:600;letter-spacing:.7px;text-transform:uppercase;color:var(--subtle-fg)}
+.ln-v{font-family:var(--font-mono);font-variant-numeric:tabular-nums;font-size:28px;font-weight:600;
+  letter-spacing:-1px;margin-top:7px;line-height:1.1}
+.ln-v.md{font-size:20px;letter-spacing:-.6px;margin-top:9px}
+.ln-v.ok{color:var(--green)}
+.ln-v.warn{color:var(--amber)}
+.ln-note{margin-top:9px;font-size:12px;color:var(--muted-fg);display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.ln-split{display:flex;gap:16px;margin-top:11px;font-size:12px;color:var(--muted-fg);flex-wrap:wrap}
+.ln-split i{width:7px;height:7px;border-radius:2px;display:inline-block;margin-right:6px;vertical-align:1px}
+.ln-split b{font-family:var(--font-mono);font-variant-numeric:tabular-nums;font-weight:550;color:var(--foreground)}
+
+/* ---- tenure track: where this loan is in its life ---- */
+.ln-track{padding:15px 20px 16px;border-top:1px solid var(--border);background:#fcfcfd}
+.ln-track-bar{position:relative;height:6px;border-radius:99px;background:var(--muted-2)}
+.ln-track-fill{position:absolute;left:0;top:0;bottom:0;border-radius:99px;background:#3f3f46}
+.ln-track-now{position:absolute;top:50%;width:10px;height:10px;border-radius:99px;background:var(--surface);
+  border:2px solid #3f3f46;transform:translate(-50%,-50%)}
+.ln-track-lbl{display:flex;justify-content:space-between;gap:14px;margin-top:11px;font-size:11.5px;color:var(--muted-fg)}
+.ln-track-lbl b{color:var(--foreground);font-weight:550;font-family:var(--font-mono);font-variant-numeric:tabular-nums}
+.ln-track-mid{color:var(--subtle-fg)}
+
+/* One pill per instalment — the term-loan equivalent of the SCF bar, and the
+   same weight and palette as the schedule widget's strip so the two agree on
+   sight. Pills are thick enough to carry the days-delayed count on the pill
+   itself; the due one is taller again, so urgency survives without colour. */
+.ln-ticks{display:flex;align-items:flex-end;gap:3px;padding-bottom:2px}
+/* direct children only — the hover card lives inside a pill and must not
+   inherit pill geometry */
+.ln-ticks>span{
+  flex:1 1 0;max-width:56px;min-width:5px;height:22px;border-radius:3px;
+  background:var(--muted-2);box-shadow:inset 0 0 0 1px var(--border);
+  position:relative;display:block;cursor:help
+}
+.ln-ticks>span.paid{background:var(--green);box-shadow:none}
+.ln-ticks>span.late{background:var(--red);box-shadow:none}
+.ln-ticks>span.due{background:var(--amber);height:28px;box-shadow:0 0 0 2px var(--amber-bg)}
+/* an open EMI that absorbed part of a receipt: the settled slice, in the
+   settled colour, so "part paid" is visible without reading the card */
+.ln-ticks>span.due>u{display:block;position:absolute;left:0;top:0;bottom:0;
+  width:var(--p,0);border-radius:3px 0 0 3px;background:var(--green)}
+/* Hover darkening rides on a pseudo-element, NOT filter: a filter on the pill
+   would repaint every descendant, and the hover card lives inside the pill —
+   it came out grey instead of white. */
+.ln-ticks>span::after{
+  content:"";position:absolute;inset:0;border-radius:3px;
+  background:rgba(9,9,11,0);transition:background .12s
+}
+.ln-ticks>span:hover::after{background:rgba(9,9,11,.12)}
+/* days delayed, printed on the pill it belongs to */
+.ln-ticks>span>i{
+  position:absolute;inset:0;z-index:1;display:flex;align-items:center;justify-content:center;
+  font-style:normal;font-family:var(--font-mono);font-variant-numeric:tabular-nums;
+  font-size:9px;font-weight:600;color:#fff;letter-spacing:-.3px
+}
+
+/* reuse the .pop hover card, minus the dashed underline it normally carries */
+.ln-ticks>span.pop{border-bottom:0}
+.ln-ticks>span .pop-card{min-width:196px}
+.ln-ticks>span .pop-row .pk{white-space:nowrap}
+.ln-ticks>span .pop-row .pv{white-space:nowrap;text-align:right}
+/* keep the card on screen at both ends of a 24-pill run */
+.ln-ticks>span:nth-child(-n+4) .pop-card{left:0;transform:translate(0,4px)}
+.ln-ticks>span:nth-child(-n+4):hover .pop-card{transform:translate(0,0)}
+.ln-ticks>span:nth-last-child(-n+4) .pop-card{left:auto;right:0;transform:translate(0,4px)}
+.ln-ticks>span:nth-last-child(-n+4):hover .pop-card{transform:translate(0,0)}
+
+.ln-hero-foot{display:flex;align-items:center;gap:24px;flex-wrap:wrap;padding:10px 20px;
+  border-top:1px solid var(--border);font-size:11.5px;color:var(--muted-fg);background:var(--muted)}
+.ln-hero-foot b{font-family:var(--font-mono);font-variant-numeric:tabular-nums;color:var(--foreground);font-weight:550}
+
+/* ---- overflow menu: foreclosure must not sit one click from repay ---- */
+.ln-menu{position:relative}
+.ln-menu>summary{display:inline-flex;align-items:center;justify-content:center;width:31px;height:30px;
+  list-style:none;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--surface);
+  color:var(--muted-fg);cursor:pointer;box-shadow:var(--shadow-sm);font-size:14px;line-height:1}
+.ln-menu>summary::-webkit-details-marker{display:none}
+.ln-menu>summary:hover,.ln-menu[open]>summary{background:var(--muted);color:var(--foreground)}
+.ln-menu-list{position:absolute;right:0;top:calc(100% + 6px);z-index:60;min-width:190px;
+  background:var(--surface);border:1px solid var(--border);border-radius:9px;
+  box-shadow:var(--shadow-md);padding:5px}
+.ln-menu-list button{display:block;width:100%;text-align:left;border:0;background:none;font:inherit;
+  font-size:12.5px;color:var(--foreground);padding:6px 9px;border-radius:5px;cursor:pointer}
+.ln-menu-list button:hover{background:var(--muted)}
+.ln-menu-list button.danger{color:var(--red)}
+.ln-menu-list button.danger:hover{background:var(--red-bg)}
+.ln-menu-sep{height:1px;background:var(--border);margin:5px 4px}
+
+/* ---- component progress: how far each demand has been settled ---- */
+.ln-comp{padding:11px 0;border-bottom:1px solid var(--border)}
+.ln-comp:first-child{padding-top:0}
+.ln-comp:last-of-type{border-bottom:0}
+.ln-comp-h{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+.ln-comp-n{font-size:12.5px;font-weight:500}
+.ln-comp-n em{font-style:normal;font-size:11px;color:var(--subtle-fg);margin-left:5px}
+.ln-comp-v{font-family:var(--font-mono);font-variant-numeric:tabular-nums;font-weight:600;font-size:13px}
+.ln-comp-v.done{color:var(--green);font-size:12px}
+.ln-meter{height:6px;border-radius:99px;background:var(--muted-2);margin:8px 0 6px;overflow:hidden}
+.ln-meter i{display:block;height:100%;border-radius:99px;background:#3f3f46}
+.ln-comp-f{display:flex;justify-content:space-between;gap:12px;font-size:11px;color:var(--muted-fg);
+  font-variant-numeric:tabular-nums}
+.ln-tot{display:flex;justify-content:space-between;align-items:baseline;gap:12px;
+  margin-top:12px;padding-top:11px;border-top:1px solid var(--border-strong);font-size:12.5px}
+.ln-tot b{font-family:var(--font-mono);font-variant-numeric:tabular-nums;font-size:15px;font-weight:650}
+
+/* ---- the three figures that define the loan ---- */
+.ln-spec{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px;
+  padding-bottom:13px;border-bottom:1px solid var(--border)}
+.ln-spec>div{min-width:0}
+.ln-spec .v{font-family:var(--font-mono);font-variant-numeric:tabular-nums;font-size:19px;
+  font-weight:600;letter-spacing:-.6px;line-height:1.1}
+.ln-spec .v small{font-size:12px;font-weight:500;color:var(--muted-fg);margin-left:1px}
+.ln-spec .v.txt{font-family:var(--font-sans);font-size:15px;letter-spacing:-.2px}
+.ln-spec .k{font-size:10px;color:var(--subtle-fg);margin-top:3px;white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis}
+
+@media (max-width:1180px){
+  .ln-cols{grid-template-columns:1fr}
+  .ln-col{border-right:0;border-bottom:1px solid var(--border);padding:14px 18px}
+  .ln-col:last-child{border-bottom:0}
+}
 
 /* Stacked: the rail dissolves (display:contents) so its cards can be ordered
    against the content. Terms has to fall BELOW the panes — stacked in source

@@ -100,9 +100,19 @@
         <div class="page-meta"><span>Term loan · 24 monthly EMIs @ 11.75% p.a.</span></div>
       </div>
       <div class="page-actions">
-        <button class="btn">Waive</button>
-        <button class="btn">Foreclose</button>
-        <button class="btn primary">Repay</button>
+        <button class="btn">Statement</button>
+        <details class="ln-menu">
+          <summary aria-label="More actions">···</summary>
+          <div class="ln-menu-list">
+            <button>Waive charges</button>
+            <button>Reschedule EMIs</button>
+            <button>Re-present NACH</button>
+            <div class="ln-menu-sep"></div>
+            <button>Export ledger</button>
+            <button class="danger">Foreclose loan</button>
+          </div>
+        </details>
+        <button class="btn primary">Record repayment</button>
       </div>
     </div>
 
@@ -141,13 +151,13 @@
         <div class="card">
           <nav class="secnav" data-secnav role="tablist" aria-label="Loan sections">
             <button class="sec" role="tab" data-sec="overview" aria-selected="true" aria-controls="sec-overview">
-              <span class="sec-i"></span>Overview<span class="sec-n">14</span>
+              <span class="sec-i"></span>Overview<span class="sec-n">17</span>
             </button>
             <button class="sec" role="tab" data-sec="schedule" aria-selected="false" aria-controls="sec-schedule">
               <span class="sec-i"></span>Schedule &amp; EMIs<span class="sec-n">24</span>
             </button>
             <button class="sec" role="tab" data-sec="fees" aria-selected="false" aria-controls="sec-fees">
-              <span class="sec-i"></span>Fees &amp; charges<span class="sec-n">4</span>
+              <span class="sec-i"></span>Fees &amp; charges<span class="sec-n">5</span>
             </button>
           </nav>
         </div>
@@ -155,6 +165,11 @@
         <div class="card">
           <div class="card-h"><h3>Terms</h3></div>
           <div class="card-b">
+            <div class="ln-spec">
+              <div><div class="v">11.75<small>%</small></div><div class="k">interest p.a.</div></div>
+              <div><div class="v">24</div><div class="k">monthly EMIs</div></div>
+              <div><div class="v txt">Monthly</div><div class="k">on the 5th</div></div>
+            </div>
             <dl class="kv">
               <dt title="loan_amount">Loan amount</dt><dd class="amt">₹24,00,000</dd>
               <dt title="emi_amount">EMI</dt><dd class="amt">₹1,12,500</dd>
@@ -170,12 +185,45 @@
       </div>
 
       <div>
-        <div class="card">
-          <div class="statstrip">
-            <div class="stat" style="padding:12px 16px"><div class="k">Outstanding</div><div class="v">₹19,19,040</div><div class="d">principal ₹18,93,190 · interest ₹19,450 · penal ₹6,400</div></div>
-            <div class="stat" style="padding:12px 16px"><div class="k">Net due</div><div class="v" style="color:var(--amber)">₹1,18,900</div><div class="d">EMI #14 · EMI ₹1,12,500 + penal ₹6,400</div></div>
-            <div class="stat" style="padding:12px 16px"><div class="k">Asset class</div><div class="v" style="font-size:17px;color:var(--amber)">SMA-0 · DPD 22</div><div class="d">overdue since 05 Jul 26</div></div>
-            <div class="stat" style="padding:12px 16px"><div class="k">Next EMI</div><div class="v" style="font-size:17px">05 Aug 26</div><div class="d">#15 · ₹1,12,500</div></div>
+        <div class="card ln-hero">
+          <div class="ln-hero-top">
+            <span class="t">Summary</span>
+            <div class="right"><span class="badge outline">As of 27 Jul 26</span></div>
+          </div>
+          <div class="ln-cols">
+            <div class="ln-col">
+              <div class="ln-k">Outstanding</div>
+              <div class="ln-v">₹18,85,320</div>
+              <div class="ln-split">
+                <span><i style="background:#3f3f46"></i>Principal <b>₹18,83,820</b></span>
+                <span><i style="background:#d97706"></i>Late fee <b>₹1,500</b></span>
+              </div>
+            </div>
+            <div class="ln-col">
+              <div class="ln-k">Due now</div>
+              <div class="ln-v md warn">₹85,180</div>
+              <div class="ln-note"><span class="badge amber"><span class="dot"></span>SMA-0</span><span>EMI #14 · 22 days late</span></div>
+            </div>
+            <div class="ln-col">
+              <div class="ln-k">Next EMI</div>
+              <div class="ln-v md">05 Aug 26</div>
+              <div class="ln-note">#15 of 24 · ₹1,12,500 · NACH</div>
+            </div>
+          </div>
+          <div class="ln-track">
+            <div class="ln-ticks" id="ticks-emi"></div>
+            <div class="ln-track-lbl">
+              <span>Started <b>05 May 25</b></span>
+              <span class="ln-track-mid">12 on time · 1 settled late · 1 part paid &amp; overdue · 10 pending</span>
+              <span>Matures <b>05 May 28</b></span>
+            </div>
+          </div>
+          <div class="ln-hero-foot">
+            <span>Loan amount <b>₹24,00,000</b></span>
+            <span>Collected to date <b>₹15,00,000</b></span>
+            <span>On-time rate <b>92%</b></span>
+            <span>Peak DPD <b>36</b></span>
+            <span>Asset class <b>SMA-0</b></span>
           </div>
         </div>
 
@@ -190,6 +238,22 @@
         </div>
 
         <div class="secpane mt-lg" id="sec-schedule" role="tabpanel">
+          <div class="card" style="margin-bottom:16px">
+            <div class="card-h"><h3>What's outstanding</h3></div>
+            <div class="card-b">
+              <div class="ln-comp">
+                <div class="ln-comp-h"><span class="ln-comp-n">Principal</span><span class="ln-comp-v">₹18,83,820</span></div>
+                <div class="ln-meter"><i style="width:21.5%"></i></div>
+                <div class="ln-comp-f"><span>₹5,16,180 settled of ₹24,00,000 · ₹83,680 of it billed to EMI #14 and overdue</span><span>21.5%</span></div>
+              </div>
+              <div class="ln-comp">
+                <div class="ln-comp-h"><span class="ln-comp-n">Late fee <em>EMI #14</em></span><span class="ln-comp-v">₹1,500</span></div>
+                <div class="ln-meter"><i style="width:0%"></i></div>
+                <div class="ln-comp-f"><span>₹0 settled of ₹1,500 charged</span><span>0%</span></div>
+              </div>
+              <div class="ln-tot"><span>Total outstanding</span><b>₹18,85,320</b></div>
+            </div>
+          </div>
           <div class="card">
             <div class="card-h"><h3>Repayment schedule</h3>
               <div class="right"><button class="btn sm" data-nav="demands">Full schedule →</button></div>
@@ -202,14 +266,14 @@
                 </tr></thead>
                 <tbody>
                   <tr><td class="num">12</td><td class="num">05 May 26</td><td class="r amt">₹1,12,500</td><td class="r amt">₹92,360</td><td class="r amt">₹20,140</td><td class="r amt pos">₹1,12,500</td><td class="r amt dim">₹0</td><td class="r num">0</td><td><span class="badge green outline">Settled</span></td></tr>
-                  <tr><td class="num">13</td><td class="num">05 Jun 26</td><td class="r amt">₹1,12,500</td><td class="r amt">₹92,720</td><td class="r amt">₹19,780</td><td class="r amt pos">₹1,12,500</td><td class="r amt dim">₹0</td><td class="r num">6</td><td><span class="badge green outline">Settled</span></td></tr>
+                  <tr><td class="num">13</td><td class="num">05 Jun 26</td><td class="r amt">₹1,12,500</td><td class="r amt">₹92,720</td><td class="r amt">₹19,780</td><td class="r amt pos">₹1,12,500</td><td class="r amt dim">₹0</td><td class="r num">36</td><td><span class="badge green outline">Settled</span></td></tr>
                   <tr style="background:var(--amber-bg)">
-                    <td class="num">14</td><td class="num">05 Jul 26</td><td class="r amt">₹1,12,500</td><td class="r amt">₹93,050</td><td class="r amt">₹19,450</td><td class="r amt">₹0</td><td class="r amt" style="color:var(--amber);font-weight:600">₹1,18,900</td><td class="r num" style="color:var(--amber);font-weight:600">22</td><td><span class="badge amber"><span class="dot"></span>Overdue</span></td>
+                    <td class="num">14</td><td class="num">05 Jul 26</td><td class="r amt">₹1,12,500</td><td class="r amt">₹93,050</td><td class="r amt">₹19,450</td><td class="r amt pos">₹28,820</td><td class="r amt" style="color:var(--amber);font-weight:600">₹85,180</td><td class="r num" style="color:var(--amber);font-weight:600">22</td><td><span class="badge amber"><span class="dot"></span>Part paid</span></td>
                   </tr>
                   <tr><td class="num">15</td><td class="num">05 Aug 26</td><td class="r amt">₹1,12,500</td><td class="r amt">₹93,960</td><td class="r amt">₹18,540</td><td class="r amt dim">—</td><td class="r amt dim">—</td><td class="r num">—</td><td><span class="badge outline">Pending</span></td></tr>
                   <tr><td class="num">16</td><td class="num">05 Sep 26</td><td class="r amt">₹1,12,500</td><td class="r amt">₹94,880</td><td class="r amt">₹17,620</td><td class="r amt dim">—</td><td class="r amt dim">—</td><td class="r num">—</td><td><span class="badge outline">Pending</span></td></tr>
                 </tbody>
-                <tfoot><tr><td colspan="5">13 settled · 1 overdue · 10 pending</td><td class="r amt pos">₹14,62,500</td><td class="r amt" colspan="3">₹1,18,900 overdue</td></tr></tfoot>
+                <tfoot><tr><td colspan="5">13 settled · 1 part paid &amp; overdue · 10 pending</td><td class="r amt pos">₹15,00,000</td><td class="r amt" colspan="3">₹85,180 overdue</td></tr></tfoot>
               </table>
             </div>
           </div>
@@ -223,12 +287,13 @@
                 <thead><tr><th>Fee</th><th>Component</th><th>Value date</th><th class="r">Amount</th><th>Status</th></tr></thead>
                 <tbody>
                   <tr><td>Processing fee</td><td class="sub small mono">processing_fee + tax</td><td class="num">05 May 25</td><td class="r amt">₹42,480</td><td><span class="badge outline">Deducted at source</span></td></tr>
-                  <tr><td>Bounce fee <span class="sub small">EMI #13</span></td><td class="sub small mono">bounce_fee</td><td class="num">05 Jun 26</td><td class="r amt">₹2,280</td><td><span class="badge green outline">Paid 11 Jun</span></td></tr>
+                  <tr><td>Bounce fee <span class="sub small">EMI #13</span></td><td class="sub small mono">bounce_fee</td><td class="num">05 Jun 26</td><td class="r amt">₹2,280</td><td><span class="badge green outline">Paid 11 Jul</span></td></tr>
                   <tr><td>Penal charge <span class="sub small">EMI #13</span></td><td class="sub small mono">penal_charge</td><td class="num">09 Jun 26</td><td class="r amt">₹1,140</td><td><span class="badge violet outline">Waived 10 Jun</span></td></tr>
                   <tr><td>Bounce fee <span class="sub small">EMI #14</span></td><td class="sub small mono">bounce_fee</td><td class="num">08 Jul 26</td><td class="r amt">₹2,280</td><td><span class="badge violet outline">Waived 20 Jul</span></td></tr>
-                  <tr><td>Penal charge <span class="sub small">EMI #14</span></td><td class="sub small mono">penal_charge</td><td class="num">08 Jul 26</td><td class="r amt">₹6,400</td><td><span class="badge amber"><span class="dot"></span>Outstanding</span></td></tr>
+                  <tr><td>Penal charge <span class="sub small">EMI #14</span></td><td class="sub small mono">penal_charge</td><td class="num">08 Jul 26</td><td class="r amt">₹6,400</td><td><span class="badge green outline">Paid 11 Jul</span></td></tr>
+                  <tr><td>Late fee <span class="sub small">EMI #14</span></td><td class="sub small mono">late_fee</td><td class="num">15 Jul 26</td><td class="r amt">₹1,500</td><td><span class="badge amber"><span class="dot"></span>Outstanding</span></td></tr>
                 </tbody>
-                <tfoot><tr><td colspan="3">Collected ₹44,760 · waived ₹3,420</td><td class="r amt" colspan="2">outstanding ₹6,400</td></tr></tfoot>
+                <tfoot><tr><td colspan="3">Collected ₹51,160 · waived ₹3,420</td><td class="r amt" colspan="2">outstanding ₹1,500</td></tr></tfoot>
               </table>
             </div>
           </div>

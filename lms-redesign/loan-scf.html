@@ -104,9 +104,19 @@
         <div class="page-meta"><span>Supply chain finance · invoice discounting</span></div>
       </div>
       <div class="page-actions">
-        <button class="btn">Waive</button>
-        <button class="btn">Foreclose</button>
-        <button class="btn primary">Repay</button>
+        <button class="btn">Statement</button>
+        <details class="ln-menu">
+          <summary aria-label="More actions">···</summary>
+          <div class="ln-menu-list">
+            <button>Waive charges</button>
+            <button>Reschedule</button>
+            <button>Recalculate interest</button>
+            <div class="ln-menu-sep"></div>
+            <button>Export ledger</button>
+            <button class="danger">Foreclose loan</button>
+          </div>
+        </details>
+        <button class="btn primary">Record repayment</button>
       </div>
     </div>
 
@@ -146,7 +156,7 @@
         <div class="card">
           <nav class="secnav" data-secnav role="tablist" aria-label="Loan sections">
             <button class="sec" role="tab" data-sec="overview" aria-selected="true" aria-controls="sec-overview">
-              <span class="sec-i"></span>Overview<span class="sec-n">60</span>
+              <span class="sec-i"></span>Overview<span class="sec-n">62</span>
             </button>
             <button class="sec" role="tab" data-sec="schedule" aria-selected="false" aria-controls="sec-schedule">
               <span class="sec-i"></span>Schedule &amp; demands<span class="sec-n">3</span>
@@ -163,9 +173,14 @@
         <div class="card">
           <div class="card-h"><h3>Terms</h3></div>
           <div class="card-b">
+            <div class="ln-spec">
+              <div><div class="v">13.5<small>%</small></div><div class="k">interest p.a.</div></div>
+              <div><div class="v">90<small>d</small></div><div class="k">tenor</div></div>
+              <div><div class="v txt">Bullet</div><div class="k">repayment</div></div>
+            </div>
             <dl class="kv">
               <dt title="loan_amount">Loan amount</dt><dd class="amt">₹34,00,000</dd>
-              <dt title="payout_amount">Net payout</dt><dd class="amt">₹33,10,000</dd>
+              <dt title="payout_amount">Net payout</dt><dd class="amt">₹32,72,329</dd>
               <dt title="loan_start_date">Start date</dt><dd class="num">02 Jun 26</dd>
               <dt title="loan_end_date">Maturity date</dt><dd class="num">31 Aug 26</dd>
               <dt title="upfront_interest_rate">Upfront rate</dt><dd class="num">13.50% p.a.</dd>
@@ -182,12 +197,47 @@
 
         <!-- State strip sits outside the panes: outstanding, due and risk
              stay true whichever section you are reading. -->
-        <div class="card">
-          <div class="statstrip">
-            <div class="stat" style="padding:12px 16px"><div class="k">Outstanding</div><div class="v">₹30,59,095</div><div class="d">principal ₹30,46,698 · interest ₹12,397</div></div>
-            <div class="stat" style="padding:12px 16px"><div class="k">Net due</div><div class="v" style="color:var(--green)">₹0</div><div class="d">nothing overdue</div></div>
-            <div class="stat" style="padding:12px 16px"><div class="k">Asset class</div><div class="v" style="font-size:17px">STD · DPD 0</div><div class="d">peak DPD 6 · cured 14 Jul</div></div>
-            <div class="stat" style="padding:12px 16px"><div class="k">Maturity</div><div class="v" style="font-size:17px">31 Aug 26</div><div class="d">37 days remaining</div></div>
+        <div class="card ln-hero">
+          <div class="ln-hero-top">
+            <span class="t">Summary</span>
+            <div class="right"><span class="badge outline">As of 27 Jul 26</span></div>
+          </div>
+          <div class="ln-cols">
+            <div class="ln-col">
+              <div class="ln-k">Outstanding</div>
+              <div class="ln-v">₹29,93,910</div>
+              <div class="ln-split">
+                <span><i style="background:#3f3f46"></i>Principal <b>₹29,93,910</b></span>
+                <span><i style="background:#0d9488"></i>Interest <b>prepaid at disbursal</b></span>
+              </div>
+            </div>
+            <div class="ln-col">
+              <div class="ln-k">Due now</div>
+              <div class="ln-v md ok">₹0</div>
+              <div class="ln-note"><span class="badge green outline">STD</span><span>0 DPD · peak 6, cured 14 Jul</span></div>
+            </div>
+            <div class="ln-col">
+              <div class="ln-k">Next &amp; only repayment</div>
+              <div class="ln-v md">31 Aug 26</div>
+              <div class="ln-note">Full balance falls due · in 35 days</div>
+            </div>
+          </div>
+          <div class="ln-track">
+            <div class="ln-track-bar">
+              <span class="ln-track-fill" style="width:61%"></span>
+              <span class="ln-track-now" style="left:61%"></span>
+            </div>
+            <div class="ln-track-lbl">
+              <span>Disbursed <b>02 Jun 26</b></span>
+              <span class="ln-track-mid">Day 55 of 90 · 11.9% of principal repaid early</span>
+              <span>Matures <b>31 Aug 26</b></span>
+            </div>
+          </div>
+          <div class="ln-hero-foot">
+            <span>Loan amount <b>₹34,00,000</b></span>
+            <span>Collected to date <b>₹4,08,450</b></span>
+            <span>Upfront earned <b>₹66,987</b> of ₹1,13,178</span>
+            <span>Asset class <b>STD · 01</b></span>
           </div>
         </div>
 
@@ -208,16 +258,23 @@
             <div class="card-h"><h3>Demands on this loan</h3>
               <div class="right"><button class="btn sm" data-nav="demands">Open demands →</button></div>
             </div>
-            <div class="card-b flush">
-              <table>
-                <thead><tr><th>Component</th><th class="r">Charged</th><th class="r">Settled</th><th class="r">Outstanding</th></tr></thead>
-                <tbody>
-                  <tr><td title="principal">Principal</td><td class="r amt">₹34,00,000</td><td class="r amt pos">₹3,53,302</td><td class="r amt">₹30,46,698</td></tr>
-                  <tr><td title="interest">Interest <span class="sub small">beyond upfront</span></td><td class="r amt">₹65,185</td><td class="r amt pos">₹52,788</td><td class="r amt">₹12,397</td></tr>
-                  <tr><td title="service_fee">Service fee <span class="sub small">incl. GST</span></td><td class="r amt">₹2,360</td><td class="r amt pos">₹2,360</td><td class="r amt dim">₹0</td></tr>
-                </tbody>
-                <tfoot><tr><td>Net outstanding</td><td class="r amt">₹34,67,545</td><td class="r amt pos">₹4,08,450</td><td class="r amt">₹30,59,095</td></tr></tfoot>
-              </table>
+            <div class="card-b">
+              <div class="ln-comp">
+                <div class="ln-comp-h"><span class="ln-comp-n">Principal</span><span class="ln-comp-v">₹29,93,910</span></div>
+                <div class="ln-meter"><i style="width:11.9%"></i></div>
+                <div class="ln-comp-f"><span>₹4,06,090 settled of ₹34,00,000</span><span>11.9%</span></div>
+              </div>
+              <div class="ln-comp">
+                <div class="ln-comp-h"><span class="ln-comp-n">Interest <em>prepaid at disbursal</em></span><span class="ln-comp-v done">Nil</span></div>
+                <div class="ln-meter"><i style="width:100%"></i></div>
+                <div class="ln-comp-f"><span>₹66,987 accrued, all settled from the upfront pot</span><span>100%</span></div>
+              </div>
+              <div class="ln-comp">
+                <div class="ln-comp-h"><span class="ln-comp-n">Service fee <em>incl. GST</em></span><span class="ln-comp-v done">Settled</span></div>
+                <div class="ln-meter"><i style="width:100%"></i></div>
+                <div class="ln-comp-f"><span>₹2,360 settled in full</span><span>100%</span></div>
+              </div>
+              <div class="ln-tot"><span>Total outstanding</span><b>₹29,93,910</b></div>
             </div>
           </div>
 
@@ -244,18 +301,18 @@
             </div>
             <div class="card-b">
               <div class="grid g3" style="gap:10px">
-                <div><div class="small sub">Deducted at disbursal</div><div class="amt" style="font-size:16px">₹75,507</div></div>
-                <div><div class="small sub">Earned to date</div><div class="amt" style="font-size:16px">₹44,467</div></div>
-                <div><div class="small sub">Unearned (hold)</div><div class="amt" style="font-size:16px;color:var(--teal)">₹31,040</div></div>
+                <div><div class="small sub">Deducted at disbursal</div><div class="amt" style="font-size:16px">₹1,13,178</div></div>
+                <div><div class="small sub">Earned to date</div><div class="amt" style="font-size:16px">₹66,987</div></div>
+                <div><div class="small sub">Unearned (hold)</div><div class="amt" style="font-size:16px;color:var(--teal)">₹46,191</div></div>
               </div>
               <div class="divider"></div>
               <div class="segbar" style="height:8px">
-                <span style="width:59%;background:#0d9488"></span>
-                <span style="width:41%;background:#99f6e4"></span>
+                <span style="width:59.2%;background:#0d9488"></span>
+                <span style="width:40.8%;background:#99f6e4"></span>
               </div>
               <div class="legend">
-                <span><i style="background:#0d9488"></i>Earned 59%</span>
-                <span><i style="background:#99f6e4"></i>Unearned (hold) 41%</span>
+                <span><i style="background:#0d9488"></i>Earned 59.2%</span>
+                <span><i style="background:#99f6e4"></i>Unearned (hold) 40.8%</span>
                 <span style="margin-left:auto">@ 13.5% p.a. · 90 days · ends <b class="mono">31 Aug 26</b></span>
               </div>
             </div>
@@ -327,7 +384,7 @@
                     <div class="t">3 · This loan</div>
                     <div class="n">LN-2406-0187</div>
                     <div class="small mut" style="margin-top:4px">gross booked <b class="mono">₹34,00,000</b></div>
-                    <div class="small mut">upfront + fees deducted <b class="mono">₹90,000</b></div>
+                    <div class="small mut">upfront + fees deducted <b class="mono">₹1,27,671</b></div>
                   </div>
                 </div>
                 <div class="flow-arrow"><svg viewBox="0 0 36 14"><path d="M0 7h30M26 2l6 5-6 5" stroke="currentColor" stroke-width="1.6" fill="none"/></svg></div>
@@ -335,7 +392,7 @@
                   <div class="flow-node" style="border-color:var(--green-bd);background:var(--green-bg)">
                     <div class="t">4 · Borrower bank</div>
                     <div class="n"><span class="ref link">PYTUTR861204</span></div>
-                    <div class="small mut" style="margin-top:4px">net transfer <b class="mono">₹33,10,000</b></div>
+                    <div class="small mut" style="margin-top:4px">net transfer <b class="mono">₹32,72,329</b></div>
                     <div class="small mut">HDFC ••4410 · credited 02 Jun 26</div>
                   </div>
                 </div>

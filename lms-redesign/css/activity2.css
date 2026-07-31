@@ -18,8 +18,7 @@ table.a2{
 .a2 col.w-date{width:130px}   /* fits "21 Jun – 08 Jul 26" without colliding */
 .a2 col.w-emi {width:46px}
 .a2 col.w-bal {width:104px}
-.a2 col.w-mv  {width:26%}
-.a2 col.w-net {width:96px}
+.a2 col.w-mv  {width:112px}
 
 /* ---- header ---- */
 .a2 thead th{
@@ -76,6 +75,19 @@ table.a2{
 .a2 .a2-cnt{flex:0 2 auto;font-weight:400;font-size:10.5px;color:var(--subtle-fg);
   white-space:nowrap;overflow:hidden}
 
+/* ---- typed row icons ----
+   Five colours grouped by what the event does to the position: blue a balance
+   was created, teal income recognised, amber charged or at risk, violet
+   forgiven, green money in. See the ICONS map in js/activity2.js. */
+.a2 .a2-i{flex:none;display:inline-flex;align-items:center;justify-content:center;
+  width:17px;height:17px;border-radius:5px;background:var(--muted);color:var(--subtle-fg)}
+.a2 .a2-i svg{width:11px;height:11px;display:block}
+.a2 .a2-i.blue  {background:var(--blue-bg);  color:var(--blue)}
+.a2 .a2-i.green {background:var(--green-bg); color:var(--green)}
+.a2 .a2-i.amber {background:var(--amber-bg); color:var(--amber)}
+.a2 .a2-i.violet{background:var(--violet-bg);color:var(--violet)}
+.a2 .a2-i.teal  {background:var(--teal-bg);  color:var(--teal)}
+
 /* one line, always — ragged row heights are what make a long ledger
    unscannable. The full text lives in the pinned detail. */
 .a2 .a2-m{display:flex;align-items:center;gap:5px;margin:1px 0 0 12px;
@@ -93,6 +105,10 @@ table.a2{
 .a2 .a2-flag{flex:none}
 .a2 .a2-flag.rev,.a2 .a2-flag.con{color:var(--violet);border-color:var(--violet-bd);background:var(--violet-bg)}
 .a2 .a2-flag.sch {color:var(--muted-fg);border-color:var(--border);background:var(--muted)}
+/* dashed and unfilled: nothing posted, so it must not look like the solid
+   flags that sit on rows where something did */
+.a2 .a2-flag.der {color:var(--subtle-fg);border-color:var(--border-strong);
+  border-style:dashed;background:transparent;cursor:help}
 .a2 .a2-flag.back{color:var(--amber);border-color:var(--amber-bd);background:var(--amber-bg);
   text-transform:none;letter-spacing:0;font-weight:500;font-family:var(--font-mono)}
 
@@ -104,10 +120,9 @@ table.a2{
 .a2 .a2-flag.risk.sma2,
 .a2 .a2-flag.risk.npa {color:var(--red);border-color:var(--red-bd);background:var(--red-bg)}
 
-/* the charge that was undone is struck; its contra is not — the contra
-   is a real posting, and finance never deletes, it offsets */
-.a2 .a2-t:has(.a2-flag.rev) .a2-title{text-decoration:line-through;
-  text-decoration-color:var(--violet);text-decoration-thickness:1px}
+/* The REVERSED badge carries it on its own. A strikethrough on top read as
+   "this row was deleted", which is the opposite of what happened — the charge
+   is still a real posting, offset by a contra on the row below. */
 
 /* ---- balances ---- */
 .a2 tbody td.a2-bal{font-family:var(--font-mono);font-weight:600;color:var(--foreground);
@@ -115,17 +130,15 @@ table.a2{
 .a2 tbody td.a2-bal.open{border-right:1px solid var(--border-strong)}
 .a2 tbody td.a2-bal.close{border-left:1px solid var(--border-strong)}
 
-/* ---- net Δ: the number v1 made the reader compute ---- */
-.a2 tbody td.a2-net{font-family:var(--font-mono);font-weight:600;white-space:nowrap}
-.a2 tbody td.a2-net.pos {color:var(--red)}     /* outstanding grew  */
-.a2 tbody td.a2-net.neg {color:var(--green)}   /* outstanding shrank */
-.a2 tbody td.a2-net.zero{color:var(--muted-2)}
+/* ---- movement: one signed figure. The component split lives in the
+   expanded detail, so 60 rows read as a column of numbers, not of chips. ---- */
+.a2 tbody td.a2-mv{font-family:var(--font-mono);font-weight:600;white-space:nowrap;text-align:right}
+.a2 tbody td.a2-mv.pos {color:var(--red)}     /* outstanding grew  */
+.a2 tbody td.a2-mv.neg {color:var(--green)}   /* outstanding shrank */
+.a2 tbody td.a2-mv.zero{color:var(--muted-2)}
 
-/* ---- movement chips ---- */
-/* chips sit against the Net Δ column, not stranded at the far left of a
-   wide cell — the eye reads movement → net → closing as one phrase */
-.a2 tbody td.a2-mv{text-align:right}
-.a2 .a2-chips{display:flex;flex-wrap:wrap;gap:4px;align-items:center;justify-content:flex-end}
+/* ---- component chips: only inside the expanded detail and the totals now ---- */
+.a2 .a2-chips{display:flex;flex-wrap:wrap;gap:4px;align-items:center;margin-bottom:14px}
 .a2 .a2-chip{display:inline-flex;align-items:center;gap:5px;white-space:nowrap;
   padding:1px 6px;border-radius:5px;border:1px solid var(--border);
   background:var(--surface);font-size:10.5px;line-height:16px}
@@ -145,22 +158,72 @@ table.a2{
 .a2 tbody tr.a2-row.open td{background:#f4f4f5}
 .a2 tbody tr.a2-row.open td.a2-bal{background:var(--muted-2)}
 
-/* ---- folded machine rows ---- */
+/* ---- nested rows: folded accruals and per-EMI settlement splits ----
+   Indent is driven by --d (nesting depth) rather than a fixed padding, so a
+   child of a child lands one step further in without a second rule. The
+   connector is a hairline down the activity cell — enough to say "these belong
+   to the row above" without drawing a tree. */
 .a2 tbody tr.isfold .a2-t{color:var(--muted-fg)}
 .a2 tbody tr.child td{background:#fcfcfd}
 .a2 tbody tr.child td.a2-bal{background:var(--muted)}
-.a2 tbody tr.child td.a2-date,.a2 tbody tr.child td.a2-act{padding-left:24px}
+.a2 tbody tr.child td.a2-date{padding-left:calc(10px + var(--d,1) * 20px)}
+.a2 tbody tr.child td.a2-act{padding-left:calc(10px + var(--d,1) * 20px);position:relative}
+.a2 tbody tr.child td.a2-act::before{
+  content:"";position:absolute;top:0;bottom:0;width:2px;border-radius:1px;
+  left:calc(2px + var(--d,1) * 20px);background:var(--border-strong)
+}
+/* the last child closes the run, so its rule stops at the row's middle */
+.a2 tbody tr.child:not(.sys):last-of-type td.a2-act::before{bottom:50%}
 .a2 tbody tr.child .a2-t{font-weight:400;color:var(--muted-fg);font-size:12px}
-.a2 tbody tr.child td.a2-bal,.a2 tbody tr.child td.a2-net{font-weight:500;color:var(--muted-fg)}
+.a2 tbody tr.child td.a2-bal,.a2 tbody tr.child td.a2-mv{font-weight:500;color:var(--muted-fg)}
+/* a settlement split is a real event with a real amount, not folded noise */
+.a2 tbody tr.child:not(.sys) .a2-t{font-weight:500;color:var(--foreground)}
+.a2 tbody tr.child:not(.sys) td.a2-mv{font-weight:600}
+.a2 tbody tr.a2-detail td{padding-left:calc(10px + var(--d,0) * 14px)}
+
+/* ---- month bands: the rhythm a finance reader already thinks in ---- */
+.a2 tbody tr.a2-group td{
+  background:var(--muted);border-bottom:1px solid var(--border);
+  padding:5px 10px;text-align:left;
+  font-size:10px;font-weight:600;letter-spacing:.6px;text-transform:uppercase;color:var(--subtle-fg)
+}
+.a2 tbody tr.a2-group td.a2-rail{padding:0;background:var(--muted)}
+.a2 tbody tr.a2-group .n{float:right;font-family:var(--font-mono);
+  letter-spacing:0;text-transform:none;font-weight:500}
 
 /* ---- pinned postings: hover to peek, click to keep ---- */
 .a2 tbody tr.a2-detail td{background:#fafafa;text-align:left}
-.a2 .a2-pin{padding:2px 0 4px 15px}
+.a2 .a2-pin{padding:4px 0 6px 15px;max-width:640px}
+.a2 .a2-pin .a2-ref{display:inline-block}
+
+/* ---- settlement bar: one amount divided up, so one bar ---- */
+.a2 .a2-alloc{max-width:520px;margin-bottom:14px}
+.a2 .a2-alloc-t{font-size:9.5px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;
+  color:var(--subtle-fg);margin-bottom:7px}
+.a2 .a2-alloc .segbar{border-radius:4px}
+.a2 .a2-alloc .legend{gap:14px;margin-top:8px;font-size:11px}
+.a2 .a2-alloc .legend b{font-weight:600;color:var(--foreground)}
 .a2 .a2-pin-t{font-size:9.5px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;
   color:var(--subtle-fg);margin-bottom:6px}
-/* the global `table{width:100%}` stretches .ptab here — in a popover the card
-   width hides it, but a full-width cell spreads the columns to nonsense */
-.a2 .a2-pin .ptab{width:auto;min-width:0}
+/* ---- settled components: amount, then whether it closed the balance ---- */
+.a2 .a2-parts{max-width:400px;margin-bottom:14px}
+.a2 .a2-part{display:flex;align-items:baseline;gap:12px;padding:3px 0;font-size:11.5px}
+.a2 .a2-part .k{flex:1 1 auto;color:var(--muted-fg);font-family:var(--font-mono);font-size:11px}
+.a2 .a2-part .v{flex:none;font-family:var(--font-mono);font-variant-numeric:tabular-nums;
+  font-weight:600;white-space:nowrap}
+.a2 .a2-part .s{flex:none;min-width:112px;text-align:right;font-size:10px;
+  letter-spacing:.2px;white-space:nowrap}
+.a2 .a2-part .s.full{color:var(--green)}
+.a2 .a2-part .s.part{color:var(--amber);font-family:var(--font-mono)}
+.a2 .a2-part .s.pre {color:var(--teal)}
+
+/* ---- ledger postings: component and signed amount, nothing else ---- */
+.a2 .a2-post{max-width:340px}
+.a2 .a2-post-r{display:flex;justify-content:space-between;align-items:baseline;gap:20px;
+  padding:3px 0;font-size:11.5px}
+.a2 .a2-post-k{color:var(--muted-fg)}
+.a2 .a2-post-v{font-family:var(--font-mono);font-variant-numeric:tabular-nums;
+  font-weight:600;white-space:nowrap}
 
 /* ---- reconciliation break ---- */
 .a2 tbody tr.broken td.a2-bal{color:var(--red)}
@@ -175,11 +238,12 @@ table.a2{
   letter-spacing:.55px;text-transform:uppercase;color:var(--subtle-fg)}
 .a2 tfoot td.l .a2-sub{display:block;letter-spacing:0;text-transform:none;font-weight:400;
   font-size:10.5px;color:var(--subtle-fg);font-family:var(--font-mono)}
-.a2 tfoot td.a2-mv{white-space:normal;text-align:right}
 .a2 tfoot .a2-chip{background:var(--surface)}
 .a2 tfoot td.a2-rail{padding:0;background:var(--muted)}
-.a2 tfoot td.a2-net.pos{color:var(--red)}
-.a2 tfoot td.a2-net.neg{color:var(--green)}
+.a2 tfoot td.a2-mv.pos{color:var(--red)}
+.a2 tfoot td.a2-mv.neg{color:var(--green)}
+.a2 tfoot tr.a2-totchips td{padding-top:0;border-top:0;font-weight:400}
+.a2 tfoot tr.a2-totchips .a2-chips{justify-content:flex-start}
 
 /* ---- rail legend ---- */
 .a2-foot{display:flex;align-items:center;gap:14px;flex-wrap:wrap;
@@ -193,8 +257,12 @@ table.a2{
 .a2-leg.npa  i{background:#991b1b}
 .a2-leg-note{margin-left:auto;font-family:var(--font-mono);font-size:10.5px;color:var(--subtle-fg)}
 
+/* The ledger sits beside a 300px rail, so the pane runs ~300px narrower than
+   the viewport — these thresholds are set against the pane, not the window. */
+@media (max-width:1400px){
+  .a2 .a2-cnt{display:none}
+}
 @media (max-width:1200px){
   .a2 col.w-mv{width:30%}
   .a2 .a2-m{font-size:10.5px}
-  .a2 .a2-cnt{display:none}
 }

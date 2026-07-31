@@ -107,7 +107,7 @@
     <div class="card">
       <div class="card-h">
         <h3>LN-TL-0098 — EMI #14 breakdown</h3>
-        <div class="right"><span class="badge amber"><span class="dot"></span>₹1,18,900 outstanding</span></div>
+        <div class="right"><span class="badge amber"><span class="dot"></span>₹85,180 outstanding</span></div>
       </div>
       <div class="card-b flush">
         <table>
@@ -115,12 +115,13 @@
             <th>Demand</th><th>Component</th><th class="r">Amount</th><th class="r">Paid</th><th class="r">Waived</th><th class="r">Tax</th><th class="r">Outstanding</th><th>Status</th>
           </tr></thead>
           <tbody>
-            <tr><td><span class="ref">DMD-51402</span></td><td>principal</td><td class="r amt">₹93,960</td><td class="r amt dim">₹0</td><td class="r amt dim">₹0</td><td class="r amt dim">—</td><td class="r amt">₹93,960</td><td><span class="badge amber outline">Due</span></td></tr>
-            <tr><td><span class="ref">DMD-51403</span></td><td>interest</td><td class="r amt">₹18,540</td><td class="r amt dim">₹0</td><td class="r amt dim">₹0</td><td class="r amt dim">—</td><td class="r amt">₹18,540</td><td><span class="badge amber outline">Due</span></td></tr>
-            <tr><td><span class="ref">DMD-51404</span></td><td>penal_charge</td><td class="r amt">₹6,400</td><td class="r amt dim">₹0</td><td class="r amt dim">₹0</td><td class="r amt">₹0</td><td class="r amt">₹6,400</td><td><span class="badge amber outline">Due</span></td></tr>
+            <tr><td><span class="ref">DMD-51402</span></td><td>principal</td><td class="r amt">₹93,050</td><td class="r amt pos">₹9,370</td><td class="r amt dim">₹0</td><td class="r amt dim">—</td><td class="r amt">₹83,680</td><td><span class="badge amber outline">Part paid</span></td></tr>
+            <tr><td><span class="ref">DMD-51403</span></td><td>interest</td><td class="r amt">₹19,450</td><td class="r amt pos">₹19,450</td><td class="r amt dim">₹0</td><td class="r amt dim">—</td><td class="r amt dim">₹0</td><td><span class="badge green outline">Settled</span></td></tr>
+            <tr><td><span class="ref">DMD-51404</span></td><td>penal_charge</td><td class="r amt">₹6,400</td><td class="r amt pos">₹6,400</td><td class="r amt dim">₹0</td><td class="r amt">₹0</td><td class="r amt dim">₹0</td><td><span class="badge green outline">Settled</span></td></tr>
             <tr><td><span class="ref">DMD-51405</span></td><td>bounce_fee</td><td class="r amt">₹2,280</td><td class="r amt dim">₹0</td><td class="r amt">₹2,280</td><td class="r amt dim">—</td><td class="r amt dim">₹0</td><td><span class="badge outline">Waived</span></td></tr>
+            <tr><td><span class="ref">DMD-51406</span></td><td>late_fee</td><td class="r amt">₹1,500</td><td class="r amt dim">₹0</td><td class="r amt dim">₹0</td><td class="r amt">₹0</td><td class="r amt">₹1,500</td><td><span class="badge amber outline">Due</span></td></tr>
           </tbody>
-          <tfoot><tr><td colspan="6">Net outstanding (EMI #14)</td><td class="r amt">₹1,18,900</td><td></td></tr></tfoot>
+          <tfoot><tr><td colspan="6">Net outstanding (EMI #14)</td><td class="r amt">₹85,180</td><td></td></tr></tfoot>
         </table>
       </div>
     </div>
@@ -179,14 +180,14 @@
           <span style="flex:1;height:26px;border-radius:5px;background:#16a34a;opacity:.85" title="1–12 settled"></span>
           <span style="flex:.09;height:26px;border-radius:5px;background:#16a34a;opacity:.85"></span>
           <span style="flex:.09;height:26px;border-radius:5px;background:#16a34a;opacity:.85"></span>
-          <span style="flex:.09;height:26px;border-radius:5px;background:#d97706" title="#14 due"></span>
+          <span style="flex:.09;height:26px;border-radius:5px;background:#d97706" title="#14 part paid · overdue 22 d"></span>
           <span style="flex:.8;height:26px;border-radius:5px;background:var(--muted-2)" title="15–24 pending"></span>
         </div>
         <div class="legend">
           <span><i style="background:#16a34a"></i>Settled (1–13)</span>
-          <span><i style="background:#d97706"></i>Due (#14)</span>
+          <span><i style="background:#d97706"></i>Part paid &amp; overdue (#14)</span>
           <span><i style="background:var(--muted-2)"></i>Pending (15–24)</span>
-          <span style="margin-left:auto">On-time rate <b class="mono">86%</b> · avg delay <b class="mono">2.1 d</b></span>
+          <span style="margin-left:auto">On-time rate <b class="mono">92%</b> · 1 settled late <b class="mono">36 d</b></span>
         </div>
       </div>
     </div>
